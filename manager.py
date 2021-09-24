@@ -24,18 +24,15 @@ def remove_home(path):
 
 def add():
     if len(sys.argv) < 5:
-        raise Exception("Exprected 3 parameters for add")
-        return 
+        raise Exception("Exprected 3 parameters for add") 
     
     dst, src, name = sys.argv[2], sys.argv[3], sys.argv[4]
     dst = abs_path(dst)
 
     if not (os.path.isdir(dst) or os.path.isfile(dst)) or os.path.islink(dst):
         raise Exception("Dst file doesn't exist or is already symlink")
-        return
     if os.path.isfile(src) or os.path.isdir(src):
         raise Exception("Source file aready exists")
-        return
     
     data = read_data()
 
@@ -59,7 +56,6 @@ def add():
 def rm():
     if len(sys.argv) < 3:
         raise Exception("Exprected 1 parameter for rm")
-        return 
 
     data = read_data()
     name = sys.argv[2]
@@ -67,14 +63,12 @@ def rm():
     
     if f is None:
         raise Exception("File does not exist")
-        return
 
     dst, src = f["dst"], f["src"]
     dst = abs_path(dst)
 
     if not os.path.islink(dst):
         raise Exception("Symlink does not exist")
-        return
 
     os.unlink(dst)
 
