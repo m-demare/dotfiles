@@ -40,5 +40,8 @@ Run this after a `git pull`
 ```bash
 ./manager.py sync
 ```
-Note: this doesn't remove the symlinks that were removed on another PC, it only adds them
+Note: this doesn't remove the symlinks that were removed on another PC, it only adds them. Added files are updated automatically on pull
+
+## Known issues
+On windows, you need a shell with admin privilege to create symlinks
 
