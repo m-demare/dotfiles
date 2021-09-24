@@ -5,7 +5,7 @@ import sys
 import json
 import pickle
 
-symlink_data_file = "./data"
+symlink_data_file = "./data.json"
 
 def read_data():
     data = []
