@@ -3,7 +3,7 @@
 import os
 import sys
 import json
-import pickle
+import re
 
 symlink_data_file = "./data.json"
 
@@ -16,6 +16,11 @@ def read_data():
 def write_data(data):
     json.dump(data, open(symlink_data_file, 'wb'))
 
+def abs_path(path):
+    return os.path.abspath(os.path.expanduser(path))
+
+def remove_home(path):
+    return re.sub('^/home/[^\/]+', '~', path)
 
 def add():
     if len(sys.argv) < 5:
@@ -23,7 +28,7 @@ def add():
         return 
     
     dst, src, name = sys.argv[2], sys.argv[3], sys.argv[4]
-    dst = os.path.abspath(dst)
+    dst = abs_path(dst)
 
     if not (os.path.isdir(dst) or os.path.isfile(dst)) or os.path.islink(dst):
         raise Exception("Dst file doesn't exist or is already symlink")
@@ -40,11 +45,11 @@ def add():
 
     os.rename(dst, src)
 
-    os.symlink(os.path.abspath(src), dst)
+    os.symlink(abs_path(src), dst)
 
     data.append({
         "src": src,
-        "dst": dst,
+        "dst": remove_home(dst),
         "name": name
     })
 
@@ -64,33 +69,45 @@ def rm():
         raise Exception("File does not exist")
         return
 
-    if not os.path.islink(f["dst"]):
+    dst, src = f["dst"], f["src"]
+    dst = abs_path(dst)
+
+    if not os.path.islink(dst):
         raise Exception("Symlink does not exist")
         return
 
-    os.unlink(f["dst"])
+    os.unlink(dst)
 
-    os.rename(f["src"], f["dst"])
+    os.rename(src, dst)
 
     data = [i for i in data if i["name"]!=name]
     write_data(data)
 
-def init():
+def sync():
     data = read_data()
 
     for f in data:
         src, dst = f['src'], f['dst']
+        dst = abs_path(dst)
         if os.path.isdir(dst) or os.path.isfile(dst) or os.path.islink(dst):
             print("Ignoring " + dst + " since it already exists")
             continue
+        if not os.path.isdir(src) and not os.path.isfile(src):
+            print("Ignoring " + src + " since source file doesn't exist")
+            continue
         
-        os.symlink(os.path.abspath(src), dst)
+        os.symlink(abs_path(src), dst)
 
+def list():
+    data = read_data()
+    for f in data:
+        print(f["name"]+': ' + f['dst'] + ' -> ' + f['src'] + '\n')
 
 actions = {
     'add': add,
     'rm': rm,
-    'init': init
+    'sync': sync,
+    'list': list
 }
 
 if __name__=='__main__':
