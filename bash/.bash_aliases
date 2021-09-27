@@ -1,12 +1,16 @@
 alias cl='clear; clear'
 
+alias ls='ls --color=auto'
+
 alias l='ls -CF'
+
+alias ll='ls -alF'
+
+alias la='ls -A'
 
 alias work='cd ~/localwork'
 
 alias searchDir='grep -rliF --exclude=\*.{o,class,exe,mp3,mp4}' # Usage: `searchDir 'pattern' dir`
-
-alias searchExt='ls -R | grep '                                 # Usage: `searchExt '.*\(txt\|js\)'`
 
 alias cp='cp -i'
 
