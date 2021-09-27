@@ -1,16 +1,3 @@
-set incsearch
-set hls
-nmap <silent> <esc><esc> :nohls<cr>
+source ~/.config/vim/globals.vim
+
 nnoremap map <C-o><Action>(Back)
-
-set ic
-set wildmenu
-set showcmd
-
-set scrolloff=3
-
-nnoremap <leader>d "_d
-xnoremap <leader>d "_d
-
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p

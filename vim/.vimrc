@@ -1,3 +1,5 @@
+source ~/.config/vim/globals.vim
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -45,42 +47,13 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-
-set number
-set tabstop=4
-set shiftwidth=4
-set smartindent
-set expandtab
-
-" allows you to deal with multiple unsaved
-" buffers simultaneously without resorting
-" to misusing tabs
-set hidden
-
 set backspace=indent,eol,start
 
 filetype plugin on
+filetype indent on
 syntax on
-
-set nocp
 
 "set shell=/bin/bash
 
-
 " set vim-gas syntax for asm
 au BufRead,BufNewFile *.asm set filetype=gas
-
-" Disable arrows
-noremap <Up>    <Nop>
-noremap <Down>  <Nop>
-noremap <Left>  <Nop>
-noremap <Right> <Nop>
-
-set ruler
-
-" highlight search
-set incsearch
-set hls
-nnoremap <esc><esc> :silent! nohls<cr>
-
-set ic
