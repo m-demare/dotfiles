@@ -20,7 +20,7 @@ def abs_path(path):
     return os.path.abspath(os.path.expanduser(path))
 
 def remove_home(path):
-    return re.sub('^/home/[^\/]+', '~', path)
+    return re.sub('^(/home/[^\\/]+|C:\\\\Users\\\\[^\\\\]+)', '~', path)
 
 def add():
     if len(sys.argv) < 5:
