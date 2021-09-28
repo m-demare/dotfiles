@@ -20,7 +20,10 @@ def abs_path(path):
     return os.path.abspath(os.path.expanduser(path))
 
 def remove_home(path):
-    return re.sub('^(/home/[^\\/]+|C:\\\\Users\\\\[^\\\\]+)', '~', path)
+    return re.sub(r'^(/home/[^\/]+|C:\\Users\\[^\\]+)', '~', path)
+
+def get_containing_dir(path):
+    return re.sub(r'[^\/\\]+[\\/\\]?$', "", path)
 
 def add():
     if len(sys.argv) < 5:
@@ -89,10 +92,13 @@ def sync():
         if not os.path.isdir(src) and not os.path.isfile(src):
             print("Ignoring " + src + " since source file doesn't exist")
             continue
+
+        if not os.path.isdir(get_containing_dir(dst)):
+            os.makedirs(get_containing_dir(dst))
         
         os.symlink(abs_path(src), dst)
 
-def list():
+def ls():
     data = read_data()
     for f in data:
         print(f["name"]+': ' + f['dst'] + ' -> ' + f['src'] + '\n')
@@ -101,7 +107,7 @@ actions = {
     'add': add,
     'rm': rm,
     'sync': sync,
-    'list': list
+    'list': ls
 }
 
 if __name__=='__main__':
