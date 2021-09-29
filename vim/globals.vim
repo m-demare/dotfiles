@@ -1,10 +1,13 @@
 set number
 set ruler
-set scrolloff=3
+set scrolloff=5
 set foldcolumn=0
 set nowrap
 set listchars=tab:▸\ 
 set list
+filetype plugin indent on
+set backspace=indent,eol,start
+set updatetime=300
 
 set wildmenu
 set showcmd
@@ -14,6 +17,8 @@ au FocusGained,BufEnter * checktime
 set hidden
 
 set belloff=all
+
+let mapleader = ","
 
 
 " Indentation
@@ -34,16 +39,17 @@ set smartcase
 set magic
 
 
-" \d to actually delete
+" ,d to actually delete
 " "0p pastes from yank register btw
 nnoremap <leader>d "_d
-xnoremap <leader>d "_d
+vnoremap <leader>d "_d
 nnoremap x "_x
-xnoremap x "_x
 
-" \y and \p use clipboard
+" ,y and ,p use clipboard
 nnoremap <leader>y "+y
+vnoremap <leader>y "+y
 nnoremap <leader>p "+p
+vnoremap <leader>p "+p
 
 
 " sudo save with :W
@@ -85,8 +91,9 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext
+map <leader>tp :tabprevious
 
-" Let \tl toggle between this and the last accessed tab
+" Let ,tl toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
@@ -112,7 +119,7 @@ endif
 " Sppelling
 set spelllang=en,es
 
-" \ss toggles spell checking
+" ,ss toggles spell checking
 map <leader>ss :setlocal spell!<cr>
 
 " Spelling shortcuts
@@ -122,6 +129,19 @@ map <leader>sa zg
 map <leader>s? z=
 
 
+" Others
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
+
+
+
+" Helper functions
 
 function! CmdLine(str)
     call feedkeys(":" . a:str)
