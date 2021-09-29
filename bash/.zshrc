@@ -21,6 +21,10 @@ else
   export EDITOR='nvim'
 fi
 
+# Add default node to path
+default_node=~/.nvm/versions/node/v15.11.0/bin
+export PATH=$default_node:$PATH
+
 # Default nvm script is too slow
 # Defer initialization of nvm until nvm, node or a node-dependent command is
 # run. Ensure this block is only run once by checking whether __init_nvm is a function.
@@ -30,6 +34,7 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; the
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'play' 'http-server')
   function __init_nvm() {
+    export PATH=`echo -n "$(echo $PATH | tr ':' '\n' | grep -v "$default_node")" | tr '\n' ':'` # remove default node
     for i in "${__node_commands[@]}"; do unalias $i; done
     . "$NVM_DIR"/nvm.sh
     unset __node_commands
