@@ -40,9 +40,9 @@ alias gl='git log --decorate --graph --pretty=short'
 
 alias gti='git '    # too often
 
-alias brc='gedit ~/.bashrc'
+alias brc='vim ~/.bashrc'
 
-alias zrc='gedit ~/.zshrc'
+alias zrc='vim ~/.zshrc'
 
 if type nvim > /dev/null 2>&1; then
     alias vim='nvim'
