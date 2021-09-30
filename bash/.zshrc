@@ -21,9 +21,12 @@ else
   export EDITOR='nvim'
 fi
 
-# Add default node to path
-default_node=~/.nvm/versions/node/v14.18.0/bin
-export PATH=$default_node:$PATH
+# Add default node to path (Coc.nvim needs node>=12.12, and I want it to be usable
+# before nvm initialization because of how slow it is)
+export vim_node_version=v14.18.0
+default_node_path=~/.nvm/versions/node/$vim_node_version/bin
+export PATH=$default_node_path:$PATH
+export did_init_vim=false
 
 # Default nvm script is too slow
 # Defer initialization of nvm until nvm, node or a node-dependent command is
@@ -34,11 +37,12 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; the
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'play' 'http-server')
   function __init_nvm() {
-    export PATH=`echo -n "$(echo $PATH | tr ':' '\n' | grep -v "$default_node")" | tr '\n' ':'` # remove default node
+    export PATH=`echo -n "$(echo $PATH | tr ':' '\n' | grep -v "$default_node_path")" | tr '\n' ':'` # remove default node
     for i in "${__node_commands[@]}"; do unalias $i; done
     . "$NVM_DIR"/nvm.sh
     unset __node_commands
     unset -f __init_nvm
+    export did_init_vim=true
   }
   for i in "${__node_commands[@]}"; do alias $i='echo "Initializing nvm" && __init_nvm && '$i; done
 fi
