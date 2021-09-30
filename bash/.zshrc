@@ -22,7 +22,7 @@ else
 fi
 
 # Add default node to path
-default_node=~/.nvm/versions/node/v15.11.0/bin
+default_node=~/.nvm/versions/node/v14.18.0/bin
 export PATH=$default_node:$PATH
 
 # Default nvm script is too slow

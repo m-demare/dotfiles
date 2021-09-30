@@ -16,8 +16,8 @@ Plug 'leafgarland/typescript-vim',  { 'for': ['ts', 'tsx']      }
 Plug 'MaxMEllon/vim-jsx-pretty',    { 'for': ['jsx', 'tsx']     }
 
 if has("unix")
-    if isdirectory($HOME . "/.nvm/versions/node/v15.11.0/bin/")
-        let g:coc_node_path = $HOME . "/.nvm/versions/node/v15.11.0/bin/node"
+    if isdirectory($HOME . "/.nvm/versions/node/v14.18.0/bin/")
+        let g:coc_node_path = $HOME . "/.nvm/versions/node/v14.18.0/bin/node"
         let g:coc_global_extensions = [ 'coc-tsserver' ]
         " TODO consider loading it manually for faster startup
         " (https://github.com/junegunn/vim-plug/wiki/tips#loading-plugins-manually)
