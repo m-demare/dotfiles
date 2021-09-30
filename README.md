@@ -8,7 +8,17 @@ If you wanted to use your own dotfiles, you just have to create a repo with mana
 adding files as explained below.
 
 ## Dependencies
+### If you just want to use the manager with your own dotfiles
 - python3 (tested on python 3.8)
+### If you also want to use my settings
+- python3 (tested on python 3.8)
+- zsh and ohmyzsh
+- nvim
+- node (the scripts are made for node 14.18.0 LTS installed through nvm, if you want to use another
+version, change `vim\_node\_version` and `default\_node\_path` in .zshrc, and if you don't use nvm,
+you should remove the initializarion lines below that)
+- terminator if you want
+
 
 ## Usage
 
