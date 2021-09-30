@@ -42,19 +42,24 @@ E.g:
 
 ### Sync the files you've added in another computer
 Creates any missing symlinks that you've added on another PC
+
 Run this after a `git pull`/`git clone`
 ```bash
 ./manager.py sync [OPTIONS]
 ```
 **Options**
+
     --force, -f
+    
         Overrides dst files if they already exist
+        
         Use with caution
 
 Note: this doesn't remove the symlinks that were removed on another PC, it only adds them. Added files are updated automatically on pull
 
 ### Unsync files
 Removes all symlinks and replaces them with the actual files, but doesn't remove the files from the repo
+
 Mainly intended for testing purposes
 
 ```bash
