@@ -26,7 +26,7 @@ fi
 export vim_node_version=v14.18.0
 default_node_path=~/.nvm/versions/node/$vim_node_version/bin
 export PATH=$default_node_path:$PATH
-export did_init_vim=false
+export did_init_nvm=false
 
 # Default nvm script is too slow
 # Defer initialization of nvm until nvm, node or a node-dependent command is
@@ -42,7 +42,7 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; the
     . "$NVM_DIR"/nvm.sh
     unset __node_commands
     unset -f __init_nvm
-    export did_init_vim=true
+    export did_init_nvm=true
   }
   for i in "${__node_commands[@]}"; do alias $i='echo "Initializing nvm" && __init_nvm && '$i; done
 fi

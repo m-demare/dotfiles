@@ -46,7 +46,7 @@ alias zrc='vim ~/.zshrc'
 
 if type nvim > /dev/null 2>&1; then
     function set_node_version_and_vim(){
-        if $did_init_vim && [ $vim_node_version != $(\node -v) ]; then
+        if $did_init_nvm && [ $vim_node_version != $(\node -v) ]; then
             old_node_v="$(\node -v)"
             export PATH=${PATH//node\/$old_node_v/node/$vim_node_version}
             \nvim "$@"
