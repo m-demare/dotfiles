@@ -7,17 +7,32 @@ This repo contains the settings I like to use, so that I can set the up quickly 
 If you wanted to use your own dotfiles, you just have to create a repo with manager.py in it, and start
 adding files as explained below.
 
+## Why?
+All options I could find for managing my dotfiles were either too complicated for my use case, or not open source
+(or both).
+
+I wanted a simple script that required no installation, and that would get me up and running afap. Also, I tend to
+work in multiple PCs at once, so I needed my dotfiles to easyly sync between them.
+
+Now, this is how long it takes me to sync my settings in a new PC:
+![dotfiles](https://user-images.githubusercontent.com/34817965/135544361-7463015a-5ffe-4289-a34d-021138fbe9e0.gif)
+
+(\*Excluding zsh, nvim and terminator install times, I'm planning on automating that too)
+
+It's especially useful if you work on multiple PCs at once, and want to keep your settings synced
+
 ## Dependencies
 ### If you just want to use the manager with your own dotfiles
-- python3 (tested on python 3.8)
+- [python3](https://www.python.org/downloads/) (tested on python 3.8)
 ### If you also want to use my settings
-- python3 (tested on python 3.8)
-- zsh and ohmyzsh
-- nvim
-- node (the scripts are made for node 14.18.0 LTS installed through nvm, if you want to use another
-version, change `vim\_node\_version` and `default\_node\_path` in .zshrc, and if you don't use nvm,
+- [python3](https://www.python.org/downloads/) (tested on python 3.8)
+- [vim-plug](https://github.com/junegunn/vim-plug) (gets autoinstalled when you open vim using my .vimrc)
+- [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) and [ohmyzsh](https://ohmyz.sh/#install)
+- [nvim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+- [node](https://github.com/nvm-sh/nvm#installing-and-updating) (the scripts are made for node 14.18.0 LTS installed through nvm, if you want to use another
+version, change `vim_node_version` and `default_node_path` in .zshrc, and if you don't use nvm,
 you should remove the initializarion lines below that)
-- terminator if you want
+- [terminator](https://terminator-gtk3.readthedocs.io/en/latest/) if you want
 
 
 ## Usage
