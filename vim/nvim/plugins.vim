@@ -9,8 +9,22 @@ endif
 
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
-Plug 'shirk/vim-gas',               { 'for': ['asm', 'gas']     }
+" General
+Plug 'jiangmiao/auto-pairs'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'preservim/nerdtree',          { 'on': ['NERDTreeToggle'] }
+
+" Theme
+Plug 'tomasr/molokai'
+
+" Git
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+
+" asm
+Plug 'shirk/vim-gas',               { 'for': ['asm', 'gas']     }
+
+" JS
 Plug 'pangloss/vim-javascript',     { 'for': ['js', 'jsx']      }
 Plug 'leafgarland/typescript-vim',  { 'for': ['ts', 'tsx']      }
 Plug 'MaxMEllon/vim-jsx-pretty',    { 'for': ['jsx', 'tsx']     }
@@ -38,11 +52,17 @@ autocmd VimEnter *
 
 " Settings
 
+" Colors
+colorscheme molokai
+
 " set vim-gas syntax for asm
 au BufRead,BufNewFile *.asm set filetype=gas
 
 " Highlight JSDocs
 let g:javascript_plugin_jsdoc = 1
+
+" Disable autopairs for vim files (gets annoying with the quotes)
+au Filetype vim let b:AutoPairs = {}
 
 if using_coc
     " use <tab> for trigger completion and navigate to the next complete item
