@@ -140,6 +140,20 @@ else
 endif
 
 
+" Small syntax specific stuff
+
+" Wrap text on some files
+function! DoWrap()
+    let ext=expand('%:e')
+    if ext =~ 'md\|tex'
+        set textwidth=120
+    elseif ext =~ 'txt' || ext == ''
+        set linebreak
+        set wrap
+    endif
+endfunction
+au BufRead,BufEnter,BufNewFile * call DoWrap()
+
 
 " Helper functions
 

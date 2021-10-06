@@ -64,6 +64,15 @@ let g:javascript_plugin_jsdoc = 1
 " Disable autopairs for vim files (gets annoying with the quotes)
 au Filetype vim let b:AutoPairs = {}
 
+" ctrlP ignore untracked files
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+        \ },
+    \ 'fallback': 'find %s -type f'
+    \ }
+
 if using_coc
     " use <tab> for trigger completion and navigate to the next complete item
     function! s:check_back_space() abort
