@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
 import json
 import re
+import traceback
 from shutil import copy2, copytree, rmtree
 
 symlink_data_file = "./data.json"
@@ -11,17 +12,18 @@ symlink_data_file = "./data.json"
 def read_data():
     data = []
     if os.path.isfile(symlink_data_file):
-        data = json.load(open(symlink_data_file, 'rb'))
+        data = json.load(open(symlink_data_file, 'r'))
     return data
 
 def write_data(data):
-    json.dump(data, open(symlink_data_file, 'wb'))
+    json.dump(data, open(symlink_data_file, 'w'))
 
 def abs_path(path):
     return os.path.abspath(os.path.expanduser(path))
 
 def remove_home(path):
-    return re.sub(r'^(/home/[^\/]+|C:\\Users\\[^\\]+)', '~', path)
+    home = re.escape(os.path.expanduser('~'))
+    return re.sub(f'^{home}', '~', path)
 
 def get_containing_dir(path):
     return re.sub(r'[^\/\\]+[\\/\\]?$', "", path)
@@ -160,7 +162,7 @@ if __name__=='__main__':
             actions[sys.argv[1]]()
             print("Done!")
         except Exception as e:
-            print(e)
+            print(traceback.format_exc())
     else:
         print("Usage: ./manager.py [action] [params]")
         print("Actions:\n - " + ("\n - ".join(actions.keys())))
