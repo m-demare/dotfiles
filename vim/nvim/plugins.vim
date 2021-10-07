@@ -13,6 +13,8 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree',          { 'on': ['NERDTreeToggle'] }
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-commentary'
 
 " Theme
 Plug 'tomasr/molokai'
@@ -54,6 +56,20 @@ autocmd VimEnter *
 
 " Colors
 colorscheme molokai
+
+" Lightline
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
 
 " set vim-gas syntax for asm
 au BufRead,BufNewFile *.asm set filetype=gas
@@ -100,7 +116,7 @@ if using_coc
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " Symbol renaming.
-    nmap <leader>rn <Plug>(coc-rename)
+    nmap <leader>cr <Plug>(coc-rename)
 
     " Formatting selected code.
     xmap <leader>f  <Plug>(coc-format-selected)
