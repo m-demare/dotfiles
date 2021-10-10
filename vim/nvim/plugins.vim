@@ -34,19 +34,13 @@ Plug 'pangloss/vim-javascript',     { 'for': ['js', 'jsx']      }
 Plug 'leafgarland/typescript-vim',  { 'for': ['ts', 'tsx']      }
 Plug 'MaxMEllon/vim-jsx-pretty',    { 'for': ['jsx', 'tsx']     }
 
-let using_coc=0
-if has("unix")
-    if isdirectory($HOME . "/.nvm/versions/node/" . $vim_node_version . "/bin/")
-        let g:coc_node_path = $HOME . "/.nvm/versions/node/" . $vim_node_version . "/bin/node"
-        let g:coc_global_extensions = [ 'coc-tsserver', 'coc-pyright', 'coc-snippets' ]
-        " TODO consider loading it manually for faster startup
-        " (https://github.com/junegunn/vim-plug/wiki/tips#loading-plugins-manually)
-        Plug 'neoclide/coc.nvim',   { 'branch': 'release'       }
-        Plug 'honza/vim-snippets'
-        let using_coc=1
-    endif
-endif
-
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 
@@ -124,45 +118,3 @@ if has("termguicolors")
     lua require'colorizer'.setup()
 endif
 
-if using_coc
-    " use <tab> for trigger completion and navigate to the next complete item
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction
-    inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-    " Use `[g` and `]g` to navigate diagnostics
-    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-    " GoTo code navigation.
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-
-    " Highlight the symbol and its references when holding the cursor.
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-
-    " Symbol renaming.
-    " Here, leader = \
-    nmap <leader>rn <Plug>(coc-rename)
-
-    " Formatting selected code.
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
-
-    " Remap keys for applying codeAction to the current buffer.
-    nmap <leader>ac  <Plug>(coc-codeaction)
-    " Apply AutoFix to problem on the current line.
-    nmap <leader>qf  <Plug>(coc-fix-current)
-endif
