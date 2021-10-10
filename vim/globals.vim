@@ -123,8 +123,9 @@ set spelllang=en,es
 map <leader>ss :setlocal spell!<cr>
 
 " Spelling shortcuts
-map <leader>sn ]s
-map <leader>sp [s
+" [s and ]s to move between errors
+" ,sa add word to dict
+" ,s? see sugestions
 map <leader>sa zg
 map <leader>s? z=
 
@@ -150,6 +151,8 @@ function! DoWrap()
     elseif ext =~ 'txt' || ext == ''
         set linebreak
         set wrap
+    else
+        set nowrap
     endif
 endfunction
 au BufRead,BufEnter,BufNewFile * call DoWrap()
@@ -177,3 +180,4 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+

@@ -70,6 +70,9 @@ let g:lightline = {
       \ },
       \ }
 
+" NERDTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
 
 " set vim-gas syntax for asm
 au BufRead,BufNewFile *.asm set filetype=gas
@@ -83,7 +86,7 @@ au Filetype vim let b:AutoPairs = {}
 " ctrlP ignore untracked files
 let g:ctrlp_user_command = {
     \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 1: ['.git', 'cd %s && (git status --short| grep "^?" | cut -d\  -f2- && git ls-files)'],
         \ 2: ['.hg', 'hg --cwd %s locate -I .'],
         \ },
     \ 'fallback': 'find %s -type f'
