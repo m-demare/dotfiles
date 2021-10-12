@@ -35,10 +35,11 @@ let using_coc=0
 if has("unix")
     if isdirectory($HOME . "/.nvm/versions/node/" . $vim_node_version . "/bin/")
         let g:coc_node_path = $HOME . "/.nvm/versions/node/" . $vim_node_version . "/bin/node"
-        let g:coc_global_extensions = [ 'coc-tsserver' ]
+        let g:coc_global_extensions = [ 'coc-tsserver', 'coc-css', 'coc-pyright', 'coc-html', 'coc-snippets' ]
         " TODO consider loading it manually for faster startup
         " (https://github.com/junegunn/vim-plug/wiki/tips#loading-plugins-manually)
         Plug 'neoclide/coc.nvim',   { 'branch': 'release'       }
+        Plug 'honza/vim-snippets'
         let using_coc=1
     endif
 endif
@@ -76,6 +77,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 
 " set vim-gas syntax for asm
 au BufRead,BufNewFile *.asm set filetype=gas
+au BufRead,BufNewFile *.asm syn region Comment start=/;/ end=/$/
 
 " Highlight JSDocs
 let g:javascript_plugin_jsdoc = 1
@@ -98,11 +100,14 @@ if using_coc
       let col = col('.') - 1
       return !col || getline('.')[col - 1]  =~ '\s'
     endfunction
-    inoremap <silent><expr> <Tab>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<Tab>" :
-          \ coc#refresh()
+    inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
     " Use `[g` and `]g` to navigate diagnostics
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -119,7 +124,7 @@ if using_coc
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " Symbol renaming.
-    nmap <leader>cr <Plug>(coc-rename)
+    nmap <leader>rn <Plug>(coc-rename)
 
     " Formatting selected code.
     xmap <leader>f  <Plug>(coc-format-selected)
