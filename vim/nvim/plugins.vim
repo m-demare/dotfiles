@@ -12,7 +12,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 " General
 Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'preservim/nerdtree',          { 'on': ['NERDTreeToggle'] }
+Plug 'preservim/nerdtree',          { 'on': ['NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind']   }
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
 
@@ -24,7 +24,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
 " asm
-Plug 'shirk/vim-gas',               { 'for': ['asm', 'gas']     }
+Plug 'shirk/vim-gas',               { 'for': ['asm', 's']       }
 
 " JS
 Plug 'pangloss/vim-javascript',     { 'for': ['js', 'jsx']      }
@@ -35,7 +35,7 @@ let using_coc=0
 if has("unix")
     if isdirectory($HOME . "/.nvm/versions/node/" . $vim_node_version . "/bin/")
         let g:coc_node_path = $HOME . "/.nvm/versions/node/" . $vim_node_version . "/bin/node"
-        let g:coc_global_extensions = [ 'coc-tsserver', 'coc-css', 'coc-pyright', 'coc-html', 'coc-snippets' ]
+        let g:coc_global_extensions = [ 'coc-tsserver', 'coc-pyright', 'coc-snippets' ]
         " TODO consider loading it manually for faster startup
         " (https://github.com/junegunn/vim-plug/wiki/tips#loading-plugins-manually)
         Plug 'neoclide/coc.nvim',   { 'branch': 'release'       }
@@ -72,8 +72,15 @@ let g:lightline = {
       \ }
 
 " NERDTree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+" First time it is opened, open it at the repo root
+nnoremap <expr> <C-t> !exists("g:NERDTree") ? ':NERDTreeVCS<CR>' : ':NERDTreeToggle<CR>'
+nnoremap <silent> <leader>t :NERDTreeFind<CR>
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " set vim-gas syntax for asm
 au BufRead,BufNewFile *.asm set filetype=gas
@@ -124,6 +131,7 @@ if using_coc
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " Symbol renaming.
+    " Here, leader = \
     nmap <leader>rn <Plug>(coc-rename)
 
     " Formatting selected code.

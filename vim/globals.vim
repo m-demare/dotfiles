@@ -8,6 +8,7 @@ set list
 filetype plugin indent on
 set backspace=indent,eol,start
 set updatetime=300
+set mouse=a
 
 set wildmenu
 set showcmd
@@ -18,7 +19,8 @@ set hidden
 
 set belloff=all
 
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 
 
 " Indentation
