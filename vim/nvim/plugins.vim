@@ -15,6 +15,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree',          { 'on': ['NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind']   }
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " Theme
 Plug 'tomasr/molokai'
@@ -100,6 +102,12 @@ let g:ctrlp_user_command = {
         \ },
     \ 'fallback': 'find %s -type f'
     \ }
+
+" Colorizer
+if has("termguicolors")
+    set termguicolors
+    lua require'colorizer'.setup()
+endif
 
 if using_coc
     " use <tab> for trigger completion and navigate to the next complete item

@@ -9,6 +9,8 @@ filetype plugin indent on
 set backspace=indent,eol,start
 set updatetime=300
 set mouse=a
+set relativenumber
+set signcolumn=yes
 
 set wildmenu
 set showcmd
@@ -86,6 +88,12 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Window resizing
+nnoremap <M-j> :resize -2<CR>
+nnoremap <M-k> :resize +2<CR>
+nnoremap <M-h> :vertical resize -2<CR>
+nnoremap <M-l> :vertical resize +2<CR>
+
 
 " Tabs management
 map <leader>tn :tabnew<cr>
@@ -134,14 +142,9 @@ map <leader>s? z=
 
 " Others
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-    set signcolumn=number
-else
-    set signcolumn=yes
-endif
-
+" Indenting selection
+vnoremap < <gv
+vnoremap > >gv
 
 " Small syntax specific stuff
 

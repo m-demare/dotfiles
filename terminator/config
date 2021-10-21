@@ -3,9 +3,9 @@
   title_transmit_bg_color = "#04c975"
   enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
 [keybindings]
+  layout_launcher = <Primary><Alt>l
 [profiles]
   [[default]]
-    audible_bell = False
     background_color = "#121212"
     cursor_color = "#bbbbbb"
     foreground_color = "#bbbbbb"
@@ -16,7 +16,6 @@
     foreground_color = "#968c83"
     palette = "#20111b:#be100e:#858162:#eaa549:#426a79:#97522c:#989a9c:#968c83:#5e5252:#be100e:#858162:#eaa549:#426a79:#97522c:#989a9c:#d5ccba"
   [[Molokai]]
-    audible_bell = True
     background_color = "#121212"
     cursor_color = "#bbbbbb"
     foreground_color = "#bbbbbb"
