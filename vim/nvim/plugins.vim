@@ -95,13 +95,24 @@ let g:javascript_plugin_jsdoc = 1
 au Filetype vim let b:AutoPairs = {}
 
 " ctrlP ignore untracked files
-let g:ctrlp_user_command = {
-    \ 'types': {
-        \ 1: ['.git', 'cd %s && (git status --short| grep "^?" | cut -d\  -f2- && git ls-files)'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-        \ },
-    \ 'fallback': 'find %s -type f'
-    \ }
+if has('unix')
+    let g:ctrlp_user_command = {
+        \ 'types': {
+            \ 1: ['.git', 'cd %s && (git status --short| grep "^?" | cut -d\  -f2- && git ls-files)'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+            \ },
+        \ 'fallback': 'find %s -type f'
+        \ }
+else
+    let g:ctrlp_user_command = {
+        \ 'types': {
+            \ 1: ['.git', 'git ls-files'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+            \ },
+        \ 'fallback': 'dir %s /-n /b /s /a-d'
+        \ }
+endif
+
 
 " Colorizer
 if has("termguicolors")
