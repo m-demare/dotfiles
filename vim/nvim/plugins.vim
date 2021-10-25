@@ -17,13 +17,14 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'nvim-lua/plenary.nvim'
 
 " Theme
 Plug 'tomasr/molokai'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+Plug 'lewis6991/gitsigns.nvim'
 
 " asm
 Plug 'shirk/vim-gas',               { 'for': ['asm', 's']       }
@@ -56,6 +57,9 @@ autocmd VimEnter *
 
 
 " Settings
+
+" Git signs
+lua require('gitsigns').setup()
 
 " Colors
 colorscheme molokai
