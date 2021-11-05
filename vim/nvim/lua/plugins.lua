@@ -19,12 +19,23 @@ local packer = require('packer').startup(function(use)
 
     -- General
     use { 'jiangmiao/auto-pairs' }
-    use { 'ctrlpvim/ctrlp.vim' }
-    use { 'preservim/nerdtree', opt=true, cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'} }
     use { 'nvim-lualine/lualine.nvim' }
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
     use { 'norcalli/nvim-colorizer.lua' }
+    use { 'tpope/vim-endwise' }
+
+    -- Navigation
+    use { 'preservim/nerdtree',
+        opt=true,
+        cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'}
+    }
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+    use { 'glepnir/dashboard-nvim' }
+    use { 'andymass/vim-matchup' }
 
     -- Git
     use { 'tpope/vim-fugitive' }
@@ -46,11 +57,15 @@ local packer = require('packer').startup(function(use)
 
     -- LSP
     use { 'neovim/nvim-lspconfig' }
-    use { 'hrsh7th/nvim-cmp' }
-    use { 'hrsh7th/cmp-nvim-lsp' }
-    use { 'saadparwaiz1/cmp_luasnip' }
-    use { 'L3MON4D3/LuaSnip' }
+    -- use { 'hrsh7th/nvim-cmp' }
+    -- use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'ms-jpq/coq_nvim', requires={ 'ms-jpq/coq.artifacts' }}
+    -- use {
+    --     'saadparwaiz1/cmp_luasnip',
+    --     requires = { 'L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' }
+    -- }
     use { 'RRethy/vim-illuminate' }
+    use { 'glepnir/lspsaga.nvim' }
 
     if packer_bootstrap then
         require('packer').sync()
@@ -59,6 +74,8 @@ end)
 
 
 -- Settings
+
+-- require("luasnip/loaders/from_vscode").load()
 
 -- Git signs
 require('gitsigns').setup()
@@ -81,6 +98,20 @@ require('lualine').setup {
     }
 }
 
+-- Dashboard
+require('dashboard')
 
+-- NERDTree
+require('nerdtree')
+
+-- Telescope
+local function noremap(mode, lhs, rhs, opts)
+    local options = {noremap = true, silent = true}
+    if opts then options = vim.tbl_extend('force', options, opts) end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+noremap('n', '<C-p>', '<cmd>Telescope git_files<CR>')
+noremap('n', '<space>/', '<cmd>Telescope live_grep<CR>')
 
 return packer

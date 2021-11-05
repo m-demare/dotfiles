@@ -45,7 +45,8 @@ alias brc='vim ~/.bashrc'
 alias zrc='vim ~/.zshrc'
 
 if type nvim > /dev/null 2>&1; then
-    function set_node_version_and_vim(){
+    # node 'n vim (this changes the window title, so I didn't want it to be that long)
+    function nnvim(){
         if $did_init_nvm && [ $vim_node_version != $(\node -v) ]; then
             old_node_v="$(\node -v)"
             export PATH=${PATH//node\/$old_node_v/node/$vim_node_version}
@@ -55,8 +56,8 @@ if type nvim > /dev/null 2>&1; then
             \nvim "$@"
         fi
     }
-    alias vim='set_node_version_and_vim'
-    alias nvim='set_node_version_and_vim'
+    alias vim='nnvim'
+    alias nvim='nnvim'
 fi
 
 # Current work specific stuff

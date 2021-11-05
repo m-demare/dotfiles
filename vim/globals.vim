@@ -37,7 +37,7 @@ set smarttab
 " search
 set incsearch
 set hls
-nmap <silent> <esc><esc> :nohls<cr>
+nmap <silent> <leader>q :nohls<cr>
 set ignorecase
 set smartcase
 set magic
@@ -53,7 +53,9 @@ nnoremap x "_x
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 
 
 " sudo save with :W
@@ -63,6 +65,8 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " Movement
 set whichwrap+=<,>,h,l
 map 0 ^
+nnoremap zh z6h
+nnoremap zl z6l
 
 
 " Disable arrows
@@ -101,7 +105,8 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext
-map <leader>tp :tabprevious
+map <tab> :tabnext<cr>
+map <leader>tp :tabprevious<cr>
 
 " Let ,tl toggle between this and the last accessed tab
 let g:lasttab = 1
