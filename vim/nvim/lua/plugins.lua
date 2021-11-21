@@ -24,6 +24,7 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-surround' }
     use { 'norcalli/nvim-colorizer.lua' }
     use { 'tpope/vim-endwise' }
+    use { 'chentau/marks.nvim' }
 
     -- Navigation
     use { 'preservim/nerdtree',
@@ -49,6 +50,9 @@ local packer = require('packer').startup(function(use)
 
     -- asm
     use { 'shirk/vim-gas', ft={'asm', 's'} }
+
+    -- tex
+    use { 'lervag/vimtex', ft={'tex'} }
 
     -- JS
     use { 'pangloss/vim-javascript', ft={'js', 'jsx'} }
@@ -77,6 +81,9 @@ end)
 
 -- require("luasnip/loaders/from_vscode").load()
 
+-- marks
+require('marks').setup{}
+
 -- Git signs
 require('gitsigns').setup()
 
@@ -86,6 +93,9 @@ if vim.fn.has('termguicolors') == 1 then
     vim.o.termguicolors = true
     require 'colorizer'.setup()
 end
+
+-- tex
+vim.g.vimtex_view_method = 'zathura'
 
 -- lualine
 vim.o.showmode = false
