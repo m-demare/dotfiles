@@ -126,6 +126,11 @@ noremap('n', '<space><C-p>', '<cmd>Telescope find_files<CR>')
 noremap('n', '<space>/', '<cmd>Telescope live_grep<CR>')
 
 
+-- asm
+vim.cmd [[
+    au BufRead,BufNewFile *.asm set filetype=gas
+    au BufRead,BufNewFile *.asm syn region Comment start=/;/ end=/$/
+]]
 -- Treesitter
 require("treesitter").setup()
 
