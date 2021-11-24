@@ -1,6 +1,17 @@
 local nvim_lsp = require 'lspconfig'
--- local saga = require 'lspsaga'
--- local saga_prov = require 'lspsaga.provider'
+local saga = require 'lspsaga'
+
+vim.g.coq_settings = {
+    auto_start = 'shut-up',
+    keymap = {
+        jump_to_mark = "<c-q>",
+    },
+    display = {
+        icons = {
+            mode = 'none'
+        }
+    }
+}
 local coq = require "coq"
 
 local on_attach = function(client, bufnr)
@@ -17,12 +28,15 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     noremap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-    noremap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+    noremap('n', 'gd', '<cmd>Lspsaga preview_definition<CR>')
     noremap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
     noremap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-    noremap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    noremap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-    noremap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+    noremap('n', 'gf', '<cmd>Lspsaga lsp_finder<CR>')
+    noremap('n', 'gs', '<cmd>Lspsaga signature_help<CR>')
+    noremap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
+    noremap('n', 'K', '<cmd>Lspsaga hover_doc<CR>')
+    noremap('n', '<leader>rn', '<cmd>Lspsaga rename<CR>')
+    noremap('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
     noremap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
     noremap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
     noremap('n', '<leader>ff', '<cmd>lua vim.lsp.buf.formatting()<CR>')
@@ -31,22 +45,6 @@ local on_attach = function(client, bufnr)
 end
 
 local servers = require('lsplangs').for_current_os()
-
-vim.g.coq_settings = {
-    auto_start = "shut-up",
-    keymap = {
-        jump_to_mark = "<c-q>",
-    },
-    display = {
-        icons = {
-            mode = 'none'
-        }
-    }
-}
-
-vim.schedule(function()
-    vim.cmd("COQnow --shut-up")
-end)
 
 vim.g.Illuminate_ftblacklist = { 'nerdtree' }
 
@@ -67,7 +65,21 @@ end
 
 vim.o.completeopt = 'menuone,noselect'
 
--- saga.init_lsp_saga()
+saga.init_lsp_saga{
+    error_sign = 'E',
+    warn_sign = 'W',
+    hint_sign = 'H',
+    infor_sign = 'I',
+    code_action_icon = "»",
+    finder_action_keys = {
+        open = "<CR>",
+        vsplit = "s",
+        split = "i",
+        quit = "q",
+        scroll_down = "<C-f>",
+        scroll_up = "<C-b>",
+    }
+}
 
 -- local luasnip = require 'luasnip'
 -- local cmp = require 'cmp'
