@@ -30,8 +30,7 @@ local on_attach = function(client, bufnr)
     print('Using ' .. client.name)
 end
 
--- npm install -g typescript typescript-language-server
-local servers = { 'pyright', 'tsserver', 'vimls', 'ccls' }
+local servers = require('lsplangs').for_current_os()
 
 vim.g.coq_settings = {
     auto_start = "shut-up",
@@ -39,21 +38,23 @@ vim.g.coq_settings = {
         jump_to_mark = "<c-q>",
     },
     display = {
-
-    icons = {
-        mode = 'none'
-
-}}}
+        icons = {
+            mode = 'none'
+        }
+    }
+}
 
 vim.schedule(function()
     vim.cmd("COQnow --shut-up")
 end)
 
+vim.g.Illuminate_ftblacklist = { 'nerdtree' }
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup (coq.lsp_ensure_capabilities {
+  nvim_lsp[lsp.name].setup (coq.lsp_ensure_capabilities {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,

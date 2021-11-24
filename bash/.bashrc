@@ -142,4 +142,4 @@ export PATH="$PATH:/opt/mssql-tools/bin"
 
 export PATH=$PATH:$HOME/ngrok
 
-
+. "$HOME/.cargo/env"

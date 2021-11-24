@@ -46,18 +46,13 @@ local packer = require('packer').startup(function(use)
     }
 
     -- Theme
-    use { 'tomasr/molokai' }
+    use { 'sainnhe/sonokai' }
 
     -- asm
     use { 'shirk/vim-gas', ft={'asm', 's'} }
 
     -- tex
     use { 'lervag/vimtex', ft={'tex'} }
-
-    -- JS
-    use { 'pangloss/vim-javascript', ft={'js', 'jsx'} }
-    use { 'leafgarland/typescript-vim', ft={'ts', 'tsx'} }
-    use { 'MaxMEllon/vim-jsx-pretty', ft={'jsx', 'tsx'} }
 
     -- LSP
     use { 'neovim/nvim-lspconfig' }
@@ -70,6 +65,9 @@ local packer = require('packer').startup(function(use)
     -- }
     use { 'RRethy/vim-illuminate' }
     use { 'glepnir/lspsaga.nvim' }
+
+    -- Treesitter
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     if packer_bootstrap then
         require('packer').sync()
@@ -88,7 +86,9 @@ require('marks').setup{}
 require('gitsigns').setup()
 
 -- Colors
-vim.cmd 'colorscheme molokai'
+vim.g.sonokai_style = 'shusia'
+vim.cmd 'colorscheme sonokai'
+
 if vim.fn.has('termguicolors') == 1 then
     vim.o.termguicolors = true
     require 'colorizer'.setup()
@@ -102,7 +102,7 @@ vim.o.showmode = false
 require('lualine').setup {
     options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'sonokai',
         section_separators = '',
         component_separators = ''
     }
@@ -122,6 +122,16 @@ local function noremap(mode, lhs, rhs, opts)
 end
 
 noremap('n', '<C-p>', '<cmd>Telescope git_files<CR>')
+noremap('n', '<space><C-p>', '<cmd>Telescope find_files<CR>')
 noremap('n', '<space>/', '<cmd>Telescope live_grep<CR>')
+
+
+-- Treesitter
+require("treesitter").setup()
+
+
+-- Installs
+require("installs")
+
 
 return packer

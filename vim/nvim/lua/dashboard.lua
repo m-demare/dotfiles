@@ -3,12 +3,7 @@ local g = vim.g
 g.dashboard_default_executive = "telescope"
 
 g.dashboard_custom_header = {
-    '                  ▟▙           ',
-    '██▃▅▇█▆▖ ██▄  ▄██ ▝▘ ▗▟█▆▄▄▆█▙▖',
-    '██▛▔ ▝██ ▝██  ██▘ ██ ██▛▜██▛▜██',
-    '██    ██  ▜█▙▟█▛  ██ ██  ██  ██',
-    '██    ██  ▝████▘  ██ ██  ██  ██',
-    '▀▀    ▀▀    ▀▀    ▀▀ ▀▀  ▀▀  ▀▀',
+    'Welcome to neovim',
 }
 
 g.dashboard_custom_footer = { '' }
@@ -17,6 +12,10 @@ g.dashboard_custom_section = {
     last_session = {
         description = { 'Open last session         SPC s l' },
         command = 'SessionLoad'
+    },
+    git_files = {
+        description = { 'Git files                 C-p    ' },
+        command = 'Telescope git_files'
     },
     find_file = {
         description = { 'Find file                 SPC C-p' },

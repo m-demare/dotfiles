@@ -6,7 +6,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="yyyy-mm-dd"
 
-plugins=(git zsh-z thefuck)
+plugins=(git zsh-z thefuck tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,3 +86,4 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+. "$HOME/.cargo/env"
