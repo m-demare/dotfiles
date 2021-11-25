@@ -24,6 +24,7 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-surround' }
     use { 'norcalli/nvim-colorizer.lua' }
     use { 'tpope/vim-endwise' }
+    use { 'tpope/vim-repeat' }
     use { 'chentau/marks.nvim' }
 
     -- Navigation
@@ -67,7 +68,7 @@ local packer = require('packer').startup(function(use)
     use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
 
     -- Treesitter
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', branch='0.5-compat'}
 
     if packer_bootstrap then
         require('packer').sync()

@@ -12,12 +12,6 @@ local lss = {
         os={'win32', 'unix'}
     },
     {
-        name='eslint',
-        install_method='npm',
-        val='vscode-langservers-extracted',
-        os={'win32', 'unix'}
-    },
-    {
         name='vimls',
         install_method='npm',
         val='vim-language-server',
