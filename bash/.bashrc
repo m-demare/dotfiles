@@ -143,3 +143,6 @@ export PATH="$PATH:/opt/mssql-tools/bin"
 export PATH=$PATH:$HOME/ngrok
 
 . "$HOME/.cargo/env"
+
+export vim_node_version=v14.18.0
+export did_init_nvm=true
