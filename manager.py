@@ -50,6 +50,9 @@ def add():
         if f["name"] == name:
             raise Exception("No repeated names")
 
+    if not os.path.isdir(get_containing_dir(src)):
+        os.makedirs(get_containing_dir(src))
+
     os.rename(dst, src)
 
     os.symlink(abs_path(src), dst)
