@@ -6,7 +6,8 @@ local languages = {
     "lua",
     "vue",
     "latex",
-    "python"
+    "python",
+    "svelte"
 }
 
 function install_languages()

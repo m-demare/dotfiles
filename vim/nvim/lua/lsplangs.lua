@@ -12,6 +12,12 @@ local lss = {
         os={'win32', 'unix'}
     },
     {
+        name='svelte',
+        install_method='npm',
+        val='svelte-language-server',
+        os={'win32', 'unix'}
+    },
+    {
         name='vimls',
         install_method='npm',
         val='vim-language-server',
