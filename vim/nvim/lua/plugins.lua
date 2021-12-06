@@ -68,7 +68,7 @@ local packer = require('packer').startup(function(use)
     use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
 
     -- Treesitter
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', branch='0.5-compat'}
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     if packer_bootstrap then
         require('packer').sync()
