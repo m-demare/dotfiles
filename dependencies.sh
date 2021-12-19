@@ -61,7 +61,9 @@ if [[ $platform =~ "Linux" ]]; then
 
 elif [[ $platform =~ "MINGW" ]]; then
     # Windows
-    echo "Win"
+    echo "This should be run using git bash"
+    cmd <<< "mklink /D %HOMEPATH%\\AppData\\Local\\nvim %HOMEPATH%\\.config\\nvim\\"
+    echo "Created symlink for nvim settings"
 fi
 
 exit 0
