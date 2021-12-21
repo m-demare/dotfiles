@@ -16,7 +16,7 @@ I wanted a simple script that required no installation, and that would get me up
 work in multiple PCs at once, so I needed my dotfiles to easyly sync between them.
 
 Now, this is how long it takes me to sync my settings in a new PC:
-![dotfiles](https://user-images.githubusercontent.com/34817965/135544361-7463015a-5ffe-4289-a34d-021138fbe9e0.gif)
+![dotfiles](https://user-images.githubusercontent.com/34817965/147004888-cf09e508-c671-4b2a-8c68-0a0a8963bc74.gif)
 
 (\*Excluding zsh, nvim and alacritty install times, see the dependencies script)
 
