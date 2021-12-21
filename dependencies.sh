@@ -32,11 +32,11 @@ if [[ $platform =~ "Linux" ]]; then
         echo "Rust installed"
 
     # nvm
-    (curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash) &>> /dev/null &&
+    (curl -fsSL -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash) >> /dev/null &&
         echo "nvm installed"
 
     # oh-my-zsh
-    (sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc) &>> /dev/null &&
+    (sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc) >> /dev/null &&
         echo "oh-my-zsh installed"
 
     # gdb-dashboard

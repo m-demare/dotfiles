@@ -81,3 +81,7 @@ alias lg='p; grunt debug-lg'
 
 alias cleanLogs="q && find -name '*.log.zip' -delete"
 
+function localProxy(){
+    (ncat -lkv localhost $1 -c 'tee /dev/stderr | ncat -v localhost $2 | tee /dev/stderr') 2>&1 | tee -a $3
+}
+

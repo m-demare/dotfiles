@@ -18,7 +18,7 @@ work in multiple PCs at once, so I needed my dotfiles to easyly sync between the
 Now, this is how long it takes me to sync my settings in a new PC:
 ![dotfiles](https://user-images.githubusercontent.com/34817965/135544361-7463015a-5ffe-4289-a34d-021138fbe9e0.gif)
 
-(\*Excluding zsh, nvim and terminator install times, I'm planning on automating that too)
+(\*Excluding zsh, nvim and alacritty install times, see the dependencies script)
 
 It's especially useful if you work on multiple PCs at once, and want to keep your settings synced
 
@@ -26,15 +26,10 @@ It's especially useful if you work on multiple PCs at once, and want to keep you
 ### If you just want to use the manager with your own dotfiles
 - [python3](https://www.python.org/downloads/) (tested on python 3.8)
 ### If you also want to use my settings
-- [python3](https://www.python.org/downloads/) (tested on python 3.8)
-- [vim-plug](https://github.com/junegunn/vim-plug) (gets autoinstalled when you open vim using my .vimrc)
-- [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) and [ohmyzsh](https://ohmyz.sh/#install)
-- [nvim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-- [node](https://github.com/nvm-sh/nvm#installing-and-updating) (the scripts are made for node 14.18.0 LTS installed through
-nvm, if you want to use another version, change `vim_node_version` and `default_node_path` in .zshrc, and if you don't use
-nvm, you should remove the initializarion lines below that)
-- [terminator](https://terminator-gtk3.readthedocs.io/en/latest/) if you want
-
+- Run `curl -fsSL https://raw.githubusercontent.com/m-demare/dotfiles/master/dependencies.sh | bash` or
+  similar
+- Then you can `mkdir -p ~/localwork && git clone https://github.com/m-demare/dotfiles.git ~/localwork/dotfiles && cd
+  localwork/dotfiles && ./manager.py sync -f`
 
 ## Usage
 
