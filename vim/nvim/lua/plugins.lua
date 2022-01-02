@@ -110,22 +110,13 @@ require('lualine').setup {
 }
 
 -- Dashboard
-require('dashboard')
+require 'dashboard'
 
 -- NERDTree
-require('nerdtree')
+require 'nerdtree'
 
 -- Telescope
-local function noremap(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-noremap('n', '<C-p>', '<cmd>Telescope git_files<CR>')
-noremap('n', '<space><C-p>', '<cmd>Telescope find_files<CR>')
-noremap('n', '<space>/', '<cmd>Telescope live_grep<CR>')
-
+require('telescope-config').setup()
 
 -- asm
 vim.cmd [[

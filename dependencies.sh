@@ -21,7 +21,7 @@ if [[ $platform =~ "Linux" ]]; then
         $INSTALL $1 >> /dev/null
     }
 
-    install_packages "git curl zsh ripgrep tmux $NVIM_DEPS $ALACRITTY_DEPS"
+    install_packages "git curl zsh ripgrep tmux zathura $NVIM_DEPS $ALACRITTY_DEPS"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
@@ -44,7 +44,7 @@ if [[ $platform =~ "Linux" ]]; then
 
     # alacritty
     echo "Installing alacritty"
-    ~/.cargo/bin/cargo install alacritty
+    ~/.cargo/bin/cargo install alacritty bottom
 
     mkdir -p ~/localwork/
     # neovim
