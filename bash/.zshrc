@@ -82,6 +82,8 @@ export PATH="$PATH:/opt/mssql-tools/bin"
 export PATH=$PATH:$HOME/ngrok
 export PATH=$PATH:$HOME/bochs/bin
 
+export PATH=$PATH:$HOME/.local/bin
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

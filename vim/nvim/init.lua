@@ -1,5 +1,5 @@
 if vim.fn.has("unix") == 1 then
-    vim.g.python3_host_prog="/usr/bin/python3.8"
+    vim.g.python3_host_prog="/usr/bin/python3.10"
     vim.g.node_host_prog = vim.fn.getenv 'HOME' ..
         "/.nvm/versions/node/" ..
         vim.fn.getenv 'vim_node_version' ..

@@ -22,7 +22,7 @@ alias sudo='sudo '
 
 alias please='sudo '
 
-alias py='python3.8 '
+alias py='python3.10 '
 
 alias al='vim ~/.bash_aliases '
 
@@ -84,4 +84,6 @@ alias cleanLogs="q && find -name '*.log.zip' -delete"
 function localProxy(){
     (ncat -lkv localhost $1 -c 'tee /dev/stderr | ncat -v localhost $2 | tee /dev/stderr') 2>&1 | tee -a $3
 }
+
+alias gFeature='xclip -sel clip -o | sed -Ee "/^\s*(.)* (#[0-9]+)\s*$/!d;s/(^\s*|\s*$)//g;s/\s/_/g;s/^((.)*)_(#[0-9]+)$/feature\/\3_\1/g" | xargs git co -b'
 

@@ -65,7 +65,7 @@ local packer = require('packer').startup(function(use)
     --     requires = { 'L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' }
     -- }
     use { 'RRethy/vim-illuminate' }
-    use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
+    use { 'tami5/lspsaga.nvim' }
 
     -- Treesitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

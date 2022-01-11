@@ -105,7 +105,7 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext
-map <tab> :tabnext<cr>
+map <leader><tab> :tabnext<cr>
 map <leader>tp :tabprevious<cr>
 
 " Let ,tl toggle between this and the last accessed tab
