@@ -4,7 +4,7 @@ local saga = require 'lspsaga'
 vim.g.coq_settings = {
     auto_start = 'shut-up',
     keymap = {
-        jump_to_mark = "<c-q>",
+        pre_select = true
     },
     display = {
         icons = {
@@ -27,7 +27,7 @@ local on_attach = function(client, bufnr)
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    noremap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+    noremap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
     noremap('n', 'gd', '<cmd>Lspsaga preview_definition<CR>')
     noremap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
     noremap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')

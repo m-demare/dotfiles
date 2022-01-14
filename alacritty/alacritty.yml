@@ -3,8 +3,8 @@ window:
     columns: 90
     lines: 32
   padding:
-    x: 8
-    y: 8
+    x: 12
+    y: 12
   dynamic_padding: false
   decorations: full
   startup_mode: Windowed
@@ -15,7 +15,7 @@ colors:
   # Default colors
   primary:
     background: '#2D2A2E'
-    foreground: '#F8F8F2'
+    foreground: '#E3E1E4'
 
   # Normal colors
   normal:
