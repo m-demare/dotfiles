@@ -43,13 +43,13 @@ set smartcase
 set magic
 
 
-" ,d to actually delete
+" <leader>d to actually delete
 " "0p pastes from yank register btw
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 nnoremap x "_x
 
-" ,y and ,p use clipboard
+" <leader>y and <leader>p use clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
@@ -84,6 +84,7 @@ set noswapfile
 
 " Visual mode pressing *
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 
 " Movement between windows
@@ -108,7 +109,7 @@ map <leader>t<leader> :tabnext
 map <leader><tab> :tabnext<cr>
 map <leader>tp :tabprevious<cr>
 
-" Let ,tl toggle between this and the last accessed tab
+" Toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
@@ -117,7 +118,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 
 
-" Delete trailing white space on save, useful for some filetypes
+" Delete trailing white space on save
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
@@ -134,13 +135,13 @@ endif
 " Sppelling
 set spelllang=en,es
 
-" ,ss toggles spell checking
+" Toggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
 " Spelling shortcuts
 " [s and ]s to move between errors
-" ,sa add word to dict
-" ,s? see sugestions
+" <leader>sa add word to dict
+" <leader>s? see sugestions
 map <leader>sa zg
 map <leader>s? z=
 
@@ -157,7 +158,7 @@ vnoremap > >gv
 function! DoWrap()
     let ext=expand('%:e')
     if ext =~ 'md\|tex'
-        set textwidth=120
+        set textwidth=100
     elseif ext =~ 'txt' || ext == ''
         set linebreak
         set wrap

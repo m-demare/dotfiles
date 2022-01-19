@@ -7,6 +7,13 @@ This repo contains the settings I like to use, so that I can set the up quickly 
 If you wanted to use your own dotfiles, you just have to create a repo with manager.py in it, and start
 adding files as explained below.
 
+# Table of contents
+
+* [Why?](#why)
+* [Dependencies](#dependencies)
+* [Usage](#usage)
+* [Known issues](#known-issues)
+
 ## Why?
 All options I could find for managing my dotfiles were either too complicated for my use case, or not open source
 (or both). Update: since doing this, I've found some other options. I still like this one because of its simplicity, the
@@ -29,7 +36,7 @@ It's especially useful if you work on multiple PCs at once, and want to keep you
 - Run `curl -fsSL https://raw.githubusercontent.com/m-demare/dotfiles/master/dependencies.sh | bash` or
   similar
 - Then you can `mkdir -p ~/localwork && git clone https://github.com/m-demare/dotfiles.git ~/localwork/dotfiles && cd
-  localwork/dotfiles && ./manager.py sync -f`
+  localwork/dotfiles && python3 ./manager.py sync -f`
 
 ## Usage
 
