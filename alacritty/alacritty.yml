@@ -38,3 +38,20 @@ colors:
     magenta: '#AE81FF'
     cyan:    '#A1EFE4'
     white:   '#F9F8F5'
+font:
+  normal:
+    family: "JetBrainsMono Nerd Font"
+
+  bold:
+    family: "JetBrainsMono Nerd Font"
+    style: Bold
+
+  italic:
+    family: "JetBrainsMono Nerd Font"
+    style: Italic
+
+  bold_italic:
+    family: "JetBrainsMono Nerd Font"
+    style: Bold Italic
+
+  size: 12
