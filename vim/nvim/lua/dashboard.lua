@@ -14,12 +14,8 @@ g.dashboard_custom_section = {
         command = 'SessionLoad'
     },
     git_files = {
-        description = { 'Git files                 C-p    ' },
+        description = { 'Find file                 C-p    ' },
         command = 'Telescope git_files'
-    },
-    find_file = {
-        description = { 'Find file                 SPC C-p' },
-        command = 'DashboardFindFile'
     },
     new_file = {
         description = { 'New file                  SPC c n' },

@@ -8,7 +8,7 @@ end
 
 M.setup = function()
     noremap('n', '<C-p>', '<cmd>lua require"telescope-config".project_files()<CR>')
-    noremap('n', '<space><C-p>', '<cmd>Telescope find_files<CR>')
+    noremap('n', '<space><C-p>', '<cmd>Telescope buffers<CR>')
     noremap('n', '<space>/', '<cmd>Telescope live_grep<CR>')
 end
 
