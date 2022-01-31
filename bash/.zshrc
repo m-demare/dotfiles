@@ -21,7 +21,7 @@ else
   export EDITOR='nvim'
 fi
 
-# Add default node to path (Coc.nvim needs node>=12.12, and I want it to be usable
+# Add default node to path (nvim lsp servers need node, and I want it to be usable
 # before nvm initialization because of how slow it is)
 export vim_node_version=v14.18.0
 default_node_path=~/.nvm/versions/node/$vim_node_version/bin
@@ -75,11 +75,6 @@ LIGHT_GREEN="\033[1;32m"
  LIGHT_GRAY="\033[0;37m"
  COLOR_NONE="\e[0m"
 
-
-# SQLServer
-export PATH="$PATH:/opt/mssql-tools/bin"
-
-export PATH=$PATH:$HOME/ngrok
 export PATH=$PATH:$HOME/bochs/bin
 
 export PATH=$PATH:$HOME/.local/bin
@@ -89,3 +84,4 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 . "$HOME/.cargo/env"
+

@@ -15,3 +15,9 @@ vim.cmd('source ~/.config/vim/globals.vim')
 
 require('lsp')
 
+vim.cmd[[
+    augroup highlight_yank
+        autocmd!
+        autocmd TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false, higroup="IncSearch", timeout=250}
+    augroup END
+]]

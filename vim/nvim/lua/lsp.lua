@@ -60,9 +60,9 @@ local on_attach = function(client, bufnr)
     require 'illuminate'.on_attach(client)
 
     local function buf_noremap(mode, lhs, rhs, opts)
-      local options = {noremap = true, silent = true}
-      if opts then options = vim.tbl_extend('force', options, opts) end
-      vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
+        local options = {noremap = true, silent = true}
+        if opts then options = vim.tbl_extend('force', options, opts) end
+        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
     end
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
