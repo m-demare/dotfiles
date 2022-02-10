@@ -1,6 +1,6 @@
 set number
 set ruler
-set scrolloff=5
+set scrolloff=3
 set foldcolumn=0
 set nowrap
 set listchars=tab:▸\ 
