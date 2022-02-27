@@ -11,6 +11,8 @@ set updatetime=300
 set mouse=a
 set relativenumber
 set signcolumn=yes
+set cursorline
+highlight clear CursorLine
 
 set wildmenu
 set showcmd
@@ -67,6 +69,12 @@ set whichwrap+=<,>,h,l
 map 0 ^
 nnoremap zh z6h
 nnoremap zl z6l
+nnoremap <leader>H ^
+nnoremap <leader>L $
+
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
 " Disable arrows

@@ -26,6 +26,7 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-endwise' }
     use { 'tpope/vim-repeat' }
     use { 'chentau/marks.nvim' }
+    use { 'tpope/vim-sleuth' }
 
     -- Navigation
     use { 'preservim/nerdtree',
@@ -48,6 +49,7 @@ local packer = require('packer').startup(function(use)
 
     -- Theme
     use { 'sainnhe/sonokai' }
+    use { '~/localwork/hlargs.nvim' }
 
     -- asm
     use { 'shirk/vim-gas', ft={'asm', 's'} }
@@ -63,6 +65,7 @@ local packer = require('packer').startup(function(use)
 
     -- Treesitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { 'nvim-treesitter/playground' }
 
     if packer_bootstrap then
         require('packer').sync()
@@ -111,6 +114,7 @@ require('gitsigns').setup({
 -- Colors
 vim.g.sonokai_style = 'shusia'
 vim.cmd 'colorscheme sonokai'
+require("hlargs").setup { }
 
 if vim.fn.has('termguicolors') == 1 then
     vim.o.termguicolors = true

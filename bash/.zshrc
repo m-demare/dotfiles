@@ -10,6 +10,9 @@ plugins=(git zsh-z thefuck tmux)
 
 source $ZSH/oh-my-zsh.sh
 
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+
 # User configuration
 
 export LANG=en_US.UTF-8
