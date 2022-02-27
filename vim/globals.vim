@@ -18,7 +18,7 @@ set wildmenu
 set showcmd
 
 set autoread
-au FocusGained,BufEnter * checktime
+au FocusGained,BufEnter * if mode() != 'c' | checktime | endif
 set hidden
 
 set belloff=all
