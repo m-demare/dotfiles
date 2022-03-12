@@ -53,6 +53,7 @@ nnoremap x "_x
 
 " <leader>y and <leader>p use clipboard
 nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
@@ -135,10 +136,7 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-if has("autocmd")
-    autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java :call CleanExtraSpaces()
-endif
-
+autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java :call CleanExtraSpaces()
 
 " Sppelling
 set spelllang=en,es

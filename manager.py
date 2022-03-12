@@ -93,8 +93,6 @@ def rm():
 def sync():
     data = read_data()
 
-    # TODO: add pre/post sync scripts, to apt install apps and stuff
-
     force = False
     if len(sys.argv) > 2:
         for flag in sys.argv[2:]:

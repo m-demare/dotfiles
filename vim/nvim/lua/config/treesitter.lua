@@ -1,22 +1,24 @@
 local languages = {
-    "javascript",
-    "typescript",
     "c",
     "cpp",
-    "lua",
-    "vue",
+    "java",
+    "javascript",
     "latex",
+    "lua",
     "python",
-    "svelte"
+    "svelte",
+    "tsx",
+    "typescript",
+    "vue"
 }
 
-function install_languages()
-    for i, l in ipairs(languages) do
-        vim.cmd('TSInstall! ' .. l)
+local function install_languages()
+    for _, l in ipairs(languages) do
+        vim.cmd('TSInstall ' .. l)
     end
 end
 
-function setup()
+local function setup()
     require'nvim-treesitter.configs'.setup {
         highlight = {
             enable = true,
@@ -29,7 +31,7 @@ function setup()
             keymaps = {
                 init_selection = "gnn",
                 node_incremental = "grn",
-                scope_incremental = "grc",
+                scope_incremental = "grs",
                 node_decremental = "grm",
             },
         },

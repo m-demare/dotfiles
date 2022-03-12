@@ -9,6 +9,7 @@ else
     vim.g.node_host_prog = 'C:\\Program Files\\nodejs\\'
 end
 
+vim.g.mapleader = ' '
 require('plugins')
 
 vim.cmd('source ~/.config/vim/globals.vim')

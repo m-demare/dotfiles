@@ -28,5 +28,5 @@ g.dashboard_custom_section = {
 }
 
 local options = {noremap = true, silent = true}
-vim.api.nvim_set_keymap('n', '<space>sl', '<cmd>SessionLoad<CR>', options)
-vim.api.nvim_set_keymap('n', '<space>cn', '<cmd>DashboardNewFile<CR>', options)
+vim.api.nvim_set_keymap('n', '<leader>sl', '<cmd>SessionLoad<CR>', options)
+vim.api.nvim_set_keymap('n', '<leader>cn', '<cmd>DashboardNewFile<CR>', options)

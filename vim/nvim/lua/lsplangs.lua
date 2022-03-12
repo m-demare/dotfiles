@@ -38,12 +38,15 @@ local lss = {
     {
         name='sumneko_lua',
         install_method='package_manager',
-        val='sumneko_lua',
+        val='lua-language-server',
         os={'unix'},
         settings = {
             Lua = {
                 diagnostics = {
                     globals = { 'vim' }
+                },
+                telemetry = {
+                    enable = false
                 }
             }
         }
@@ -53,8 +56,8 @@ local lss = {
 local function for_current_os()
     local retval = {}
     for _, ls in ipairs(lss) do
-        isValid = false
-        for __, os in ipairs(ls.os) do
+        local isValid = false
+        for _, os in ipairs(ls.os) do
             if vim.fn.has(os) == 1 then
                 isValid = true
                 break

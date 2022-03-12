@@ -25,37 +25,58 @@ local packer = require('packer').startup(function(use)
     use { 'norcalli/nvim-colorizer.lua' }
     use { 'tpope/vim-endwise' }
     use { 'tpope/vim-repeat' }
-    use { 'chentau/marks.nvim' }
+    use { 'chentau/marks.nvim', config = [[require('marks').setup {}]] }
     use { 'tpope/vim-sleuth' }
 
     -- Navigation
     use { 'preservim/nerdtree',
         opt=true,
-        cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'}
+        cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'},
+        setup = [[require 'config.nerdtree']]
     }
     use {
         'nvim-telescope/telescope.nvim',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = {'nvim-lua/plenary.nvim'},
+        config = function ()
+            require('config.telescope').setup()
+        end
     }
-    use { 'glepnir/dashboard-nvim' }
+    use {
+        'glepnir/dashboard-nvim',
+        config = function ()
+            require 'config.dashboard'
+        end
+    }
     use { 'andymass/vim-matchup' }
 
     -- Git
     use { 'tpope/vim-fugitive' }
     use {
         'lewis6991/gitsigns.nvim',
-        requires = { 'nvim-lua/plenary.nvim' }
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function ()
+            require('config.gitsigns')
+        end
     }
 
     -- Theme
     use { 'sainnhe/sonokai' }
-    use { '~/localwork/hlargs.nvim' }
+    use { '~/localwork/hlargs.nvim', config = [[ require("hlargs").setup {} ]] }
 
     -- asm
-    use { 'shirk/vim-gas', ft={'asm', 's'} }
+    use {
+        'shirk/vim-gas',
+        ft={'asm', 's'},
+        config = function ()
+            vim.cmd [[
+                au BufRead,BufNewFile *.asm set filetype=gas
+                au BufRead,BufNewFile *.asm syn region Comment start=/;/ end=/$/
+            ]]
+        end
+    }
 
     -- tex
-    use { 'lervag/vimtex', ft={'tex'} }
+    use { 'lervag/vimtex', ft={'tex'}, config=[[vim.g.vimtex_view_method = 'zathura']] }
 
     -- LSP
     use { 'neovim/nvim-lspconfig' }
@@ -64,7 +85,11 @@ local packer = require('packer').startup(function(use)
     use { 'tami5/lspsaga.nvim' }
 
     -- Treesitter
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = [[ require("config.treesitter").setup() ]]
+    }
     use { 'nvim-treesitter/playground' }
 
     if packer_bootstrap then
@@ -83,46 +108,14 @@ require('nvim-autopairs').setup{
     enable_check_bracket_line = false
 }
 
--- Marks
-require('marks').setup{}
-
--- Git signs
-require('gitsigns').setup({
-    on_attach = function (bufnr)
-        local gs = package.loaded.gitsigns
-        local function buf_noremap(mode, lhs, rhs, opts)
-            local options = {noremap = true, silent = true}
-            if opts then options = vim.tbl_extend('force', options, opts) end
-            vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
-        end
-        buf_noremap('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-        buf_noremap('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
-        buf_noremap('n', '<leader>hs', "<cmd>lua package.loaded.gitsigns.stage_hunk()<CR>")
-        buf_noremap('n', '<leader>hr', "<cmd>lua package.loaded.gitsigns.reset_hunk()<CR>")
-        buf_noremap('n', '<leader>hS', "<cmd>lua package.loaded.gitsigns.stage_buffer()<CR>")
-        buf_noremap('n', '<leader>hu', "<cmd>lua package.loaded.gitsigns.undo_stage_hunk()<CR>")
-        buf_noremap('n', '<leader>hR', "<cmd>lua package.loaded.gitsigns.reset_buffer()<CR>")
-        buf_noremap('n', '<leader>hp', "<cmd>lua package.loaded.gitsigns.preview_hunk()<CR>")
-        buf_noremap('n', '<leader>hb', "<cmd>lua package.loaded.gitsigns.blame_line{full=true}<CR>")
-        buf_noremap('n', '<leader>tb', "<cmd>lua package.loaded.gitsigns.toggle_current_line_blame()<CR>")
-        buf_noremap('n', '<leader>hd', "<cmd>lua package.loaded.gitsigns.diffthis()<CR>")
-        buf_noremap('n', '<leader>hD', "<cmd>lua package.loaded.gitsigns.diffthis('~')<CR>")
-        buf_noremap('n', '<leader>td', "<cmd>lua package.loaded.gitsigns.toggle_deleted()<CR>")
-    end
-})
-
 -- Colors
 vim.g.sonokai_style = 'shusia'
 vim.cmd 'colorscheme sonokai'
-require("hlargs").setup { }
 
 if vim.fn.has('termguicolors') == 1 then
     vim.o.termguicolors = true
     require 'colorizer'.setup()
 end
-
--- tex
-vim.g.vimtex_view_method = 'zathura'
 
 -- lualine
 vim.o.showmode = false
@@ -135,22 +128,6 @@ require('lualine').setup {
     }
 }
 
--- Dashboard
-require 'dashboard'
-
--- NERDTree
-require 'nerdtree'
-
--- Telescope
-require('telescope-config').setup()
-
--- asm
-vim.cmd [[
-    au BufRead,BufNewFile *.asm set filetype=gas
-    au BufRead,BufNewFile *.asm syn region Comment start=/;/ end=/$/
-]]
--- Treesitter
-require("treesitter").setup()
 
 
 -- Installs
