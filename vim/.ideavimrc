@@ -1,3 +1,11 @@
 source ~/.config/vim/globals.vim
 
-nnoremap map <C-o><Action>(Back)
+" Plugins
+set surround
+set commentary
+
+map <C-o> <Action>(Back)
+map <C-i> <Action>(Forward)
+map <C-p> <Action>(GotoFile)
+map <space>/ <Action>(FindInPath)
+

@@ -88,3 +88,7 @@ fi
 
 . "$HOME/.cargo/env"
 
+if (( RANDOM%50 == 0)); then
+  unimatrix -ws 97
+fi
+

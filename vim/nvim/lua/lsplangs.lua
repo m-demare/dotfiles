@@ -34,6 +34,19 @@ local lss = {
         install_method='cargo',
         val='--git https://github.com/latex-lsp/texlab.git --locked',
         os={'unix'}
+    },
+    {
+        name='sumneko_lua',
+        install_method='package_manager',
+        val='sumneko_lua',
+        os={'unix'},
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' }
+                }
+            }
+        }
     }
 }
 

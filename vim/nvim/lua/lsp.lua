@@ -97,7 +97,8 @@ for _, lsp in ipairs(servers) do
     flags = {
       debounce_text_changes = 150,
     },
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = lsp.settings
   })
 end
 
