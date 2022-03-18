@@ -12,16 +12,19 @@ local languages = {
     "vue"
 }
 
-local function install_languages()
-    for _, l in ipairs(languages) do
-        vim.cmd('TSInstall ' .. l)
-    end
+local function install_parsers()
+    vim.cmd('TSInstall ' .. table.concat(languages, ' '))
 end
 
 local function setup()
     require'nvim-treesitter.configs'.setup {
         highlight = {
             enable = true,
+            disable = function(lang, bufnr)
+                -- Disable for minified js. Not perfect, single line minified files
+                -- still destroy performance
+                return lang == "javascript" and vim.api.nvim_buf_line_count(bufnr) > 4000
+            end
         },
         indent = {
             enable = true
@@ -39,6 +42,6 @@ local function setup()
 end
 
 return {
-    install_languages = install_languages,
+    install_parsers = install_parsers,
     setup = setup
 }

@@ -1,5 +1,6 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
@@ -19,7 +20,6 @@ local packer = require('packer').startup(function(use)
 
     -- General
     use { 'windwp/nvim-autopairs' }
-    use { 'nvim-lualine/lualine.nvim' }
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
     use { 'norcalli/nvim-colorizer.lua' }
@@ -27,6 +27,13 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-repeat' }
     use { 'chentau/marks.nvim', config = [[require('marks').setup {}]] }
     use { 'tpope/vim-sleuth' }
+
+    -- Status line
+    use { 'nvim-lualine/lualine.nvim', config = [[require 'config.statusline']] }
+    use {
+        "SmiteshP/nvim-gps",
+        requires = "nvim-treesitter/nvim-treesitter"
+    }
 
     -- Navigation
     use { 'preservim/nerdtree',
@@ -42,12 +49,22 @@ local packer = require('packer').startup(function(use)
         end
     }
     use {
+        'nvim-telescope/telescope-smart-history.nvim',
+        requires = { "tami5/sqlite.lua" }
+    }
+    use {
         'glepnir/dashboard-nvim',
         config = function ()
             require 'config.dashboard'
         end
     }
     use { 'andymass/vim-matchup' }
+    use {
+        'mbbill/undotree',
+        cmd = 'UndotreeToggle',
+        config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
+        setup = [[vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>UndotreeToggle<CR>', {noremap = true, silent = true})]]
+    }
 
     -- Git
     use { 'tpope/vim-fugitive' }
@@ -117,21 +134,11 @@ if vim.fn.has('termguicolors') == 1 then
     require 'colorizer'.setup()
 end
 
--- lualine
-vim.o.showmode = false
-require('lualine').setup {
-    options = {
-        icons_enabled = false,
-        theme = 'sonokai',
-        section_separators = '',
-        component_separators = ''
-    }
-}
-
-
 
 -- Installs
-require("installs")
+-- TODO vim.api.nvim_add_user_command() (nvim 0.7)
+vim.cmd [[ command! InstallTSParsers lua require'config.treesitter'.install_parsers() ]]
+vim.cmd [[ command! InstallLsps lua require'installLsps'() ]]
 
 
 return packer

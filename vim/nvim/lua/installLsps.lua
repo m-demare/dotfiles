@@ -6,10 +6,7 @@ local function get_npm_path()
     end
 end
 
-function install()
-    vim.cmd('PackerCompile')
-    vim.cmd('PackerSync')
-    require('treesitter').install_languages()
+local function install()
     local lsplangs = require('lsplangs').for_current_os()
     for _, ls in ipairs(lsplangs) do
         local silence = vim.fn.has("unix") == 1 and ' >> /dev/null' or ''
@@ -25,9 +22,4 @@ function install()
     print("Done!")
 end
 
-vim.cmd('command InstallAll lua require("installs").install()')
-
-
-return {
-    install = install
-}
+return install

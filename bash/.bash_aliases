@@ -14,6 +14,8 @@ alias searchDir='grep -rliF --exclude=\*.{o,class,exe,mp3,mp4}' # Usage: `search
 
 alias cp='cp -i'
 
+alias less='less -i'
+
 alias op='xdg-open '
 
 alias path='tr ":" "\n"<<<$PATH | sort'
