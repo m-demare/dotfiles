@@ -10,6 +10,10 @@ else
 end
 
 vim.g.mapleader = ' '
+if vim.fn.has('termguicolors') == 1 then
+    vim.o.termguicolors = true
+end
+
 require('plugins')
 
 vim.cmd('source ~/.config/vim/globals.vim')

@@ -22,11 +22,15 @@ local packer = require('packer').startup(function(use)
     use { 'windwp/nvim-autopairs' }
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
-    use { 'norcalli/nvim-colorizer.lua' }
     use { 'tpope/vim-endwise' }
     use { 'tpope/vim-repeat' }
     use { 'chentau/marks.nvim', config = [[require('marks').setup {}]] }
     use { 'tpope/vim-sleuth' }
+    use {
+        'norcalli/nvim-colorizer.lua',
+        ft = {'css', 'scss'},
+        config = [[require('colorizer').setup()]]
+    }
 
     -- Status line
     use { 'nvim-lualine/lualine.nvim', config = [[require 'config.statusline']] }
@@ -67,7 +71,10 @@ local packer = require('packer').startup(function(use)
     }
 
     -- Git
-    use { 'tpope/vim-fugitive' }
+    use {
+        'tpope/vim-fugitive',
+        setup = [[vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>G<CR>', {noremap = true, silent = true})]]
+    }
     use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
@@ -128,12 +135,6 @@ require('nvim-autopairs').setup{
 -- Colors
 vim.g.sonokai_style = 'shusia'
 vim.cmd 'colorscheme sonokai'
-
-if vim.fn.has('termguicolors') == 1 then
-    vim.o.termguicolors = true
-    require 'colorizer'.setup()
-end
-
 
 -- Installs
 -- TODO vim.api.nvim_add_user_command() (nvim 0.7)

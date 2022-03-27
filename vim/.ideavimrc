@@ -8,4 +8,6 @@ map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
 map <C-p> <Action>(GotoFile)
 map <space>/ <Action>(FindInPath)
+map ]c <Action>(VcsShowNextChangeMarker)
+map [c <Action>(VcsShowPrevChangeMarker)
 

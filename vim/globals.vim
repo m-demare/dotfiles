@@ -64,6 +64,9 @@ vnoremap <leader>P "+P
 " sudo save with :W
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+command! Wq wq
+command! Qa qa
+command! Wqa wqa
 
 " Movement
 set whichwrap+=<,>,h,l
