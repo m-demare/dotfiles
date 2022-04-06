@@ -19,12 +19,7 @@ end
 local function setup()
     require'nvim-treesitter.configs'.setup {
         highlight = {
-            enable = true,
-            disable = function(lang, bufnr)
-                -- Disable for minified js. Not perfect, single line minified files
-                -- still destroy performance
-                return lang == "javascript" and vim.api.nvim_buf_line_count(bufnr) > 4000
-            end
+            enable = true
         },
         indent = {
             enable = true

@@ -8,7 +8,7 @@ window:
   dynamic_padding: false
   decorations: full
   startup_mode: Windowed
-  opacity: 1
+  opacity: .75
 
 custom_cursor_colors: true
 colors:
@@ -43,15 +43,15 @@ font:
     family: "JetBrainsMono Nerd Font"
 
   bold:
-    family: "JetBrainsMono Nerd Font"
+    family: "JetBrainsMono"
     style: Bold
 
   italic:
-    family: "JetBrainsMono Nerd Font"
+    family: "JetBrainsMono"
     style: Italic
 
   bold_italic:
-    family: "JetBrainsMono Nerd Font"
+    family: "JetBrainsMono"
     style: Bold Italic
 
   size: 11

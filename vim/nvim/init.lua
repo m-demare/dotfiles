@@ -1,3 +1,5 @@
+require'impatient'.enable_profile()
+
 if vim.fn.has("unix") == 1 then
     vim.g.python3_host_prog="/usr/bin/python3.10"
     vim.g.node_host_prog = vim.fn.getenv 'HOME' ..

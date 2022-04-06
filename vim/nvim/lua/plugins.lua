@@ -16,6 +16,7 @@ vim.cmd([[
 ]])
 
 local packer = require('packer').startup(function(use)
+    use 'lewis6991/impatient.nvim'
     use 'wbthomason/packer.nvim'
 
     -- General
@@ -105,7 +106,7 @@ local packer = require('packer').startup(function(use)
     -- LSP
     use { 'neovim/nvim-lspconfig' }
     use { 'ms-jpq/coq_nvim', requires={ 'ms-jpq/coq.artifacts' } }
-    use { 'RRethy/vim-illuminate' }
+    use { 'RRethy/vim-illuminate', module='illuminate' }
     use { 'tami5/lspsaga.nvim' }
 
     -- Treesitter
@@ -134,7 +135,23 @@ require('nvim-autopairs').setup{
 
 -- Colors
 vim.g.sonokai_style = 'shusia'
+vim.g.sonokai_transparent_background = 1
+vim.g.sonokai_current_word = "underline"
 vim.cmd 'colorscheme sonokai'
+
+local transparent_groups = {
+    -- Already set by sonokai:
+    -- 'Normal',
+    -- 'NonText',
+    -- 'EndOfBuffer'
+    'TabLine',
+    'TabLineFill'
+}
+for _, group in ipairs(transparent_groups) do
+    vim.cmd('highlight ' .. group .. ' ctermfg=none guibg=none')
+end
+
+vim.cmd 'highlight! Visual guibg=#666666'
 
 -- Installs
 -- TODO vim.api.nvim_add_user_command() (nvim 0.7)
