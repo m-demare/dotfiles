@@ -167,7 +167,7 @@ vnoremap > >gv
 function! DoWrap()
     let ext=expand('%:e')
     if ext =~ 'md\|tex'
-        set textwidth=100
+        set textwidth=85
     elseif ext =~ 'txt' || ext == ''
         set linebreak
         set wrap

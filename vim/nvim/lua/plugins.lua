@@ -1,8 +1,7 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
 vim.cmd [[packadd packer.nvim]]
@@ -19,22 +18,30 @@ local packer = require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
     use 'wbthomason/packer.nvim'
 
+    local req = function (file, fn)
+        local str = 'require("' .. file .. '")'
+        if fn then str = str .. '.' .. fn .. '({})' end
+        return str
+        -- Sadly: https://github.com/wbthomason/packer.nvim/issues/655
+        --        https://github.com/wbthomason/packer.nvim/pull/402
+    end
+
     -- General
     use { 'windwp/nvim-autopairs' }
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
     use { 'tpope/vim-endwise' }
     use { 'tpope/vim-repeat' }
-    use { 'chentau/marks.nvim', config = [[require('marks').setup {}]] }
+    use { 'chentau/marks.nvim', config = req('marks', 'setup') }
     use { 'tpope/vim-sleuth' }
     use {
         'norcalli/nvim-colorizer.lua',
         ft = {'css', 'scss'},
-        config = [[require('colorizer').setup()]]
+        config = req('colorizer', 'setup')
     }
 
     -- Status line
-    use { 'nvim-lualine/lualine.nvim', config = [[require 'config.statusline']] }
+    use { 'nvim-lualine/lualine.nvim', config = req 'config.statusline' }
     use {
         "SmiteshP/nvim-gps",
         requires = "nvim-treesitter/nvim-treesitter"
@@ -44,25 +51,18 @@ local packer = require('packer').startup(function(use)
     use { 'preservim/nerdtree',
         opt=true,
         cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'},
-        setup = [[require 'config.nerdtree']]
+        setup = req 'config.nerdtree'
     }
     use {
         'nvim-telescope/telescope.nvim',
         requires = {'nvim-lua/plenary.nvim'},
-        config = function ()
-            require('config.telescope').setup()
-        end
+        config = req('config.telescope', 'setup')
     }
     use {
         'nvim-telescope/telescope-smart-history.nvim',
         requires = { "tami5/sqlite.lua" }
     }
-    use {
-        'glepnir/dashboard-nvim',
-        config = function ()
-            require 'config.dashboard'
-        end
-    }
+    use { 'glepnir/dashboard-nvim', config = req 'config.dashboard' }
     use { 'andymass/vim-matchup' }
     use {
         'mbbill/undotree',
@@ -79,14 +79,12 @@ local packer = require('packer').startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
-        config = function ()
-            require('config.gitsigns')
-        end
+        config = req 'config.gitsigns'
     }
 
     -- Theme
     use { 'sainnhe/sonokai' }
-    use { '~/localwork/hlargs.nvim', config = [[ require("hlargs").setup {} ]] }
+    use { '~/localwork/hlargs.nvim', config = req('hlargs', 'setup') }
 
     -- asm
     use {
@@ -113,7 +111,7 @@ local packer = require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = [[ require("config.treesitter").setup() ]]
+        config = req('config.treesitter', 'setup')
     }
     use { 'nvim-treesitter/playground' }
 

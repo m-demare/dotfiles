@@ -24,9 +24,9 @@ local lss = {
         os={'win32', 'unix'}
     },
     {
-        name='ccls',
+        name='clangd',
         install_method='package_manager',
-        val='ccls',
+        val='clang or lldb',
         os={'unix'}
     },
     {

@@ -1,4 +1,4 @@
-require'impatient'.enable_profile()
+require'impatient'
 
 if vim.fn.has("unix") == 1 then
     vim.g.python3_host_prog="/usr/bin/python3.10"
