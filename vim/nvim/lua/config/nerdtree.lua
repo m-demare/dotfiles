@@ -1,11 +1,8 @@
-local function noremap(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local map  = require('utils').map
+
 -- First time it is opened, open it at the repo root
-noremap('n', '<C-t>', "!exists('g:NERDTree') ? ':NERDTreeVCS<CR>' : ':NERDTreeToggle<CR>'", {expr = true, silent = true})
-noremap('n', '\\t', ":NERDTreeFind<CR>", {silent = true})
+map('n', '<C-t>', "!exists('g:NERDTree') ? ':NERDTreeVCS<CR>' : ':NERDTreeToggle<CR>'", {expr=true})
+map('n', '\\t', ":NERDTreeFind<CR>")
 vim.g.NERDTreeQuitOnOpen = 1
 vim.g.NERDTreeMinimalUI = 1
 -- Exit Vim if NERDTree is the only window remaining in the only tab.

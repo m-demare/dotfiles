@@ -37,7 +37,8 @@ local packer = require('packer').startup(function(use)
     use {
         'norcalli/nvim-colorizer.lua',
         ft = {'css', 'scss'},
-        config = req('colorizer', 'setup')
+        config = req('colorizer', 'setup'),
+        disable=true
     }
 
     -- Status line
@@ -54,13 +55,26 @@ local packer = require('packer').startup(function(use)
         setup = req 'config.nerdtree'
     }
     use {
-        'nvim-telescope/telescope.nvim',
-        requires = {'nvim-lua/plenary.nvim'},
-        config = req('config.telescope', 'setup')
-    }
-    use {
-        'nvim-telescope/telescope-smart-history.nvim',
-        requires = { "tami5/sqlite.lua" }
+        {
+            'nvim-telescope/telescope.nvim',
+            requires = {
+                'nvim-lua/plenary.nvim',
+                'nvim-telescope/telescope-smart-history.nvim'
+            },
+            wants = {
+                'plenary.nvim',
+                'telescope-smart-history.nvim'
+            },
+            module = 'telescope',
+            cmd = 'Telescope',
+            setup = req('config.telescope_setup', 'setup'),
+            config = req 'config.telescope',
+        },
+        {
+            'nvim-telescope/telescope-smart-history.nvim',
+            requires = { "tami5/sqlite.lua" },
+            after = 'telescope.nvim'
+        }
     }
     use { 'glepnir/dashboard-nvim', config = req 'config.dashboard' }
     use { 'andymass/vim-matchup' }
@@ -148,13 +162,10 @@ local transparent_groups = {
 for _, group in ipairs(transparent_groups) do
     vim.cmd('highlight ' .. group .. ' ctermfg=none guibg=none')
 end
-
 vim.cmd 'highlight! Visual guibg=#666666'
 
 -- Installs
--- TODO vim.api.nvim_add_user_command() (nvim 0.7)
-vim.cmd [[ command! InstallTSParsers lua require'config.treesitter'.install_parsers() ]]
-vim.cmd [[ command! InstallLsps lua require'installLsps'() ]]
-
+vim.api.nvim_create_user_command('InstallTSParsers', require'config.treesitter'.install_parsers, {force=true})
+vim.api.nvim_create_user_command('InstallLsps', require'installLsps', {force=true})
 
 return packer

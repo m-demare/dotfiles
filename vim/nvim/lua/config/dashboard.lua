@@ -1,4 +1,5 @@
 local g = vim.g
+local telescope = require 'config.telescope_setup'
 
 g.dashboard_default_executive = "telescope"
 
@@ -15,7 +16,7 @@ g.dashboard_custom_section = {
     },
     git_files = {
         description = { 'Find file                 C-p    ' },
-        command = 'Telescope git_files'
+        command = telescope.project_files
     },
     new_file = {
         description = { 'New file                  SPC c n' },
@@ -23,7 +24,7 @@ g.dashboard_custom_section = {
     },
     find_word = {
         description = { 'Find word                 SPC /  ' },
-        command = 'DashboardFindWord'
+        command = telescope.picker 'live_grep'
     }
 }
 

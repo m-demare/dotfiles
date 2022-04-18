@@ -13,13 +13,13 @@ gps.setup{
     depth = 2,
 }
 
--- TODO use global statusline (https://github.com/neovim/neovim/pull/17266)
 require('lualine').setup {
     options = {
         icons_enabled = unix,
         theme = 'sonokai',
         section_separators = separators,
-        component_separators = separators
+        component_separators = separators,
+        globalstatus = true
     },
     extensions = {'nerdtree'},
     sections = {
