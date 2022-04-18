@@ -4,10 +4,10 @@ platform=$(uname)
 
 if [[ $platform =~ "Linux" ]]; then
 
-    if ! command -v apt-get &> /dev/null
+    if command -v pacman &> /dev/null
     then
         INSTALL="sudo pacman --noconfirm -Syu"
-        NVIM_DEPS="base-devel cmake unzip ninja tree-sitter curl"
+        NVIM_DEPS="nvim"
         ALACRITTY_DEPS="cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python"
     else
         echo "Updating repos"
@@ -18,10 +18,11 @@ if [[ $platform =~ "Linux" ]]; then
     fi
 
     install_packages(){
-        $INSTALL $1 >> /dev/null
+        echo "Installing $1"
+        $INSTALL $1
     }
 
-    install_packages "git curl zsh ripgrep tmux zathura $NVIM_DEPS $ALACRITTY_DEPS"
+    install_packages "git curl zsh ripgrep tmux zathura gdb $NVIM_DEPS $ALACRITTY_DEPS"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
@@ -43,18 +44,20 @@ if [[ $platform =~ "Linux" ]]; then
     curl https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit -o ~/.gdbinit
 
     # alacritty
-    echo "Installing alacritty"
+    echo "Installing alacritty and bottom"
     ~/.cargo/bin/cargo install alacritty bottom
 
     mkdir -p ~/localwork/
     # neovim
     echo "Building neovim"
     git clone https://github.com/neovim/neovim ~/localwork/neovim
-    cd ~/localwork/neovim &&
-    git checkout "release-0.6" &&
-    sudo make distclean >> /dev/null &&
-    make CMAKE_BUILD_TYPE=RelWithDebInfo &&
-    sudo make install
+    if command -v apt-get &> /dev/null
+    then
+        cd ~/localwork/neovim &&
+        sudo make distclean >> /dev/null &&
+        make CMAKE_BUILD_TYPE=RelWithDebInfo &&
+        sudo make install
+    fi
 
     # for some reason I couldn't install node from this script, nvm was not found
     echo "Please run 'nvm install \$vim_node_version' manually"
