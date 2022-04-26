@@ -1,5 +1,7 @@
 local nvim_lsp = require 'lspconfig'
 local saga = require 'lspsaga'
+local utils = require 'utils'
+local map  = utils.map
 
 -- COQ settings
 vim.g.coq_settings = {
@@ -15,17 +17,12 @@ vim.g.coq_settings = {
         }
     }
 }
-local coq = require "coq"
+local coq = require 'coq'
 
-local function noremap(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-noremap('i', '<Esc>', 'pumvisible() ? "\\<C-e><Esc>" : "\\<Esc>"', {expr=true})
-noremap('i', '<C-c>', 'pumvisible() ? "\\<C-e><C-c>" : "\\<C-c>"', {expr=true})
-noremap('i', '<BS>', 'pumvisible() ? "\\<C-e><BS>"  : "\\<BS>"', {expr=true})
-noremap('i', '<Tab>', 'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"', {expr=true})
+map('i', '<Esc>', 'pumvisible() ? "\\<C-e><Esc>" : "\\<Esc>"', {expr=true})
+map('i', '<C-c>', 'pumvisible() ? "\\<C-e><C-c>" : "\\<C-c>"', {expr=true})
+map('i', '<BS>', 'pumvisible() ? "\\<C-e><BS>"  : "\\<BS>"', {expr=true})
+map('i', '<Tab>', 'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"', {expr=true})
 
 _G.MUtils= {}
 local autopairs = require('nvim-autopairs')
@@ -41,7 +38,7 @@ MUtils.CR = function()
     return autopairs.autopairs_cr()
   end
 end
-noremap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true })
+map('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true })
 
 MUtils.BS = function()
   if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
@@ -50,43 +47,41 @@ MUtils.BS = function()
     return autopairs.autopairs_bs()
   end
 end
-noremap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true })
+map('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true })
 
 -- LSP settings
 
 local on_attach = function(client, bufnr)
-
     -- Highlighting
     require 'illuminate'.on_attach(client)
 
-    local function buf_noremap(mode, lhs, rhs, opts)
-        local options = {noremap = true, silent = true}
-        if opts then options = vim.tbl_extend('force', options, opts) end
-        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
-    end
-
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    buf_noremap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
-    buf_noremap('n', 'gd', '<cmd>Lspsaga preview_definition<CR>')
-    buf_noremap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-    buf_noremap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-    buf_noremap('n', 'gf', '<cmd>Lspsaga lsp_finder<CR>')
-    buf_noremap('n', 'gs', '<cmd>Lspsaga signature_help<CR>')
-    buf_noremap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
-    buf_noremap('n', 'K', '<cmd>Lspsaga hover_doc<CR>')
-    buf_noremap('n', '<leader>rn', '<cmd>Lspsaga rename<CR>')
-    buf_noremap('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
-    buf_noremap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-    buf_noremap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-    buf_noremap('n', '<leader>ff', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+    map('n', 'gD', vim.lsp.buf.declaration, {buffer=bufnr})
+    map('n', 'gd', vim.lsp.buf.definition, {buffer=bufnr})
+    map('n', 'gi', vim.lsp.buf.implementation, {buffer=bufnr})
+    map('n', 'gr', vim.lsp.buf.references, {buffer=bufnr})
+    map('n', 'gf', '<cmd>Lspsaga lsp_finder<CR>', {buffer=bufnr})
+    map('n', 'gs', '<cmd>Lspsaga signature_help<CR>', {buffer=bufnr})
+    map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", {buffer=bufnr})
+    map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', {buffer=bufnr})
+    -- map('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', {buffer=bufnr})
+    map('n', '<leader>rn', vim.lsp.buf.rename, {buffer=bufnr})
+    -- map('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>', {buffer=bufnr})
+    map('n', '<leader>ca', vim.lsp.buf.code_action, {buffer=bufnr})
+    map('n', '[g', vim.diagnostic.goto_prev, {buffer=bufnr})
+    map('n', ']g', vim.diagnostic.goto_next, {buffer=bufnr})
+    map('n', '<leader>ff', vim.lsp.buf.formatting, {buffer=bufnr})
 
     print('Using ' .. client.name)
 end
 
 local servers = require('lsplangs').for_current_os()
 
-vim.g.Illuminate_ftblacklist = { 'nerdtree', 'TelescopePrompt' }
+vim.g.Illuminate_ftwhitelist = utils.reduce(servers, function (acc, s)
+    for _, ft in ipairs(s.fts) do table.insert(acc, ft) end
+    return acc
+end, {})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true

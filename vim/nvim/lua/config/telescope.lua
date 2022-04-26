@@ -13,10 +13,17 @@ telescope.setup{
             path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
             limit = 500,
         }
+    },
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown { },
+        }
     }
 }
 
+telescope.load_extension 'ui-select'
+
 if vim.fn.has('unix') == 1 then
-    telescope.load_extension('smart_history')
+    telescope.load_extension 'smart_history'
 end
 

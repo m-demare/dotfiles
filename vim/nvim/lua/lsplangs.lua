@@ -1,42 +1,49 @@
 local lss = {
     {
         name='pyright',
+        fts={ 'python' },
         install_method='npm',
         val='pyright',
         os={'win32', 'unix'}
     },
     {
         name='tsserver',
+        fts={ 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
         install_method='npm',
         val='typescript typescript-language-server',
         os={'win32', 'unix'}
     },
     {
         name='svelte',
+        fts={ 'svelte' },
         install_method='npm',
         val='svelte-language-server',
         os={'win32', 'unix'}
     },
     {
         name='vimls',
+        fts={ 'vim' },
         install_method='npm',
         val='vim-language-server',
         os={'win32', 'unix'}
     },
     {
         name='clangd',
+        fts={ 'c', 'cpp' },
         install_method='package_manager',
         val='clang or lldb',
         os={'unix'}
     },
     {
         name='texlab',
+        fts={ 'tex' },
         install_method='cargo',
         val='--git https://github.com/latex-lsp/texlab.git --locked',
         os={'unix'}
     },
     {
         name='sumneko_lua',
+        fts={ 'lua' },
         install_method='package_manager',
         val='lua-language-server',
         os={'unix'},

@@ -21,6 +21,7 @@ require('plugins')
 vim.cmd('source ~/.config/vim/globals.vim')
 
 require('lsp')
+require('ui.input')
 
 vim.cmd[[
     augroup highlight_yank

@@ -74,6 +74,10 @@ local packer = require('packer').startup(function(use)
             'nvim-telescope/telescope-smart-history.nvim',
             requires = { "tami5/sqlite.lua" },
             after = 'telescope.nvim'
+        },
+        {
+            'nvim-telescope/telescope-ui-select.nvim',
+            after = 'telescope.nvim'
         }
     }
     use { 'glepnir/dashboard-nvim', config = req 'config.dashboard' }
