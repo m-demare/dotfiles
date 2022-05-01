@@ -1,11 +1,10 @@
 local g = vim.g
 local telescope = require 'config.telescope_setup'
+local map = require('utils').map
 
 g.dashboard_default_executive = "telescope"
 
-g.dashboard_custom_header = {
-    'Welcome to neovim',
-}
+g.dashboard_custom_header = { 'Welcome to neovim' }
 
 g.dashboard_custom_footer = { '' }
 
@@ -28,6 +27,6 @@ g.dashboard_custom_section = {
     }
 }
 
-local options = {noremap = true, silent = true}
-vim.api.nvim_set_keymap('n', '<leader>sl', '<cmd>SessionLoad<CR>', options)
-vim.api.nvim_set_keymap('n', '<leader>cn', '<cmd>DashboardNewFile<CR>', options)
+map('n', '<leader>sl', '<cmd>SessionLoad<CR>')
+map('n', '<leader>cn', '<cmd>DashboardNewFile<CR>')
+

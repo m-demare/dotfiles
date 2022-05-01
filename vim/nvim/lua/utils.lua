@@ -9,14 +9,21 @@ end
 function M.bind(fn, ...)
     local args = {...}
     return function(...)
-        fn(unpack(args), ...)
+        return fn(unpack(args), ...)
     end
 end
 
 function M.strict_bind(fn, ...)
     local args = {...}
     return function()
-        fn(unpack(args))
+        return fn(unpack(args))
+    end
+end
+
+function M.call_bind(fn, prop, ...)
+    local args = {...}
+    return function ()
+        return fn()[prop](unpack(args))
     end
 end
 

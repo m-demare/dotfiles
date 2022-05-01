@@ -92,7 +92,7 @@ local packer = require('packer').startup(function(use)
     -- Git
     use {
         'tpope/vim-fugitive',
-        setup = [[vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>G<CR>', {noremap = true, silent = true})]]
+        config = [[vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>G<CR>', {noremap = true, silent = true})]]
     }
     use {
         'lewis6991/gitsigns.nvim',
@@ -124,6 +124,34 @@ local packer = require('packer').startup(function(use)
     use { 'ms-jpq/coq_nvim', requires={ 'ms-jpq/coq.artifacts' } }
     use { 'RRethy/vim-illuminate', module='illuminate' }
     use { 'tami5/lspsaga.nvim' }
+
+    -- Debugging
+    use {
+        {
+            'mfussenegger/nvim-dap',
+            setup = req 'config.dap_setup',
+            config = req 'config.dap',
+            requires = 'jbyuki/one-small-step-for-vimkind',
+            wants = 'one-small-step-for-vimkind',
+            module = 'dap'
+        },
+        {
+            'rcarriga/nvim-dap-ui',
+            requires = 'nvim-dap',
+            after = 'nvim-dap',
+            config = req 'config.dapui',
+            module = 'dapui'
+        },
+        {
+            'theHamsta/nvim-dap-virtual-text',
+            requires = {
+                'mfussenegger/nvim-dap',
+                'nvim-treesitter/nvim-treesitter'
+            },
+            after = 'nvim-dap',
+            config = req('nvim-dap-virtual-text', 'setup')
+        }
+    }
 
     -- Treesitter
     use {

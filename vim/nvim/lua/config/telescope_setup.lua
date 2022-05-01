@@ -1,11 +1,11 @@
 local M = {}
 
-local map  = require('utils').map
+local utils  = require('utils')
+local map  = utils.map
 
+local telescope_builtin = utils.bind(require, 'telescope.builtin')
 function M.picker(name)
-    return function()
-        require'telescope.builtin'[name]()
-    end
+    return utils.call_bind(telescope_builtin, name)
 end
 
 function M.project_files()
