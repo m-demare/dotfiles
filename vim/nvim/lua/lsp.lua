@@ -15,6 +15,12 @@ vim.g.coq_settings = {
         icons = {
             mode = 'none'
         }
+    },
+    clients = {
+      buffers = { weight_adjust=.5 },
+      tmux = { weight_adjust=.8 },
+      tree_sitter = { weight_adjust=1.2 },
+      lsp = { weight_adjust=2 }
     }
 }
 local coq = require 'coq'
