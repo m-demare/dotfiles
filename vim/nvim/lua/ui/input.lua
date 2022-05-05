@@ -38,7 +38,9 @@ local function wininput(opts, on_confirm, win_opts)
     win_opts.width = #default_text + #prompt + 5 < win_opts.width and win_opts.width or #default_text + #prompt + 5
 
     local win = vim.api.nvim_open_win(buf, true, win_opts)
-    vim.api.nvim_win_set_option(win, "winhighlight", "Normal:None")
+
+    -- Proper colors
+    vim.api.nvim_win_set_option(win, "winhighlight", "Normal:None,FloatBorder:None")
 
     vim.cmd("startinsert")
 
@@ -48,6 +50,7 @@ local function wininput(opts, on_confirm, win_opts)
         vim.cmd("startinsert!") -- bang: go to end of line
     end, 1)
 
+    -- Close on leave
     vim.api.nvim_create_autocmd({ "BufLeave" }, {
         pattern = { "<buffer=" .. tostring(buf) .. ">" },
         once = true,
