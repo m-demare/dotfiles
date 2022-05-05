@@ -33,6 +33,18 @@ local function setup()
                 node_decremental = "grm",
             },
         },
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@call.outer",
+                    ["ic"] = "@call.inner",
+                },
+            },
+        }
     }
 end
 

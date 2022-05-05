@@ -104,18 +104,6 @@ local packer = require('packer').startup(function(use)
     use { 'sainnhe/sonokai' }
     use { '~/localwork/hlargs.nvim', config = req('hlargs', 'setup') }
 
-    -- asm
-    use {
-        'shirk/vim-gas',
-        ft={'asm', 's'},
-        config = function ()
-            vim.cmd [[
-                au BufRead,BufNewFile *.asm set filetype=gas
-                au BufRead,BufNewFile *.asm syn region Comment start=/;/ end=/$/
-            ]]
-        end
-    }
-
     -- tex
     use { 'lervag/vimtex', ft={'tex'}, config=[[vim.g.vimtex_view_method = 'zathura']] }
 
@@ -155,9 +143,15 @@ local packer = require('packer').startup(function(use)
 
     -- Treesitter
     use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = req('config.treesitter', 'setup')
+        {
+            'nvim-treesitter/nvim-treesitter',
+            run = ':TSUpdate',
+            config = req('config.treesitter', 'setup')
+        },
+        {
+            'nvim-treesitter/nvim-treesitter-textobjects',
+            requires = 'nvim-treesitter/nvim-treesitter'
+        }
     }
     use { 'nvim-treesitter/playground' }
 

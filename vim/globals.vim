@@ -176,7 +176,7 @@ function! DoWrap()
     endif
 endfunction
 au BufRead,BufEnter,BufNewFile * call DoWrap()
-
+au BufNew,BufRead *.asm set ft=ia64
 
 " Helper functions
 
