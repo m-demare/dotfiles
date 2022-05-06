@@ -173,7 +173,7 @@ require('nvim-autopairs').setup{
 
 -- Colors
 vim.g.sonokai_style = 'shusia'
-vim.g.sonokai_transparent_background = 1
+vim.g.sonokai_transparent_background = vim.fn.has 'unix'
 vim.g.sonokai_current_word = "underline"
 vim.cmd 'colorscheme sonokai'
 
