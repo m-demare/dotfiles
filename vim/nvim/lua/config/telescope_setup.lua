@@ -19,6 +19,10 @@ function M.setup()
     map('n', '<leader><C-p>', M.picker 'buffers')
     map('n', '<leader>/', M.picker 'live_grep')
     map('n', '<leader>gb', M.picker 'git_branches')
+    vim.ui.select = function (...)
+        vim.cmd[[PackerLoad telescope.nvim]]
+        vim.ui.select(...)
+    end
 end
 
 return M
