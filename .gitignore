@@ -1,4 +1,4 @@
 .netrwhist
-vim/nvim/spell/
+vim/nvim/spell/*.spl
 vim/nvim/plugin/packer_compiled.lua
 
