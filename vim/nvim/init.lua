@@ -1,4 +1,4 @@
-require'impatient'
+pcall(require, 'impatient')
 
 if vim.fn.has("unix") == 1 then
     vim.g.python3_host_prog="/usr/bin/python3.10"
@@ -20,12 +20,7 @@ require('plugins')
 
 vim.cmd('source ~/.config/vim/globals.vim')
 
-require('lsp')
-require('ui.input')
+require 'ui.input'
+require 'maps'
+require 'autocmds'
 
-vim.cmd[[
-    augroup highlight_yank
-        autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false, higroup="IncSearch", timeout=250}
-    augroup END
-]]

@@ -14,7 +14,7 @@ local function wininput(opts, on_confirm, win_opts)
     local deferred_callback = function(input)
         vim.defer_fn(function()
             on_confirm(input)
-        end, 1)
+        end, 3)
     end
 
     vim.fn.prompt_setprompt(buf, prompt)
@@ -48,11 +48,11 @@ local function wininput(opts, on_confirm, win_opts)
     vim.defer_fn(function()
         vim.api.nvim_buf_set_text(buf, 0, #prompt, 0, #prompt, { default_text })
         vim.cmd("startinsert!") -- bang: go to end of line
-    end, 1)
+    end, 5)
 
     -- Close on leave
     vim.api.nvim_create_autocmd({ "BufLeave" }, {
-        pattern = { "<buffer=" .. tostring(buf) .. ">" },
+        buffer = buf,
         once = true,
         callback = utils.strict_bind(vim.api.nvim_win_close, win, true)
     })

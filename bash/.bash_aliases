@@ -60,6 +60,7 @@ if type nvim > /dev/null 2>&1; then
     }
     alias vim='nnvim'
     alias nvim='nnvim'
+    alias v='nnvim'
 fi
 
 # Current work specific stuff

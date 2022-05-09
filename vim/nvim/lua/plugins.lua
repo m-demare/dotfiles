@@ -108,7 +108,7 @@ local packer = require('packer').startup(function(use)
     use { 'lervag/vimtex', ft={'tex'}, config=[[vim.g.vimtex_view_method = 'zathura']] }
 
     -- LSP
-    use { 'neovim/nvim-lspconfig' }
+    use { 'neovim/nvim-lspconfig', config = req 'lsp'}
     use { 'ms-jpq/coq_nvim', requires={ 'ms-jpq/coq.artifacts' } }
     use { 'RRethy/vim-illuminate', module='illuminate' }
     use { 'tami5/lspsaga.nvim' }
