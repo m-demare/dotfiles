@@ -3,9 +3,17 @@ local M = {}
 local utils  = require('utils')
 local map  = utils.map
 
+local telescope = utils.bind(require, 'telescope')
 local telescope_builtin = utils.bind(require, 'telescope.builtin')
 function M.picker(name)
     return utils.call_bind(telescope_builtin, name)
+end
+
+function M.extension_picker(ext, picker)
+    return function ()
+        vim.pretty_print(telescope().extensions)
+        telescope().extensions[ext][picker]()
+    end
 end
 
 function M.project_files()

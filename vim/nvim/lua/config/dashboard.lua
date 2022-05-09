@@ -18,7 +18,7 @@ g.dashboard_custom_section = {
         command = telescope.project_files
     },
     new_file = {
-        description = { 'New file                  SPC c n' },
+        description = { 'Temp file                 SPC a n' },
         command = 'DashboardNewFile'
     },
     find_word = {
@@ -28,5 +28,4 @@ g.dashboard_custom_section = {
 }
 
 map('n', '<leader>sl', '<cmd>SessionLoad<CR>')
-map('n', '<leader>cn', '<cmd>DashboardNewFile<CR>')
 

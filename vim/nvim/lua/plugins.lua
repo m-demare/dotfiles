@@ -40,6 +40,11 @@ local packer = require('packer').startup(function(use)
         config = req('colorizer', 'setup'),
         disable=true
     }
+    use {
+        '~/localwork/attempt.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = req 'config.attempt'
+    }
 
     -- Status line
     use { 'nvim-lualine/lualine.nvim', config = req 'config.statusline' }
