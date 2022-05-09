@@ -65,7 +65,7 @@ local on_attach = function(client, bufnr)
 
     map('n', 'gD', vim.lsp.buf.declaration, {buffer=bufnr})
     map('n', 'gd', vim.lsp.buf.definition, {buffer=bufnr})
-    map('n', 'gi', vim.lsp.buf.implementation, {buffer=bufnr})
+    map('n', '<leader>gi', vim.lsp.buf.implementation, {buffer=bufnr})
     map('n', 'gr', vim.lsp.buf.references, {buffer=bufnr})
     map('n', 'gf', '<cmd>Lspsaga lsp_finder<CR>', {buffer=bufnr})
     map('n', 'gs', '<cmd>Lspsaga signature_help<CR>', {buffer=bufnr})
