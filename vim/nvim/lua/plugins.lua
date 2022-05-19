@@ -32,7 +32,7 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-surround' }
     use { 'tpope/vim-endwise' }
     use { 'tpope/vim-repeat' }
-    use { 'chentau/marks.nvim', config = req('marks', 'setup') }
+    use { 'chentoast/marks.nvim', config = req('marks', 'setup') }
     use { 'tpope/vim-sleuth' }
     use {
         'norcalli/nvim-colorizer.lua',

@@ -11,7 +11,6 @@ end
 
 function M.extension_picker(ext, picker)
     return function ()
-        vim.pretty_print(telescope().extensions)
         telescope().extensions[ext][picker]()
     end
 end
