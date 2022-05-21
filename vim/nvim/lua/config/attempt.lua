@@ -7,6 +7,7 @@ attempt.setup {
 }
 
 map('n', '<leader>an', attempt.new_select)
+map('n', '<leader>ai', attempt.new_input_ext)
 map('n', '<leader>al', telescope.extension_picker('attempt', 'attempt'))
 map('n', '<leader>ar', attempt.run)
 map('n', '<leader>ad', attempt.delete_buf)
