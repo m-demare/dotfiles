@@ -15,19 +15,13 @@ adding files as explained below.
 * [Known issues](#known-issues)
 
 ## Why?
-All options I could find for managing my dotfiles were either too complicated for my use case, or not open source
-(or both). Update: since doing this, I've found some other options. I still like this one because of its simplicity, the
-fact that it has basically no dependencies and it's a single file with no installation required. Also I may be biased
+All options I could find for managing my dotfiles were either too complicated for my use case, not
+multiplatform, or not open source (or all of those). Update: since doing this, I've found some other options.
+I still like this one because of its simplicity, the fact that it has basically no dependencies and it's a
+single file with no installation required. Also I may be biased
 
 I wanted a simple script that required no installation, and that would get me up and running afap. Also, I tend to
-work in multiple PCs at once, so I needed my dotfiles to easyly sync between them.
-
-Now, this is how long it takes me to sync my settings in a new PC:
-![dotfiles](https://user-images.githubusercontent.com/34817965/147004888-cf09e508-c671-4b2a-8c68-0a0a8963bc74.gif)
-
-(\*Excluding zsh, nvim and alacritty install times, see the dependencies script)
-
-It's especially useful if you work on multiple PCs at once, and want to keep your settings synced
+work in multiple PCs at once, and different OSs, so I needed my dotfiles to easily sync between them.
 
 ## Dependencies
 ### If you just want to use the manager with your own dotfiles
