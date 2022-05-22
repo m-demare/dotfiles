@@ -64,11 +64,13 @@ local packer = require('packer').startup(function(use)
             'nvim-telescope/telescope.nvim',
             requires = {
                 'nvim-lua/plenary.nvim',
-                'nvim-telescope/telescope-smart-history.nvim'
+                'nvim-telescope/telescope-smart-history.nvim',
+                'nvim-telescope/telescope-ui-select.nvim'
             },
             wants = {
                 'plenary.nvim',
-                'telescope-smart-history.nvim'
+                'telescope-smart-history.nvim',
+                'telescope-ui-select.nvim'
             },
             module = 'telescope',
             cmd = 'Telescope',
