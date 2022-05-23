@@ -30,7 +30,6 @@ local packer = require('packer').startup(function(use)
     use { 'windwp/nvim-autopairs' }
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
-    use { 'tpope/vim-endwise' }
     use { 'tpope/vim-repeat' }
     use { 'chentoast/marks.nvim', config = req('marks', 'setup') }
     use { 'tpope/vim-sleuth' }
@@ -116,7 +115,20 @@ local packer = require('packer').startup(function(use)
 
     -- LSP
     use { 'neovim/nvim-lspconfig', config = req 'lsp'}
-    use { 'ms-jpq/coq_nvim', requires={ 'ms-jpq/coq.artifacts' } }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'L3MON4D3/LuaSnip',
+            'rafamadriz/friendly-snippets',
+            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+            'hrsh7th/cmp-nvim-lsp',
+            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+        },
+        config = req('config.cmp'),
+        event = 'InsertEnter *',
+    }
     use { 'RRethy/vim-illuminate', module='illuminate' }
     use { 'tami5/lspsaga.nvim' }
 
@@ -173,9 +185,7 @@ end)
 -- Auto pairs
 require('nvim-autopairs').setup{
     disable_filetype = { "TelescopePrompt" , "vim" },
-    map_bs = false,
-    map_cr = false,
-    enable_check_bracket_line = false
+    enable_check_bracket_line = true
 }
 
 -- Colors

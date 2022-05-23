@@ -2,58 +2,7 @@ local nvim_lsp = require 'lspconfig'
 local saga = require 'lspsaga'
 local utils = require 'utils'
 local map  = utils.map
-
--- COQ settings
-vim.g.coq_settings = {
-    auto_start = 'shut-up',
-    keymap = {
-        jump_to_mark = '<c-q>',
-        pre_select = true,
-        recommended = false
-    },
-    display = {
-        icons = {
-            mode = 'none'
-        }
-    },
-    clients = {
-      buffers = { weight_adjust=.5 },
-      tmux = { weight_adjust=.8 },
-      tree_sitter = { weight_adjust=1.2 },
-      lsp = { weight_adjust=2 }
-    }
-}
-local coq = require 'coq'
-
-map('i', '<Esc>', 'pumvisible() ? "\\<C-e><Esc>" : "\\<Esc>"', {expr=true})
-map('i', '<C-c>', 'pumvisible() ? "\\<C-e><C-c>" : "\\<C-c>"', {expr=true})
-map('i', '<BS>', 'pumvisible() ? "\\<C-e><BS>"  : "\\<BS>"', {expr=true})
-map('i', '<Tab>', 'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"', {expr=true})
-
-_G.MUtils= {}
-local autopairs = require('nvim-autopairs')
-
-MUtils.CR = function()
-  if vim.fn.pumvisible() ~= 0 then
-    if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
-      return autopairs.esc('<c-y>')
-    else
-      return autopairs.esc('<c-e>') .. autopairs.autopairs_cr()
-    end
-  else
-    return autopairs.autopairs_cr()
-  end
-end
-map('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true })
-
-MUtils.BS = function()
-  if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
-    return autopairs.esc('<c-e>') .. autopairs.autopairs_bs()
-  else
-    return autopairs.autopairs_bs()
-  end
-end
-map('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true })
+local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
 -- LSP settings
 
@@ -93,14 +42,14 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp.name].setup (coq.lsp_ensure_capabilities {
+  nvim_lsp[lsp.name].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     },
-    capabilities = capabilities,
+    capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
     settings = lsp.settings
-  })
+  }
 end
 
 saga.init_lsp_saga{
