@@ -47,7 +47,6 @@ local function has_words_before ()
 end
 
 cmp.setup({
-    completion = { completeopt = 'menu,menuone' },
     formatting = {
         format = format,
     },
@@ -67,10 +66,10 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<Tab>'] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
+            if cmp.visible() then
+                cmp.confirm({select=true})
+            elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            elseif cmp.visible() then
-                cmp.confirm({ select = true })
             elseif has_words_before() then
                 cmp.complete()
             else
@@ -83,10 +82,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { 'i', 's' }),
-        ['<CR>'] = function(fallback)
-            fallback()
-        end
+        end, { 'i', 's' })
     }),
     sources = cmp.config.sources({
         { name = 'luasnip' },
