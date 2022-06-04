@@ -107,3 +107,11 @@ if vim.fn.has("unix") == 1 then
     vim.fn.sign_define("DapBreakpointReject", { text = "●", texthl = "DiagnosticSignHint", linehl = "", numhl = "" })
 end
 
+-- dapui
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  require("dapui").close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  require("dapui").close()
+end
+
