@@ -20,7 +20,9 @@ require('plugins')
 
 vim.cmd('source ~/.config/vim/globals.vim')
 
-require 'ui.input'
-require 'maps'
 require 'autocmds'
+vim.defer_fn(function ()
+    require 'ui.input'
+    require 'maps'
+end, 2)
 

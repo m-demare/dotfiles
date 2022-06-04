@@ -87,7 +87,7 @@ local packer = require('packer').startup(function(use)
         }
     }
     use { 'glepnir/dashboard-nvim', config = req 'config.dashboard' }
-    use { 'andymass/vim-matchup' }
+    use { 'andymass/vim-matchup', ft={'lua', 'js', 'tex', 'sh'} }
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -96,10 +96,7 @@ local packer = require('packer').startup(function(use)
     }
 
     -- Git
-    use {
-        'tpope/vim-fugitive',
-        config = [[vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>G<CR>', {noremap = true, silent = true})]]
-    }
+    use { 'tpope/vim-fugitive' }
     use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
