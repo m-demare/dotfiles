@@ -15,6 +15,10 @@ map('n', '<leader>bc', function ()
     dap().set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end)
 map('n', '<leader>br', cb(dap, 'toggle_breakpoint'))
+map('n', '<leader>ev', function ()
+    local expr = vim.fn.input 'Expression: '
+    require("dapui").eval(expr)
+end)
 map('n', '<M-d>', cb(dapui, 'toggle'))
 
 cmd('DebugThis', cb(osv, 'launch'), { force=true })

@@ -116,5 +116,16 @@ cmp.setup.cmdline(':', {
     })
 })
 
+-- cmp throws errors in dap buffers
+local dap_fts = { 'dapui_watches', 'dap-repl' }
+for _, ft in ipairs(dap_fts) do
+    cmp.setup.filetype(ft, {
+        enabled = function ()
+            return false
+        end,
+        sources = {}
+    })
+end
+
 cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
