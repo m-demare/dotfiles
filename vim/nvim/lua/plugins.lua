@@ -25,6 +25,7 @@ local packer = require('packer').startup(function(use)
         -- Sadly: https://github.com/wbthomason/packer.nvim/issues/655
         --        https://github.com/wbthomason/packer.nvim/pull/402
     end
+    use { 'romainl/vim-qf' }
 
     -- General
     use { 'windwp/nvim-autopairs' }
@@ -169,7 +170,7 @@ local packer = require('packer').startup(function(use)
             requires = 'nvim-treesitter/nvim-treesitter'
         }
     }
-    use { 'nvim-treesitter/playground' }
+    use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
 
     if packer_bootstrap then
         require('packer').sync()
