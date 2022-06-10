@@ -4,10 +4,10 @@ source ~/.config/vim/globals.vim
 set surround
 set commentary
 
-map <C-o> <Action>(Back)
-map <C-i> <Action>(Forward)
-map <C-p> <Action>(GotoFile)
-map <space>/ <Action>(FindInPath)
-map ]c <Action>(VcsShowNextChangeMarker)
-map [c <Action>(VcsShowPrevChangeMarker)
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+nmap <C-p> <Action>(GotoFile)
+nmap <space>/ <Action>(FindInPath)
+nmap ]c <Action>(VcsShowNextChangeMarker)
+nmap [c <Action>(VcsShowPrevChangeMarker)
 

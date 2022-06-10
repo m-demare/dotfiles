@@ -1,5 +1,4 @@
 vim.o.showmode = false
-vim.g.NERDTreeStatusline = -1
 
 local separators
 local unix = vim.fn.has('unix') == 1
@@ -21,7 +20,6 @@ require('lualine').setup {
         component_separators = separators,
         globalstatus = true
     },
-    extensions = {'nerdtree'},
     sections = {
         lualine_c = {
             'filename',
