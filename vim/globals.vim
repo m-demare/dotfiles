@@ -70,7 +70,6 @@ command! Wqa wqa
 
 " Movement
 set whichwrap+=<,>,h,l
-map 0 ^
 nnoremap zh z6h
 nnoremap zl z6l
 nnoremap <leader>H ^
@@ -142,14 +141,14 @@ endfun
 autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java :call CleanExtraSpaces()
 
 " Sppelling
-set spelllang=en,es
+set spelllang=es,en
 
 " Toggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
 " Spelling shortcuts
 " [s and ]s to move between errors
-" <leader>sa add word to dict
+" <leader>sa add word to dict (compile manually added words with :mkspell)
 " <leader>s? see sugestions
 map <leader>sa zg
 map <leader>s? z=
@@ -160,6 +159,8 @@ map <leader>s? z=
 " Indenting selection
 vnoremap < <gv
 vnoremap > >gv
+
+nnoremap cn *``cgn
 
 " Small syntax specific stuff
 
