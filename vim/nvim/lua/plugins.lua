@@ -25,7 +25,6 @@ local packer = require('packer').startup(function(use)
         -- Sadly: https://github.com/wbthomason/packer.nvim/issues/655
         --        https://github.com/wbthomason/packer.nvim/pull/402
     end
-    use { 'romainl/vim-qf' }
 
     -- General
     use { 'windwp/nvim-autopairs' }
@@ -34,6 +33,7 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-repeat' }
     use { 'chentoast/marks.nvim', config = req('marks', 'setup') }
     use { 'tpope/vim-sleuth' }
+    use { 'romainl/vim-qf' }
     use {
         'norcalli/nvim-colorizer.lua',
         ft = {'css', 'scss'},
@@ -55,7 +55,6 @@ local packer = require('packer').startup(function(use)
 
     -- Navigation
     use { 'preservim/nerdtree',
-        opt=true,
         cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'},
         setup = req 'config.nerdtree'
     }
@@ -93,7 +92,7 @@ local packer = require('packer').startup(function(use)
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
         config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
-        setup = [[vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>UndotreeToggle<CR>', {noremap = true, silent = true})]]
+        setup = [[vim.keymap.set('n', '<leader>u', '<cmd>UndotreeToggle<CR>', {silent = true})]]
     }
 
     -- Git
@@ -118,10 +117,10 @@ local packer = require('packer').startup(function(use)
         requires = {
             'L3MON4D3/LuaSnip',
             'rafamadriz/friendly-snippets',
-            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
             'hrsh7th/cmp-nvim-lsp',
-            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-buffer',       after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-path',         after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lua',     after = 'nvim-cmp' },
             { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
         },
         config = req('config.cmp'),
@@ -146,15 +145,6 @@ local packer = require('packer').startup(function(use)
             after = 'nvim-dap',
             config = req 'config.dapui',
             module = 'dapui'
-        },
-        {
-            'theHamsta/nvim-dap-virtual-text',
-            requires = {
-                'mfussenegger/nvim-dap',
-                'nvim-treesitter/nvim-treesitter'
-            },
-            after = 'nvim-dap',
-            config = req('nvim-dap-virtual-text', 'setup')
         }
     }
 

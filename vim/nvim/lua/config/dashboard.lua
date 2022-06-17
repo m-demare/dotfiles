@@ -1,30 +1,24 @@
-local g = vim.g
+local db = require 'dashboard'
 local telescope = require 'config.telescope_setup'
-local map = require('utils').map
+local utils = require 'utils'
+local map = utils.map
+local attempt = utils.bind(require, 'attempt')
 
-g.dashboard_default_executive = "telescope"
-
-g.dashboard_custom_header = { 'Welcome to neovim' }
-
-g.dashboard_custom_footer = { '' }
-
-g.dashboard_custom_section = {
-    last_session = {
-        description = { 'Open last session         SPC s l' },
-        command = 'SessionLoad'
+db.custom_header = { '', '', 'Welcome to neovim', '', '' }
+db.custom_footer = { '' }
+db.custom_center = {{
+        desc = 'Open last session         SPC s l' ,
+        action = 'SessionLoad'
+    }, {
+        desc = 'Find file                 C-p    ',
+        action = telescope.project_files
+    }, {
+        desc = 'Find word                 SPC /  ',
+        action = telescope.picker 'live_grep'
+    }, {
+        desc = 'Temp file                 SPC a n',
+        action = utils.call_bind(attempt, 'new_select')
     },
-    git_files = {
-        description = { 'Find file                 C-p    ' },
-        command = telescope.project_files
-    },
-    new_file = {
-        description = { 'Temp file                 SPC a n' },
-        command = 'DashboardNewFile'
-    },
-    find_word = {
-        description = { 'Find word                 SPC /  ' },
-        command = telescope.picker 'live_grep'
-    }
 }
 
 map('n', '<leader>sl', '<cmd>SessionLoad<CR>')
