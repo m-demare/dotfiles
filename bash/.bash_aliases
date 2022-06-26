@@ -26,7 +26,7 @@ alias please='sudo '
 
 alias py='python3.10 '
 
-alias al='vim ~/.bash_aliases '
+alias al='$EDITOR ~/.bash_aliases '
 
 alias src='. ~/.zshrc'
 
@@ -42,9 +42,9 @@ alias gl='git log --decorate --graph --pretty=short'
 
 alias gti='git '    # too often
 
-alias brc='vim ~/.bashrc'
+alias brc='$EDITOR ~/.bashrc'
 
-alias zrc='vim ~/.zshrc'
+alias zrc='$EDITOR ~/.zshrc'
 
 if type nvim > /dev/null 2>&1; then
     # node 'n vim (this changes the window title, so I didn't want it to be that long)
@@ -58,7 +58,6 @@ if type nvim > /dev/null 2>&1; then
             \nvim "$@"
         fi
     }
-    alias vim='nnvim'
     alias nvim='nnvim'
     alias v='nnvim'
 fi

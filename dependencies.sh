@@ -8,13 +8,13 @@ if [[ $platform =~ "Linux" ]]; then
     then
         INSTALL="sudo pacman --noconfirm -Syu"
         NVIM_DEPS="nvim"
-        ALACRITTY_DEPS="cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python"
+        EXTRA_PACKAGES="gdb-dashboard alacritty"
     else
         echo "Updating repos"
         sudo apt-get update >> /dev/null
         INSTALL="sudo apt-get -y install"
         NVIM_DEPS="ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen"
-        ALACRITTY_DEPS="cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3"
+        EXTRA_PACKAGES=""
     fi
 
     install_packages(){
@@ -22,7 +22,7 @@ if [[ $platform =~ "Linux" ]]; then
         $INSTALL $1
     }
 
-    install_packages "git curl zsh ripgrep tmux zathura gdb $NVIM_DEPS $ALACRITTY_DEPS"
+    install_packages "git curl zsh ripgrep tmux zathura gdb python $NVIM_DEPS"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
@@ -40,12 +40,8 @@ if [[ $platform =~ "Linux" ]]; then
     (sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc) >> /dev/null &&
         echo "oh-my-zsh installed"
 
-    # gdb-dashboard
-    curl https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit -o ~/.gdbinit
-
-    # alacritty
-    echo "Installing alacritty and bottom"
-    ~/.cargo/bin/cargo install alacritty bottom
+    echo "Installing bottom"
+    ~/.cargo/bin/cargo install bottom
 
     mkdir -p ~/localwork/
     # neovim
