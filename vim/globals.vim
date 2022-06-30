@@ -53,7 +53,7 @@ nnoremap x "_x
 
 " <leader>y and <leader>p use clipboard
 nnoremap <leader>y "+y
-nnoremap <leader>Y "+Y
+nnoremap <leader>Y "+y$
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P

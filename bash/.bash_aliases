@@ -71,9 +71,7 @@ alias levQ='q; play debug run'
 
 alias mo='cd ~/localwork/debQMobile/debQMobile; nvm use 9; ~/play/play "run 9001"'
 
-alias appo='cd ~/localwork/debQAppointmentsOld; play "run 9002"'
-
-alias appo2='cd ~/localwork/debQAppointments/backend; nvm use 14; ~/play/play "run 9002"'
+alias appo='cd ~/localwork/debQAppointments/backend; nvm use 14; ~/play/play "run 9002"'
 
 alias surv='cd ~/localwork/debQSurvey; nvm use 9; ~/play/play "run 9003"'
 
