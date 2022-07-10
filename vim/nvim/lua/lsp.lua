@@ -48,6 +48,7 @@ for _, lsp in ipairs(servers) do
       debounce_text_changes = 150,
     },
     capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
+    cmd = lsp.cmd,
     settings = lsp.settings
   }
 end

@@ -1,3 +1,7 @@
+local HOME = vim.fn.expand('$HOME')
+local sumneko_root_path = HOME .. "\\.config\\sumneko"
+local sumneko_binary =  HOME .. "\\.config\\sumneko\\bin\\lua-language-server"
+
 local lss = {
     {
         name='pyright',
@@ -46,14 +50,20 @@ local lss = {
         fts={ 'lua' },
         install_method='package_manager',
         val='lua-language-server',
-        os={'unix'},
+        os={'unix', 'win32'},
+        cmd= vim.fn.has("unix") == 0 and {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"} or nil,
         settings = {
             Lua = {
                 runtime = {
                     version = 'LuaJIT',
+                    special = {include='require'}
                 },
                 diagnostics = {
-                    globals = { 'vim' }
+                    globals = { 'vim',
+                        'Isaac', 'Game', 'Vector',
+                        'EntityType', 'EntityVariants', 'EntityCollisionClass',
+                        'CacheFlag', 'ModCallbacks', 'EffectVariant',
+                        'FamiliarVariant', 'LevelStage' }
                 },
                 workspace = {
                     library = vim.api.nvim_get_runtime_file("", true),
