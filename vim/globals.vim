@@ -13,6 +13,7 @@ set relativenumber
 set signcolumn=yes
 set cursorline
 highlight clear CursorLine
+set splitright
 
 set wildmenu
 set showcmd

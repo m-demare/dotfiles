@@ -104,8 +104,10 @@ local packer = require('packer').startup(function(use)
     }
 
     -- Theme
-    use { 'sainnhe/sonokai' }
-    use { '~/localwork/hlargs.nvim', config = req('hlargs', 'setup') }
+    use {
+        'sainnhe/sonokai',
+        requires = '~/localwork/hlargs.nvim',
+        config = req('config.theme') }
 
     -- tex
     use { 'lervag/vimtex', ft={'tex'}, config=[[vim.g.vimtex_view_method = 'zathura']] }
@@ -126,7 +128,7 @@ local packer = require('packer').startup(function(use)
         event = 'InsertEnter *',
     }
     use { 'RRethy/vim-illuminate', module='illuminate' }
-    use { 'tami5/lspsaga.nvim' }
+    use { 'kkharji/lspsaga.nvim' }
 
     -- Debugging
     use {
@@ -174,25 +176,6 @@ require('nvim-autopairs').setup{
     disable_filetype = { "TelescopePrompt" , "vim" },
     enable_check_bracket_line = true
 }
-
--- Colors
-vim.g.sonokai_style = 'shusia'
-vim.g.sonokai_transparent_background = vim.fn.has 'unix'
-vim.g.sonokai_current_word = "underline"
-vim.cmd 'colorscheme sonokai'
-
-local transparent_groups = {
-    -- Already set by sonokai:
-    -- 'Normal',
-    -- 'NonText',
-    -- 'EndOfBuffer'
-    'TabLine',
-    'TabLineFill'
-}
-for _, group in ipairs(transparent_groups) do
-    vim.cmd('highlight ' .. group .. ' ctermfg=none guibg=none')
-end
-vim.cmd 'highlight! Visual guibg=#666666'
 
 -- Installs
 vim.api.nvim_create_user_command('InstallTSParsers', require'config.treesitter'.install_parsers, {force=true})
