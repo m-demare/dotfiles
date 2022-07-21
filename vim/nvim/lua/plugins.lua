@@ -64,12 +64,14 @@ local packer = require('packer').startup(function(use)
             requires = {
                 'nvim-lua/plenary.nvim',
                 'nvim-telescope/telescope-smart-history.nvim',
-                'nvim-telescope/telescope-ui-select.nvim'
+                'nvim-telescope/telescope-ui-select.nvim',
+                'nvim-telescope/telescope-fzf-native.nvim'
             },
             wants = {
                 'plenary.nvim',
                 'telescope-smart-history.nvim',
-                'telescope-ui-select.nvim'
+                'telescope-ui-select.nvim',
+                'telescope-fzf-native.nvim'
             },
             module = 'telescope',
             cmd = 'Telescope',
@@ -83,6 +85,11 @@ local packer = require('packer').startup(function(use)
         },
         {
             'nvim-telescope/telescope-ui-select.nvim',
+            after = 'telescope.nvim'
+        },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
             after = 'telescope.nvim'
         }
     }
