@@ -14,6 +14,8 @@ vim.cmd([[
   augroup end
 ]])
 
+local unix = vim.fn.has 'unix'
+
 local packer = require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
     use 'wbthomason/packer.nvim'
@@ -89,7 +91,7 @@ local packer = require('packer').startup(function(use)
         },
         {
             'nvim-telescope/telescope-fzf-native.nvim',
-            run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+            run = unix and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' or nil,
             after = 'telescope.nvim'
         }
     }
