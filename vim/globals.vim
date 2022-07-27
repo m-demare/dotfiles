@@ -139,7 +139,7 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java :call CleanExtraSpaces()
+autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java,*.c,*.h,*.cpp :call CleanExtraSpaces()
 
 " Sppelling
 set spelllang=es,en

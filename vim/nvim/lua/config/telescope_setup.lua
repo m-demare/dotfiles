@@ -22,8 +22,9 @@ function M.project_files()
 end
 
 function M.grep_string()
+    local input = vim.fn.input('Pattern: ')
     require('telescope.builtin').grep_string {
-        search = vim.fn.input('Pattern: '),
+        search = input~='' and input or nil,
         use_regex=true
     }
 end

@@ -55,3 +55,6 @@ font:
     style: Bold Italic
 
   size: 11
+
+mouse:
+    hide_when_typing: true
