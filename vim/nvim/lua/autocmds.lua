@@ -6,7 +6,7 @@ local group = vim.api.nvim_create_augroup('my_aucmds', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
     group    = group,
     pattern  = '*',
-    callback = function() vim.highlight.on_yank { on_visual = false, higroup = 'IncSearch', timeout = 300 } end
+    callback = function() vim.highlight.on_yank { on_visual = false, timeout = 300 } end
 })
 
 vim.api.nvim_create_autocmd('FileType', {

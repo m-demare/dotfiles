@@ -7,10 +7,10 @@ vim.cmd 'colorscheme sonokai'
 
 if unix then
     local transparent_groups = {
+        -- 'Normal',
+        -- 'NonText',
+        -- 'EndOfBuffer',
         -- Already set by sonokai, but not working right now with sonokai_style=2:
-        'Normal',
-        'NonText',
-        'EndOfBuffer',
         'CursorLine',
         --
         'TabLine',
@@ -23,6 +23,7 @@ end
 vim.cmd 'highlight! Visual guibg=#666666'
 
 require('hlargs').setup {
+    hl_priority=150,
     highlight= {
         fg= '#ef9062',
         italic=true,
