@@ -44,6 +44,9 @@ local function setup()
                     ["ic"] = "@call.inner",
                 },
             },
+        },
+        playground = {
+            enable = true,
         }
     }
 end
