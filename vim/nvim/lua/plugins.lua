@@ -14,7 +14,7 @@ vim.cmd([[
   augroup end
 ]])
 
-local unix = vim.fn.has 'unix'
+local unix = vim.fn.has 'unix' == 1
 
 local packer = require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
@@ -56,9 +56,12 @@ local packer = require('packer').startup(function(use)
     }
 
     -- Navigation
-    use { 'preservim/nerdtree',
-        cmd={'NERDTreeToggle', 'NERDTreeVCS', 'NERDTreeFind'},
-        setup = req 'config.nerdtree'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = unix and 'kyazdani42/nvim-web-devicons' or nil,
+        module = 'nvim-tree',
+        setup = req 'config.nvimtree_setup',
+        config = req 'config.nvimtree'
     }
     use {
         {
