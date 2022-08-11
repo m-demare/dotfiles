@@ -30,7 +30,7 @@ function M.grep_string()
 end
 
 function M.setup()
-    map('n', '<C-p>', M.picker 'find_files')
+    map('n', '<C-p>', M.picker('git_files', {recurse_submodules=true}))
     map('n', '<leader>ff', M.picker('find_files', {no_ignore=true, no_ignore_parent=true}))
     map('n', '<leader><C-p>', M.picker 'buffers')
     map('n', '<leader>/', M.picker 'live_grep')
