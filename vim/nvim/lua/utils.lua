@@ -35,5 +35,16 @@ function M.reduce(list, fn, init)
     return acc
 end
 
+function M.tbl_join(tbl, join_str)
+    local retval = ''
+    for i, v in ipairs(tbl) do
+        if i>1 then
+            retval = retval .. join_str
+        end
+        retval = retval .. v
+    end
+    return retval
+end
+
 return M
 
