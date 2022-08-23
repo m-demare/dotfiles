@@ -35,7 +35,7 @@ local function wininput(opts, on_confirm, win_opts)
 
     -- adjust window width so that there is always space
     -- for prompt + default text plus a little bit
-    win_opts.width = #default_text + #prompt + 5 < win_opts.width and win_opts.width or #default_text + #prompt + 5
+    win_opts.width = (#default_text + #prompt + 10 < win_opts.width) and win_opts.width or #default_text + #prompt + 10
 
     local win = vim.api.nvim_open_win(buf, true, win_opts)
 
@@ -46,7 +46,9 @@ local function wininput(opts, on_confirm, win_opts)
 
     -- set the default text (needs to be deferred after the prompt is drawn)
     vim.defer_fn(function()
-        vim.api.nvim_buf_set_text(buf, 0, #prompt, 0, #prompt, { default_text })
+        if default_text ~= '' then
+            vim.api.nvim_buf_set_text(buf, 0, #prompt, 0, #prompt, { default_text })
+        end
         vim.cmd("startinsert!") -- bang: go to end of line
     end, 5)
 
