@@ -1,4 +1,4 @@
-local actions = require "telescope.actions"
+local actions = require 'telescope.actions'
 local telescope = require 'telescope'
 telescope.setup{
     defaults = {
@@ -12,6 +12,9 @@ telescope.setup{
         history = {
             path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
             limit = 500,
+        },
+        preview = {
+            filesize_limit = .9
         }
     },
     extensions = {

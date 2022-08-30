@@ -15,7 +15,8 @@
                            "ng-options"
                            "ng-focus"
                            "ng-mousedown"
-                           "ng-keydown")
+                           "ng-keydown"
+                           "show-if")
   (quoted_attribute_value
     (attribute_value) @javascript)
   )
