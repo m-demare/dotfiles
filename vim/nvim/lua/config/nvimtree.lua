@@ -35,9 +35,9 @@ require("nvim-tree").setup({
     },
     renderer = {
         icons = {
-            show = (not unix) and hide_icons,
+            show = unix and {} or hide_icons,
             glyphs = {
-                folder = (not unix) and non_icon_folders
+                folder = unix and {} or non_icon_folders
             }
         }
     }
