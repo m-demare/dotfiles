@@ -73,6 +73,13 @@ local lss = {
                 }
             }
         }
+    },
+    {
+        name='tailwindcss',
+        fts={ 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte' },
+        install_method='npm',
+        val='@tailwindcss/language-server',
+        os={'win32', 'unix'}
     }
 }
 
