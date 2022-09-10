@@ -64,7 +64,7 @@ vnoremap <leader>P "+P
 nnoremap <leader>K :help <C-r><C-w><CR>
 
 " sudo save with :W
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 command! Wq wq
 command! Qa qa
