@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
     map('n', '<leader>ca', vim.lsp.buf.code_action, {buffer=bufnr})
     map('n', '[g', vim.diagnostic.goto_prev, {buffer=bufnr})
     map('n', ']g', vim.diagnostic.goto_next, {buffer=bufnr})
-    map('n', '<leader>ff', vim.lsp.buf.formatting, {buffer=bufnr})
+    map('n', '<leader>fo', vim.lsp.buf.formatting, {buffer=bufnr})
 
     print('Using ' .. client.name)
 end
