@@ -21,5 +21,7 @@ db.custom_center = {{
     },
 }
 
+db.session_directory = '~/.local/share/dashboard'
+
 map('n', '<leader>sl', '<cmd>SessionLoad<CR>')
 
