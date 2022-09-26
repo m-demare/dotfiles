@@ -49,6 +49,9 @@ local function setup()
             enable = true,
         }
     }
+    require("nvim-treesitter.highlight").set_custom_captures {
+        ["hlargs.namedparam"] = "Hlargs",
+    }
 end
 
 return {
