@@ -1,0 +1,10 @@
+[credential]
+	helper = cache --timeout=2628000
+[alias]
+	co = checkout
+	st = status
+[user]
+	email = 34817965+m-demare@users.noreply.github.com
+	name = Dema
+[core]
+	commentChar = ";"

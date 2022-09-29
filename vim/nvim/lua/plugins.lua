@@ -173,7 +173,7 @@ local packer = require('packer').startup(function(use)
             requires = 'nvim-treesitter/nvim-treesitter'
         }
     }
-    use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
+    use { 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
 
     if packer_bootstrap then
         require('packer').sync()

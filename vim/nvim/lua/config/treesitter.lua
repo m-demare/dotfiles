@@ -3,7 +3,6 @@ local languages = {
     "cpp",
     "java",
     "javascript",
-    "latex",
     "lua",
     "python",
     "svelte",
