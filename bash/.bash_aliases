@@ -62,6 +62,10 @@ if type nvim > /dev/null 2>&1; then
     alias v='nnvim'
 fi
 
+gMergesOf () {
+    git log --merges --ancestry-path --oneline $1..origin | tail
+}
+
 # Current work specific stuff
 alias p='cd ~/localwork/debPlayerWeb'
 
