@@ -26,3 +26,5 @@ vim.defer_fn(function ()
     require 'maps'
 end, 2)
 
+vim.o.mousemodel='extend'
+

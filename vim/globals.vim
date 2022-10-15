@@ -67,6 +67,7 @@ nnoremap <leader>K :help <C-r><C-w><CR>
 " command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 command! Wq wq
+command! Q q
 command! Qa qa
 command! Wqa wqa
 
