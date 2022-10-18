@@ -38,7 +38,7 @@ vim.g.Illuminate_ftwhitelist = utils.reduce(servers, function (acc, s)
     return acc
 end, {})
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 for _, lsp in ipairs(servers) do
@@ -47,7 +47,7 @@ for _, lsp in ipairs(servers) do
     flags = {
       debounce_text_changes = 150,
     },
-    capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
+    capabilities = capabilities,
     cmd = lsp.cmd,
     settings = lsp.settings
   }
