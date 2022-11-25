@@ -34,7 +34,9 @@ end
 local servers = require('lsplangs').for_current_os()
 
 vim.g.Illuminate_ftwhitelist = utils.reduce(servers, function (acc, s)
-    for _, ft in ipairs(s.fts) do table.insert(acc, ft) end
+    for _, ft in ipairs(s.filetypes or {}) do
+        if not vim.tbl_contains(acc, ft) then table.insert(acc, ft) end
+    end
     return acc
 end, {})
 
@@ -49,7 +51,8 @@ for _, lsp in ipairs(servers) do
     },
     capabilities = capabilities,
     cmd = lsp.cmd,
-    settings = lsp.settings
+    settings = lsp.settings,
+    filetypes = lsp.filetypes
   }
 end
 

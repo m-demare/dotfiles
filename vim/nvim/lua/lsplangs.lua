@@ -5,49 +5,49 @@ local sumneko_binary =  HOME .. "\\.config\\sumneko\\bin\\lua-language-server"
 local lss = {
     {
         name='pyright',
-        fts={ 'python' },
+        filetypes={ 'python' },
         install_method='npm',
         val='pyright',
         os={'win32', 'unix'}
     },
     {
         name='tsserver',
-        fts={ 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+        filetypes={ "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
         install_method='npm',
         val='typescript typescript-language-server',
         os={'win32', 'unix'}
     },
     {
         name='svelte',
-        fts={ 'svelte' },
+        filetypes={ 'svelte' },
         install_method='npm',
         val='svelte-language-server',
         os={'win32', 'unix'}
     },
     {
         name='vimls',
-        fts={ 'vim' },
+        filetypes={ 'vim' },
         install_method='npm',
         val='vim-language-server',
         os={'win32', 'unix'}
     },
     {
         name='clangd',
-        fts={ 'c', 'cpp' },
+        filetypes={ 'c', 'cpp' },
         install_method='package_manager',
         val='clang or lldb',
         os={'unix'}
     },
     {
         name='texlab',
-        fts={ 'tex' },
+        filetypes={ 'tex' },
         install_method='cargo',
         val='--git https://github.com/latex-lsp/texlab.git --locked',
         os={'unix'}
     },
     {
         name='sumneko_lua',
-        fts={ 'lua' },
+        filetypes={ 'lua' },
         install_method='package_manager',
         val='lua-language-server',
         os={'unix', 'win32'},
@@ -76,7 +76,7 @@ local lss = {
     },
     {
         name='tailwindcss',
-        fts={ 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte' },
+        filetypes={ 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte' },
         install_method='npm',
         val='@tailwindcss/language-server',
         os={'win32', 'unix'}
