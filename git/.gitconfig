@@ -8,3 +8,5 @@
 	name = Dema
 [core]
 	commentChar = ";"
+[push]
+	autoSetupRemote = true
