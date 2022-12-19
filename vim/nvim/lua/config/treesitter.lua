@@ -15,10 +15,21 @@ local function install_parsers()
     vim.cmd('TSInstall ' .. table.concat(languages, ' '))
 end
 
+local function total_size(bufnr)
+    local lines, size  = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), 0
+    for _, line in ipairs(lines) do
+        size = size + string.len(line)
+    end
+    return size
+end
+
 local function setup()
     require'nvim-treesitter.configs'.setup {
         highlight = {
-            enable = true
+            enable = true,
+            disable = function(lang, bufnr)
+                return lang == "javascript" and total_size(bufnr) > 100000
+            end,
         },
         indent = {
             enable = true
