@@ -14,6 +14,7 @@ set signcolumn=yes
 set cursorline
 highlight clear CursorLine
 set splitright
+set foldmethod=marker
 
 set wildmenu
 set showcmd
@@ -163,8 +164,6 @@ map <leader>s? z=
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap cn *``cgn
-
 " Small syntax specific stuff
 
 " Wrap text on some files
@@ -204,4 +203,12 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+" Maps
+
+nnoremap cn *``cgn
+
+nnoremap gV `[v`]
+
+snoremap <BS> <BS>i
 
