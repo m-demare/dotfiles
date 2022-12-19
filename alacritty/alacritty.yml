@@ -40,18 +40,18 @@ colors:
     white:   '#F9F8F5'
 font:
   normal:
-    family: "JetBrainsMono Nerd Font"
+    family: "CaskaydiaCove Nerd Font"
 
   bold:
-    family: "JetBrainsMono"
+    family: "CaskaydiaCove Nerd Font"
     style: Bold
 
   italic:
-    family: "JetBrainsMono"
+    family: "CaskaydiaCove Nerd Font"
     style: Italic
 
   bold_italic:
-    family: "JetBrainsMono"
+    family: "CaskaydiaCove Nerd Font"
     style: Bold Italic
 
   size: 11
