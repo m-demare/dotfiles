@@ -3,6 +3,7 @@ local luasnip = require('luasnip')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 require("luasnip.loaders.from_vscode").lazy_load()
+luasnip.filetype_extend("typescript", { "javascript" })
 
 local icons = {}
 
