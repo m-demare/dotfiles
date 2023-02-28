@@ -46,7 +46,7 @@ local lss = {
         os={'unix'}
     },
     {
-        name='sumneko_lua',
+        name='lua_ls',
         filetypes={ 'lua' },
         install_method='package_manager',
         val='lua-language-server',
@@ -80,7 +80,13 @@ local lss = {
         install_method='npm',
         val='@tailwindcss/language-server',
         os={'win32', 'unix'}
-    }
+    },
+    {
+        name='rust_analyzer',
+        fts={ 'rust' },
+        install_method='other',
+        os={'unix'},
+    },
 }
 
 local function for_current_os()

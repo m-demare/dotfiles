@@ -23,10 +23,10 @@ local on_attach = function(client, bufnr)
     -- map('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', {buffer=bufnr})
     map('n', '<leader>rn', vim.lsp.buf.rename, {buffer=bufnr})
     -- map('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>', {buffer=bufnr})
-    map('n', '<leader>ca', vim.lsp.buf.code_action, {buffer=bufnr})
+    map({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {buffer=bufnr})
     map('n', '[g', vim.diagnostic.goto_prev, {buffer=bufnr})
     map('n', ']g', vim.diagnostic.goto_next, {buffer=bufnr})
-    map('n', '<leader>fo', utils.bind(vim.lsp.buf.format, { async = true }), {buffer=bufnr})
+    map({'n', 'v'}, '<leader>fo', utils.bind(vim.lsp.buf.format, { async = true }), {buffer=bufnr})
 
     print('Using ' .. client.name)
 end
