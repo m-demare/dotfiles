@@ -66,6 +66,8 @@ gMergesOf () {
     git log --merges --ancestry-path --oneline $1..origin | tail
 }
 
+alias wiki='wiki-tui'
+
 # Current work specific stuff
 alias p='cd ~/localwork/debPlayerWeb'
 
@@ -92,4 +94,6 @@ function localProxy(){
 alias gFeature='xclip -sel clip -o | sed -Ee "/^\s*(.)* (#[0-9]+)\s*$/!d;s/(^\s*|\s*$)//g;s/\s/_/g;s/^((.)*)_(#[0-9]+)$/feature\/\3_\1/g" | xargs git co -b'
 
 alias wifiEnable='sudo systemctl start iwd.service && sudo dhcpcd wlan0 --nohook mtu && sudo dhcpcd wlan0 --nohook mtu'
+
+alias fixDbeaver='echo "-vm\n/usr/lib/jvm/java-19-openjdk/bin" | cat - /usr/share/dbeaver/dbeaver.ini | sudo tee /usr/share/dbeaver/dbeaver.ini'
 
