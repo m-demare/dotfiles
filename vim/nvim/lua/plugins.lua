@@ -98,7 +98,13 @@ local packer = require('packer').startup(function(use)
             after = 'telescope.nvim'
         }
     }
-    use { 'glepnir/dashboard-nvim', config = req 'config.dashboard' }
+    use {
+        'folke/persistence.nvim',
+        event = "BufReadPre", -- start saving session when an actual file was opened
+        module = "persistence",
+        config = req("persistence", 'setup'),
+        setup = req("config.persistence"),
+    }
     use { 'andymass/vim-matchup', ft={'lua', 'js', 'tex', 'sh'} }
     use {
         'mbbill/undotree',
