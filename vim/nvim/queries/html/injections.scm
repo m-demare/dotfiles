@@ -18,6 +18,7 @@
                            "ng-mousedown"
                            "ng-keydown"
                            "ng-style"
+                           "ng-init"
                            "show-if")
   (quoted_attribute_value
     (attribute_value) @javascript))

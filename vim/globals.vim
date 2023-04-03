@@ -212,3 +212,5 @@ nnoremap gV `[v`]
 
 snoremap <BS> <BS>i
 
+nnoremap <leader>jq <CMD>%!jq<CR>
+
