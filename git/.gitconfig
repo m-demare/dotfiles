@@ -10,3 +10,5 @@
 	commentChar = ";"
 [push]
 	autoSetupRemote = true
+[log]
+	decorate = full
