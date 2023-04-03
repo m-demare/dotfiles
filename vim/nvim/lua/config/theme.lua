@@ -3,24 +3,23 @@ local unix = vim.fn.has 'unix'==1
 vim.g.sonokai_style = 'shusia'
 vim.g.sonokai_transparent_background = unix and 2 or 0
 vim.g.sonokai_current_word = "underline"
+local augroup = vim.api.nvim_create_augroup('SonokaiCustom', { clear = true })
+vim.api.nvim_create_autocmd('ColorScheme', {
+    callback = function ()
+      vim.api.nvim_set_hl(0, "TSVariableBuiltin", { link = "OrangeItalic" })
+      vim.api.nvim_set_hl(0, "TSProperty", { link = "Fg" })
+      vim.api.nvim_set_hl(0, "TSField", { link = "Green" })
+        if unix then
+            local transparent_groups = { 'CursorLine', 'TabLine', }
+            for _, group in ipairs(transparent_groups) do
+                vim.cmd('highlight ' .. group .. ' ctermbg=none guibg=none')
+            end
+        end
+        vim.cmd 'highlight! Visual guibg=#666666'
+    end,
+    group = augroup
+})
 vim.cmd 'colorscheme sonokai'
-
-if unix then
-    local transparent_groups = {
-        -- 'Normal',
-        -- 'NonText',
-        -- 'EndOfBuffer',
-        -- Already set by sonokai, but not working right now with sonokai_style=2:
-        'CursorLine',
-        --
-        'TabLine',
-        'TabLineFill'
-    }
-    for _, group in ipairs(transparent_groups) do
-        vim.cmd('highlight ' .. group .. ' ctermfg=none guibg=none')
-    end
-end
-vim.cmd 'highlight! Visual guibg=#666666'
 
 require('hlargs').setup {
     hl_priority=150,
