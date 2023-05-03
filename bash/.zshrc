@@ -59,6 +59,9 @@ fi
 # Play
 export PATH=$PATH:$HOME/play
 
+# Ruby
+export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
+
 # Android tools
 export ANDROID_HOME=$HOME/android
 export PATH=$PATH:$ANDROID_HOME/tools
