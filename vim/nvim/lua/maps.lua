@@ -1,16 +1,37 @@
-local map = require('utils').map
+local utils = require('utils')
+local map = utils.map
+local nmap = utils.bind(map, 'n')
+local M = {}
 
-map('n', '<leader>ll', '<cmd>luafile %<CR>')
+nmap('<leader>ll', '<cmd>luafile %<CR>')
 
 -- Git
-map('n', '<leader>gg', '<cmd>G<CR>')
-map('n', '<leader>gh', '<cmd>diffget //2<CR>')
-map('n', '<leader>gl', '<cmd>diffget //3<CR>')
-map('n', '<leader>gB', '<cmd>GBrowse<CR>')
+nmap('<leader>gg', '<cmd>G<CR>')
+nmap('<leader>gh', '<cmd>diffget //2<CR>')
+nmap('<leader>gl', '<cmd>diffget //3<CR>')
+nmap('<leader>gB', '<cmd>GBrowse<CR>')
 
 -- vim-qf
-map('n', '[q', '<Plug>(qf_qf_previous)')
-map('n', ']q', '<Plug>(qf_qf_next)')
-map('n', '<F1>', '<Plug>(qf_qf_toggle_stay)')
+nmap('[q', '<Plug>(qf_qf_previous)')
+nmap(']q', '<Plug>(qf_qf_next)')
+nmap('<F1>', '<Plug>(qf_qf_toggle_stay)')
 
+M.map_open_mdn = function (bufnr)
+    local base_url = 'https://developer.mozilla.org/en-US/search?q='
+    map({'n', 'v'}, '<leader>K', function ()
+        local word
+        if vim.fn.mode() == 'v' then
+            local saved_reg = vim.fn.getreg 'v'
+            vim.cmd [[noautocmd sil norm "vy]]
+            local sel = vim.fn.getreg 'v'
+            vim.fn.setreg('v', saved_reg)
+            word = sel
+        else
+            word = vim.fn.expand '<cword>'
+        end
+        vim.cmd('noautocmd sil !xdg-open "' .. base_url .. word .. '"')
+    end, {buffer=bufnr})
+end
+
+return M
 
