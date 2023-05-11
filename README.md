@@ -25,7 +25,7 @@ work in multiple PCs at once, and different OSs, so I needed my dotfiles to easi
 
 ## Dependencies
 ### If you just want to use the manager with your own dotfiles
-- [python3](https://www.python.org/downloads/) (tested on python 3.8)
+- [python3](https://www.python.org/downloads/) (tested on python 3.8+)
 ### If you also want to use my settings
 - Run `curl -fsSL https://raw.githubusercontent.com/m-demare/dotfiles/master/dependencies.sh | bash` or
   similar

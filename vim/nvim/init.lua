@@ -1,7 +1,7 @@
 pcall(require, 'impatient')
 
 if vim.fn.has("unix") == 1 and type(vim.fn.getenv 'vim_node_version') == "string" then
-    vim.g.python3_host_prog="/usr/bin/python3.10"
+    vim.g.python3_host_prog="/usr/bin/python3.11"
     vim.g.node_host_prog = vim.fn.getenv 'HOME' ..
         "/.nvm/versions/node/" ..
         vim.fn.getenv 'vim_node_version' ..

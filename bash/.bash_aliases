@@ -24,7 +24,7 @@ alias sudo='sudo '
 
 alias please='sudo '
 
-alias py='python3.10 '
+alias py='python3.11 '
 
 alias al='$EDITOR ~/.bash_aliases '
 
