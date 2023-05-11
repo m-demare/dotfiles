@@ -1,13 +1,14 @@
 local cmp = require 'cmp'
 local luasnip = require('luasnip')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local unix = require('utils').unix
 
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.filetype_extend("typescript", { "javascript" })
 
 local icons = {}
 
-if vim.fn.has("unix") == 1 then
+if unix then
     icons = {
         Text = "   ",
         Method = "  ",

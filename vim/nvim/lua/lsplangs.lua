@@ -1,6 +1,7 @@
 local HOME = vim.fn.expand('$HOME')
 local sumneko_root_path = HOME .. "\\.config\\sumneko"
 local sumneko_binary =  HOME .. "\\.config\\sumneko\\bin\\lua-language-server"
+local unix = require('utils').unix
 
 local lss = {
     {
@@ -51,7 +52,7 @@ local lss = {
         install_method='package_manager',
         val='lua-language-server',
         os={'unix', 'win32'},
-        cmd= vim.fn.has("unix") == 0 and {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"} or nil,
+        cmd= (not unix) and {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"} or nil,
         settings = {
             Lua = {
                 runtime = {

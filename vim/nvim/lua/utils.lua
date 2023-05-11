@@ -46,5 +46,7 @@ function M.tbl_join(tbl, join_str)
     return retval
 end
 
+M.unix = vim.fn.has("unix") == 1
+
 return M
 

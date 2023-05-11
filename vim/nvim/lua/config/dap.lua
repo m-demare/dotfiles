@@ -1,5 +1,7 @@
 local dap = require 'dap'
-local map = require('utils').map
+local utils = require('utils')
+local map = utils.map
+local unix = utils.unix
 
 local function request_port()
     local val = tonumber(vim.fn.input 'Port: ')
@@ -109,7 +111,7 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 -- Icons
-if vim.fn.has("unix") == 1 then
+if unix then
     vim.fn.sign_define("DapBreakpoint", { text = "● ", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpointCondition", { text = "● ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
     vim.fn.sign_define("DapLogPoint", { text = "● ", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })

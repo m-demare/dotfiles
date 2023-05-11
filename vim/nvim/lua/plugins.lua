@@ -14,7 +14,7 @@ vim.cmd([[
   augroup end
 ]])
 
-local unix = vim.fn.has 'unix' == 1
+local unix = require('utils').unix
 
 local packer = require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
