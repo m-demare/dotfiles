@@ -93,7 +93,7 @@ function localProxy(){
 
 alias gFeature='xclip -sel clip -o | sed -Ee "/^\s*(.)* (#[0-9]+)\s*$/!d;s/(^\s*|\s*$)//g;s/\s/_/g;s/^((.)*)_(#[0-9]+)$/feature\/\3_\1/g" | xargs git co -b'
 
-alias wifiEnable='sudo systemctl start iwd.service && sudo dhcpcd wlan0 --nohook mtu && sudo dhcpcd wlan0 --nohook mtu'
+alias wifiEnable='sudo systemctl restart iwd.service && sudo dhcpcd wlan0 --nohook mtu && sudo dhcpcd wlan0 --nohook mtu'
 
 alias fixDbeaver='echo "-vm\n/usr/lib/jvm/java-20-openjdk/bin" | cat - /usr/share/dbeaver/dbeaver.ini | sudo tee /usr/share/dbeaver/dbeaver.ini'
 
