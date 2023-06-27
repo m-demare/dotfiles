@@ -37,10 +37,10 @@ local function setup()
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "gnn",
-                node_incremental = "grn",
-                scope_incremental = "grs",
-                node_decremental = "grm",
+                init_selection = "<Enter>",
+                node_incremental = "<Enter>",
+                scope_incremental = "<Space><Enter>",
+                node_decremental = "<BS>",
             },
         },
         textobjects = {
