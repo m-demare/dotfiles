@@ -19,7 +19,8 @@
                            "ng-keydown"
                            "ng-style"
                            "ng-init"
-                           "show-if")
+                           "show-if"
+                           "ng-class")
   (quoted_attribute_value
     (attribute_value) @javascript))
 
