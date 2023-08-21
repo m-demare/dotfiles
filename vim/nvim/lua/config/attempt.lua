@@ -3,7 +3,8 @@ local attempt = require('attempt')
 local telescope = require 'config.telescope_setup'
 
 attempt.setup {
-    autosave = true
+    autosave = true,
+    ext_options = { 'lua', 'js', 'py', 'cpp', 'c', 'http', '' },
 }
 
 map('n', '<leader>an', attempt.new_select)

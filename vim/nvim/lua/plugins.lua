@@ -105,7 +105,6 @@ local packer = require('packer').startup(function(use)
         config = req("persistence", 'setup'),
         setup = req("config.persistence"),
     }
-    use { 'andymass/vim-matchup', ft={'lua', 'js', 'tex', 'sh'} }
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -166,6 +165,13 @@ local packer = require('packer').startup(function(use)
             config = req 'config.dapui',
             module = 'dapui'
         }
+    }
+
+    use {
+        "rest-nvim/rest.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
+        config = [[vim.keymap.set('n', '<leader>sr', '<Plug>RestNvim', {silent = true})]],
+        keys = '<leader>sr',
     }
 
     -- Treesitter
