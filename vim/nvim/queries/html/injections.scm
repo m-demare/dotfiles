@@ -22,7 +22,8 @@
                            "show-if"
                            "ng-class")
   (quoted_attribute_value
-    (attribute_value) @javascript))
+    (attribute_value) @injection.content
+    (#set! injection.language "javascript")))
 
 ; AngularJS templates inside templates
 (script_element
@@ -31,11 +32,13 @@
         (attribute_name) @_attr (#eq? @_attr "type")
         (quoted_attribute_value
           (attribute_value) @_attr_value (#eq? @_attr_value "text/ng-template"))))
-  (raw_text) @html)
+  (raw_text) @injection.content
+    (#set! injection.language "html"))
 
 ; HTML style attribute
 (attribute
   (attribute_name) @_attr (#eq? @_attr "style")
   (quoted_attribute_value
-    (attribute_value) @css))
+    (attribute_value) @injection.content
+      (#set! injection.language "css")))
 
