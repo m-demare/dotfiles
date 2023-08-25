@@ -47,6 +47,10 @@ local packer = require('packer').startup(function(use)
         requires = 'nvim-lua/plenary.nvim',
         config = req 'config.attempt'
     }
+    use {
+        'ggandor/leap.nvim',
+        config = req('leap', 'add_default_mappings')
+    }
 
     -- Status line
     use { 'nvim-lualine/lualine.nvim', config = req 'config.statusline' }
@@ -126,6 +130,11 @@ local packer = require('packer').startup(function(use)
         'sainnhe/sonokai',
         requires = '~/localwork/hlargs.nvim',
         config = req('config.theme') }
+    use { 'eandrju/cellular-automaton.nvim',
+        cmd = 'CellularAutomaton',
+        commit = '679943b8e1e5ef79aaeeaf4b00782c52eb4e928f',
+        setup = [[vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>', {silent = true})]]
+    }
 
     -- tex
     use { 'lervag/vimtex', ft={'tex'}, config=[[vim.g.vimtex_view_method = 'zathura']] }
