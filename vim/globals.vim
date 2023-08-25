@@ -15,6 +15,7 @@ set cursorline
 highlight clear CursorLine
 set splitright
 set foldmethod=marker
+set pumheight=8
 
 set wildmenu
 set showcmd
