@@ -31,7 +31,7 @@ fi
 
 # Add default node to path (nvim lsp servers need node, and I want it to be usable
 # before nvm initialization because of how slow it is)
-export vim_node_version=v14.18.0
+export vim_node_version=v20.5.1
 default_node_path=~/.nvm/versions/node/$vim_node_version/bin
 export PATH=$default_node_path:$PATH
 export did_init_nvm=false
