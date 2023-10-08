@@ -155,7 +155,7 @@ local packer = require('packer').startup(function(use)
         event = 'InsertEnter *',
     }
     use { 'RRethy/vim-illuminate', module='illuminate' }
-    use { 'kkharji/lspsaga.nvim' }
+    use { 'nvimdev/lspsaga.nvim' }
 
     -- Debugging
     use {

@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       vim.api.nvim_set_hl(0, "TSField", { link = "Green" })
       vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "Grey" })
         if unix then
-            local transparent_groups = { 'CursorLine', 'TabLine', }
+            local transparent_groups = { 'CursorLine', 'TabLine', 'FloatBorder', 'NormalFloat', }
             for _, group in ipairs(transparent_groups) do
                 vim.cmd('highlight ' .. group .. ' ctermbg=none guibg=none')
             end

@@ -16,17 +16,19 @@ local on_attach = function(client, bufnr)
     map('n', 'gd', vim.lsp.buf.definition, {buffer=bufnr})
     map('n', '<leader>gi', vim.lsp.buf.implementation, {buffer=bufnr})
     map('n', 'gr', vim.lsp.buf.references, {buffer=bufnr})
-    map('n', 'gf', '<cmd>Lspsaga lsp_finder<CR>', {buffer=bufnr})
-    map('n', 'gs', '<cmd>Lspsaga signature_help<CR>', {buffer=bufnr})
+    map('n', 'gf', '<cmd>Lspsaga finder ref<CR>', {buffer=bufnr})
+    map('n', 'gs', vim.lsp.buf.signature_help, {buffer=bufnr})
     map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", {buffer=bufnr})
     map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', {buffer=bufnr})
-    -- map('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', {buffer=bufnr})
     map('n', '<leader>rn', vim.lsp.buf.rename, {buffer=bufnr})
-    -- map('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>', {buffer=bufnr})
     map({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {buffer=bufnr})
     map('n', '[g', vim.diagnostic.goto_prev, {buffer=bufnr})
     map('n', ']g', vim.diagnostic.goto_next, {buffer=bufnr})
     map({'n', 'v'}, '<leader>fo', utils.bind(vim.lsp.buf.format, { async = true }), {buffer=bufnr})
+
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = "single",
+    })
 
     print('Using ' .. client.name)
 end
@@ -56,19 +58,15 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-saga.init_lsp_saga{
-    error_sign = 'E',
-    warn_sign = 'W',
-    hint_sign = 'H',
-    infor_sign = 'I',
-    code_action_icon = "»",
-    finder_action_keys = {
-        open = "<CR>",
-        vsplit = "v",
-        split = "s",
-        quit = "q",
-        scroll_down = "<C-f>",
-        scroll_up = "<C-b>",
+saga.setup({
+    ui = {
+        devicon = false,
+        code_action = "»",
+        normal_bg = "NONE",
+        title_bg = "NONE"
+    },
+    symbol_in_winbar = {
+        enable = false,
     }
-}
+})
 
