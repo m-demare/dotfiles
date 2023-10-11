@@ -6,7 +6,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="yyyy-mm-dd"
 
-plugins=(git zsh-z thefuck tmux)
+plugins=(git zsh-z tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -156,16 +156,14 @@ zle-line-init() {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# Optional: allows you to open the in-progress command inside of $EDITOR
+# allows you to open the in-progress command inside of $EDITOR
 autoload -Uz edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 zle -N edit-command-line
 
-# To show mode on the right
-# setopt PROMPT_SUBST
-# RPROMPT='$(__get_vi_mode)'
-
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
+bindkey -M vicmd "^P" up-line-or-beginning-search
+bindkey -M viins "^P" up-line-or-beginning-search
+bindkey -M vicmd "^N" down-line-or-beginning-search
+bindkey -M viins "^N" down-line-or-beginning-search
 bindkey "^W" vi-backward-kill-word
 
