@@ -16,6 +16,9 @@ nmap('[q', '<Plug>(qf_qf_previous)')
 nmap(']q', '<Plug>(qf_qf_next)')
 nmap('<F1>', '<Plug>(qf_qf_toggle_stay)')
 
+-- bacon
+nmap('<leader>bl', '<cmd>BaconLoad<CR><cmd>copen<CR>')
+
 M.map_open_mdn = function (bufnr)
     local base_url = 'https://developer.mozilla.org/en-US/search?q='
     map({'n', 'v'}, '<leader>K', function ()

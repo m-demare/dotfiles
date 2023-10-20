@@ -94,7 +94,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-. "$HOME/.cargo/env"
 
 # Become a hacker
 if (( RANDOM%50 == 0)); then

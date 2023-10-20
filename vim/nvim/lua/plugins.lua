@@ -29,7 +29,6 @@ local packer = require('packer').startup(function(use)
     end
 
     -- General
-    use { 'windwp/nvim-autopairs' }
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
     use { 'tpope/vim-repeat' }
@@ -50,6 +49,15 @@ local packer = require('packer').startup(function(use)
     use {
         'ggandor/leap.nvim',
         config = req('leap', 'add_default_mappings')
+    }
+    use {
+        'windwp/nvim-autopairs',
+        config = function ()
+            require('nvim-autopairs').setup {
+                disable_filetype = { "TelescopePrompt" , "vim" },
+                enable_check_bracket_line = true,
+            }
+        end
     }
 
     -- Status line
@@ -114,6 +122,18 @@ local packer = require('packer').startup(function(use)
         cmd = 'UndotreeToggle',
         config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
         setup = [[vim.keymap.set('n', '<leader>u', '<cmd>UndotreeToggle<CR>', {silent = true})]]
+    }
+    use {
+        'Canop/nvim-bacon',
+        ft='rust',
+        config = function ()
+            require("bacon").setup {
+                quickfix  = {
+                    enabled = true,
+                    event_trigger = true,
+                }
+            }
+        end
     }
 
     -- Git
@@ -202,14 +222,6 @@ local packer = require('packer').startup(function(use)
     end
 end)
 
-
--- Settings
-
--- Auto pairs
-require('nvim-autopairs').setup{
-    disable_filetype = { "TelescopePrompt" , "vim" },
-    enable_check_bracket_line = true
-}
 
 -- Installs
 vim.api.nvim_create_user_command('InstallTSParsers', require'config.treesitter'.install_parsers, {force=true})
