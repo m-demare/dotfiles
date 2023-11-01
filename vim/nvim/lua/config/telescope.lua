@@ -7,6 +7,7 @@ telescope.setup{
                 ["<C-h>"] = "which_key",
                 ["<C-k>"] = actions.cycle_history_next,
                 ["<C-j>"] = actions.cycle_history_prev,
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
             }
         },
         history = {
