@@ -30,5 +30,6 @@ require('gitsigns').setup({
         map('n', '<leader>td', gs.toggle_deleted, { buffer = bufnr })
 
         map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { buffer = bufnr })
+        map({'o', 'x'}, 'ah', ':<C-U>Gitsigns select_hunk<CR>', { buffer = bufnr })
     end
 })
