@@ -95,11 +95,6 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 
-# Become a hacker
-if (( RANDOM%50 == 0)); then
-  unimatrix -ws 97
-fi
-
 # Vi mode (copied from https://superuser.com/a/1253211)
 bindkey -v
 DEFAULT_VI_MODE=viins

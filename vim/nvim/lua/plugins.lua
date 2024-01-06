@@ -141,7 +141,6 @@ local packer = require('packer').startup(function(use)
     use { 'tpope/vim-rhubarb' }
     use {
         'lewis6991/gitsigns.nvim',
-        requires = { 'nvim-lua/plenary.nvim' },
         config = req 'config.gitsigns'
     }
 
