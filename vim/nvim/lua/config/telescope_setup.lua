@@ -51,7 +51,9 @@ function M.grep_string()
         local query = get_query()
         require('telescope.builtin').grep_string {
             search = query~='' and query or nil,
-            use_regex = mode ~= 'v'
+            use_regex = mode ~= 'v',
+            file_ignore_patterns = { '.git' },
+            additional_args={'--hidden'},
         }
     end)
 end
@@ -60,7 +62,7 @@ function M.setup()
     map('n', '<C-p>', M.project_files)
     map('n', '<leader>ff', M.picker('find_files', {no_ignore=true, no_ignore_parent=true}))
     map('n', '<leader><C-p>', M.picker 'buffers')
-    map('n', '<leader>/', M.picker 'live_grep')
+    map('n', '<leader>/', M.picker('live_grep', { file_ignore_patterns = { '.git' }, additional_args={'--hidden'} }))
     map({ 'n', 'v' }, '<leader>?', M.grep_string)
     map('n', '<leader>gb', M.picker 'git_branches')
     vim.ui.select = function (...)
