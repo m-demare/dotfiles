@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 platform=$(uname)
 
@@ -7,13 +7,11 @@ if [[ $platform =~ "Linux" ]]; then
     if command -v pacman &> /dev/null
     then
         INSTALL="sudo pacman --noconfirm -Syu"
-        NVIM_DEPS="nvim"
-        EXTRA_PACKAGES="gdb-dashboard alacritty"
+        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom"
     else
         echo "Updating repos"
         sudo apt-get update >> /dev/null
         INSTALL="sudo apt-get -y install"
-        NVIM_DEPS="ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen"
         EXTRA_PACKAGES=""
     fi
 
@@ -22,15 +20,11 @@ if [[ $platform =~ "Linux" ]]; then
         $INSTALL $1
     }
 
-    install_packages "git curl zsh ripgrep tmux zathura gdb python $NVIM_DEPS"
+    install_packages "git curl zsh ripgrep tmux zathura gdb python neovim $EXTRA_PACKAGES"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
         echo "Changed default shell to zsh"
-
-    # Rust
-    (sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" "" --no-modify-path -y) >> /dev/null &&
-        echo "Rust installed"
 
     # nvm
     (curl -fsSL -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash) >> /dev/null &&
@@ -40,23 +34,21 @@ if [[ $platform =~ "Linux" ]]; then
     (sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc) >> /dev/null &&
         echo "oh-my-zsh installed"
 
-    echo "Installing bottom"
-    ~/.cargo/bin/cargo install bottom
-
     mkdir -p ~/localwork/
     # neovim
-    echo "Building neovim"
+    echo "Cloning neovim"
     git clone https://github.com/neovim/neovim ~/localwork/neovim
-    if command -v apt-get &> /dev/null
+
+    # rust
+    if command -v pacman &> /dev/null
     then
-        cd ~/localwork/neovim &&
-        sudo make distclean >> /dev/null &&
-        make CMAKE_BUILD_TYPE=RelWithDebInfo &&
-        sudo make install
+        rustup toolchain install nightly
+        rustup toolchain install stable
+        rustup default nightly
     fi
 
-    # for some reason I couldn't install node from this script, nvm was not found
-    echo "Please run 'nvm install \$vim_node_version' manually"
+    . ~/.nvm/nvm.sh
+    nvm install v20.5.1
 
 elif [[ $platform =~ "MINGW" ]]; then
     # Windows
