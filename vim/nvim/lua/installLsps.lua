@@ -2,7 +2,7 @@ local unix = require('utils').unix
 
 local function get_npm_path()
     if unix then
-        return vim.fn.expand('~/.nvm/versions/node/$vim_node_version/bin/npm')
+        return 'npm'
     else
         return vim.fn.expand('~/AppData/Roaming/nvm/v16.17.0/npm')
     end

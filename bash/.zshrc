@@ -14,11 +14,10 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
+if type nvim &> /dev/null; then
   export EDITOR='nvim'
+else
+  export EDITOR='vim'
 fi
 
 # ssh agent
@@ -29,32 +28,7 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
-# Add default node to path (nvim lsp servers need node, and I want it to be usable
-# before nvm initialization because of how slow it is)
-export vim_node_version=v20.5.1
-default_node_path=~/.nvm/versions/node/$vim_node_version/bin
-export PATH=$default_node_path:$PATH
-export did_init_nvm=false
-
-# Default nvm script is too slow
-# Defer initialization of nvm until nvm, node or a node-dependent command is
-# run. Ensure this block is only run once by checking whether __init_nvm is a function.
-# In bash use type -t instead of whence -w
-if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'play' 'http-server')
-  function __init_nvm() {
-    export PATH=`echo -n "$(echo $PATH | tr ':' '\n' | grep -v "$default_node_path")" | tr '\n' ':'` # remove default node
-    for i in "${__node_commands[@]}"; do unalias $i; done
-    . "$NVM_DIR"/nvm.sh
-    unset __node_commands
-    unset -f __init_nvm
-    export did_init_nvm=true
-  }
-  for i in "${__node_commands[@]}"; do alias $i='echo "Initializing nvm" && __init_nvm && '$i; done
-fi
-
+export PATH=/bin:/usr/bin:/usr/ucb:/usr/local/bin
 
 # Play
 export PATH=$PATH:$HOME/play
@@ -72,23 +46,12 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 TIZEN_STUDIO=$HOME/tizen-studio
 export PATH=$PATH:$TIZEN_STUDIO/tools/ide/bin/
 
-# Colors
-        RED="\033[0;31m"
-     YELLOW="\033[1;33m"
-      GREEN="\033[0;32m"
-       BLUE="\033[1;34m"
-     PWD_BLUE="\033[00m"
-  LIGHT_RED="\033[1;31m"
-LIGHT_GREEN="\033[1;32m"
-       CYAN="\033[0;36m"
- LIGHT_CYAN="\033[1;36m"
-      WHITE="\033[1;37m"
- LIGHT_GRAY="\033[0;37m"
- COLOR_NONE="\e[0m"
-
-export PATH=$PATH:$HOME/bochs/bin
-
 export PATH=$PATH:$HOME/.local/bin
+
+export PATH=$PATH:$HOME/.cargo/bin
+
+export vim_node_version=v20.5.1
+eval "$(fnm env --shell=zsh)"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

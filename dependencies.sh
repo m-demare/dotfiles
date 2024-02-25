@@ -7,12 +7,12 @@ if [[ $platform =~ "Linux" ]]; then
     if command -v pacman &> /dev/null
     then
         INSTALL="sudo pacman --noconfirm -Syu"
-        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom"
+        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom fnm"
     else
         echo "Updating repos"
         sudo apt-get update >> /dev/null
         INSTALL="sudo apt-get -y install"
-        EXTRA_PACKAGES=""
+        EXTRA_PACKAGES="cargo"
     fi
 
     install_packages(){
@@ -25,10 +25,6 @@ if [[ $platform =~ "Linux" ]]; then
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
         echo "Changed default shell to zsh"
-
-    # nvm
-    (curl -fsSL -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash) >> /dev/null &&
-        echo "nvm installed"
 
     # oh-my-zsh
     (sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc) >> /dev/null &&
@@ -45,10 +41,13 @@ if [[ $platform =~ "Linux" ]]; then
         rustup toolchain install nightly
         rustup toolchain install stable
         rustup default nightly
+    else
+        cargo install alacritty bottom
     fi
+    cargo install fnm samply flamegraph cargo-valgrind wiki-tui
 
     . ~/.nvm/nvm.sh
-    nvm install v20.5.1
+    fnm install v20.5.1
 
 elif [[ $platform =~ "MINGW" ]]; then
     # Windows

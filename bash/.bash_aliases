@@ -49,14 +49,10 @@ alias zrc='$EDITOR ~/.zshrc'
 if type nvim > /dev/null 2>&1; then
     # node 'n vim (this changes the window title, so I didn't want it to be that long)
     function nnvim(){
-        if $did_init_nvm && [ $vim_node_version != $(\node -v) ]; then
-            old_node_v="$(\node -v)"
-            export PATH=${PATH//node\/$old_node_v/node/$vim_node_version}
-            \nvim "$@"
-            export PATH=${PATH//node\/$vim_node_version/node/$old_node_v}
-        else
-            \nvim "$@"
-        fi
+        old_node_v="$(fnm current)"
+        fnm use $vim_node_version > /dev/null
+        \nvim "$@"
+        fnm use $old_node_v > /dev/null
     }
     alias nvim='nnvim'
     alias v='nnvim'
@@ -75,11 +71,11 @@ alias q='cd ~/localwork/debQ'
 
 alias levQ='q; play debug run'
 
-alias mo='cd ~/localwork/debQMobile/debQMobile; nvm use 9; ~/play/play "run 9001"'
+alias mo='cd ~/localwork/debQMobile/debQMobile; fnm use 9; ~/play/play "run 9001"'
 
-alias appo='cd ~/localwork/debQAppointments/backend; nvm use 20; ~/play/play "run 9002"'
+alias appo='cd ~/localwork/debQAppointments/backend; fnm use 20; ~/play/play "run 9002"'
 
-alias surv='cd ~/localwork/debQSurvey; nvm use 9; ~/play/play "run 9003"'
+alias surv='cd ~/localwork/debQSurvey; fnm use 9; ~/play/play "run 9003"'
 
 alias wk='p; grunt debug-webkit'
 
