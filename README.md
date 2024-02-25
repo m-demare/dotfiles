@@ -1,27 +1,12 @@
 # dotfiles
 
-Simple script to backup, restore and sync your dotfiles between multiple computers
-(The idea is to use this in conjunction with git)
-
-This repo contains the settings I like to use, so that I can set the up quickly on any PC.
-If you wanted to use your own dotfiles, you just have to create a repo with manager.py in it, and start
-adding files as explained below.
+My personal dotfiles repo, and a small python script to keep them synced
 
 # Table of contents
 
-* [Why?](#why)
 * [Dependencies](#dependencies)
 * [Usage](#usage)
 * [Known issues](#known-issues)
-
-## Why?
-All options I could find for managing my dotfiles were either too complicated for my use case, not
-multiplatform, or not open source (or all of those). Update: since doing this, I've found some other options.
-I still like this one because of its simplicity, the fact that it has basically no dependencies and it's a
-single file with no installation required. Also I may be biased
-
-I wanted a simple script that required no installation, and that would get me up and running afap. Also, I tend to
-work in multiple PCs at once, and different OSs, so I needed my dotfiles to easily sync between them.
 
 ## Dependencies
 ### If you just want to use the manager with your own dotfiles
