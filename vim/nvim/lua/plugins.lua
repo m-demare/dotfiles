@@ -175,6 +175,7 @@ local packer = require('packer').startup(function(use)
     }
     use { 'RRethy/vim-illuminate', module='illuminate' }
     use { 'nvimdev/lspsaga.nvim' }
+    use { 'vxpm/ferris.nvim', ft='rust', config = req('ferris', 'setup'), }
 
     -- Debugging
     use {
