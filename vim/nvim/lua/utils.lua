@@ -1,11 +1,5 @@
 local M = {}
 
-function M.map(mode, l, r, opts)
-    opts = opts or {}
-    opts = vim.tbl_extend('force', { silent=true }, opts)
-    vim.keymap.set(mode, l, r, opts)
-end
-
 function M.bind(fn, ...)
     local args = {...}
     return function(...)
@@ -44,6 +38,21 @@ function M.tbl_join(tbl, join_str)
         retval = retval .. v
     end
     return retval
+end
+
+function M.req(file, fn)
+    return function()
+        local mod = require(file)
+        if fn then mod[fn] {} end
+    end
+end
+
+function M.visual_selection()
+    local saved_reg = vim.fn.getreg 'v'
+    vim.cmd [[noautocmd sil norm "vy]]
+    local sel = vim.fn.getreg 'v'
+    vim.fn.setreg('v', saved_reg)
+    return sel
 end
 
 M.unix = vim.fn.has("unix") == 1

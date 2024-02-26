@@ -1,13 +1,9 @@
 local nvim_lsp = require 'lspconfig'
-local saga = require 'lspsaga'
 local utils = require 'utils'
-local map  = utils.map
+local map  = vim.keymap.set
 local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
--- LSP settings
-
 local on_attach = function(client, bufnr)
-    -- Highlighting
     require 'illuminate'.on_attach(client)
 
     if client.server_capabilities.documentSymbolProvider then
@@ -61,16 +57,4 @@ for _, lsp in ipairs(servers) do
     filetypes = lsp.filetypes
   }
 end
-
-saga.setup({
-    ui = {
-        devicon = false,
-        code_action = "»",
-        normal_bg = "NONE",
-        title_bg = "NONE"
-    },
-    symbol_in_winbar = {
-        enable = false,
-    }
-})
 

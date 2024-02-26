@@ -1,6 +1,5 @@
 local dap = require 'dap'
 local utils = require('utils')
-local map = utils.map
 local unix = utils.unix
 
 local function request_port()
@@ -138,7 +137,7 @@ dap.listeners.after.event_initialized['inspect_k'] = function()
       end
     end
   end
-  map('n', 'K', require("dap.ui.widgets").hover)
+  vim.keymap.set('n', 'K', require("dap.ui.widgets").hover)
 end
 
 dap.listeners.after.event_terminated['inspect_k'] = function()

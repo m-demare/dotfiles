@@ -1,44 +1,11 @@
 local cmp = require 'cmp'
 local luasnip = require('luasnip')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local unix = require('utils').unix
-
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.filetype_extend("typescript", { "javascript" })
 luasnip.config.setup {}
 
-local icons = {}
-
-if unix then
-    icons = {
-        Text = "   ",
-        Method = "  ",
-        Function = "  ",
-        Constructor = "  ",
-        Variable = "  ",
-        Class = "  ",
-        Interface = "  ",
-        Struct = "  ",
-        Module = "  ",
-        Field = " ﰠ ",
-        Property = " ﰠ ",
-        Unit = "  ",
-        Value = "  ",
-        Keyword = "  ",
-        Snippet = "  ",
-        Color = "  ",
-        File = "  ",
-        Reference = "  ",
-        Folder = "  ",
-        Enum = "  ",
-        EnumMember = "  ",
-        Constant = " ﲀ ",
-        Event = "  ",
-        Operator = "  ",
-        TypeParameter = "  ",
-    }
-end
-
+local icons = require('config.icons').cmp_icons
 local function format(_, vim_item)
     vim_item.kind = (icons[vim_item.kind] or '') .. vim_item.kind
     return vim_item
@@ -124,13 +91,6 @@ cmp.setup.filetype('gitcommit', {
         },
     })
 })
-
--- cmp.setup.cmdline('/', {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = {
---         { name = 'buffer' }
---     }
--- })
 
 -- cmp throws errors in dap buffers
 local dap_fts = { 'dapui_watches', 'dap-repl' }

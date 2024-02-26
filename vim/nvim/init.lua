@@ -1,4 +1,4 @@
-pcall(require, 'impatient')
+vim.loader.enable()
 
 if vim.fn.has("unix") == 1 then
     vim.g.python3_host_prog="/usr/bin/python3.11"
@@ -9,18 +9,26 @@ end
 
 vim.g.editorconfig = true
 vim.g.mapleader = ' '
+vim.o.mousemodel='extend'
 if vim.fn.has('termguicolors') == 1 then
     vim.o.termguicolors = true
 end
 
-require('plugins')
-
 vim.cmd('source ~/.config/vim/globals.vim')
 
-require 'autocmds'
-vim.defer_fn(function ()
-    require 'maps'
-end, 2)
+-- make all keymaps silent by default
+local keymap_set = vim.keymap.set
+---@diagnostic disable-next-line: duplicate-set-field
+vim.keymap.set = function(mode, lhs, rhs, opts)
+  opts = opts or {}
+  opts.silent = opts.silent ~= false
+  return keymap_set(mode, lhs, rhs, opts)
+end
 
-vim.o.mousemodel='extend'
+require 'config.lazy'
+
+require 'config.autocmds'
+vim.defer_fn(function ()
+    require 'config.maps'
+end, 20)
 

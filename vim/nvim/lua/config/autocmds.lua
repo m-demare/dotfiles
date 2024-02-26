@@ -1,7 +1,6 @@
 local utils = require('utils')
-local map = utils.map
+local map = vim.keymap.set
 local nmap = utils.bind(map, 'n')
-local map_open_mdn = require('maps').map_open_mdn
 
 local group = vim.api.nvim_create_augroup('my_aucmds', { clear = true })
 
@@ -35,7 +34,7 @@ vim.api.nvim_create_autocmd('FileType', {
     group=group,
     callback = function (ev)
         if utils.unix and vim.tbl_contains(js_fts, ev.match) then
-            map_open_mdn(ev.buf)
+            require('maps').map_open_mdn(ev.buf)
         end
     end
 })
