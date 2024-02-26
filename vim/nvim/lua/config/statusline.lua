@@ -6,10 +6,39 @@ if not unix then
     separators = ''
 end
 
-local gps = require 'nvim-gps'
-gps.setup{
-    disable_icons = not unix,
-    depth = 2,
+local no_icons = {
+    File          = '',
+    Module        = '',
+    Namespace     = '',
+    Package       = '',
+    Class         = '',
+    Method        = '',
+    Property      = '',
+    Field         = '',
+    Constructor   = '',
+    Enum          = '',
+    Interface     = '',
+    Function      = '',
+    Variable      = '',
+    Constant      = '',
+    String        = '',
+    Number        = '',
+    Boolean       = '',
+    Array         = '',
+    Object        = '',
+    Key           = '',
+    Null          = '',
+    EnumMember    = '',
+    Struct        = '',
+    Event         = '',
+    Operator      = '',
+    TypeParameter = '',
+}
+
+local navic = require 'nvim-navic'
+navic.setup{
+    icons = unix and {} or no_icons,
+    depth_limit = 2,
 }
 
 require('lualine').setup {
@@ -23,7 +52,7 @@ require('lualine').setup {
     sections = {
         lualine_c = {
             'filename',
-            { gps.get_location, cond = gps.is_available }
+            { function() return navic.get_location() end , cond = navic.is_available }
         }
     }
 }

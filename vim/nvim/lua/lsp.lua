@@ -10,6 +10,10 @@ local on_attach = function(client, bufnr)
     -- Highlighting
     require 'illuminate'.on_attach(client)
 
+    if client.server_capabilities.documentSymbolProvider then
+        require 'nvim-navic'.attach(client, bufnr)
+    end
+
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     map('n', 'gD', vim.lsp.buf.declaration, {buffer=bufnr})
