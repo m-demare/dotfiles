@@ -5,6 +5,7 @@ local unix = require('utils').unix
 
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.filetype_extend("typescript", { "javascript" })
+luasnip.config.setup {}
 
 local icons = {}
 

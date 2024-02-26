@@ -6,6 +6,7 @@ local cmd = vim.api.nvim_create_user_command
 local dap = utils.bind(require, 'dap')
 local dapui = utils.bind(require, 'dapui')
 local osv = utils.bind(require, 'osv')
+map('n', '<F5>', cb(dap, 'close'))
 map('n', '<F9>', cb(dap, 'continue'))
 map('n', '<F8>', cb(dap, 'step_over'))
 map('n', '<F7>', cb(dap, 'step_into'))
