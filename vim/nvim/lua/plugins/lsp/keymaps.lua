@@ -1,9 +1,7 @@
-local nvim_lsp = require 'lspconfig'
-local utils = require 'utils'
-local map  = vim.keymap.set
-local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-
 local on_attach = function(client, bufnr)
+    local utils = require 'utils'
+    local map  = vim.keymap.set
+
     require 'illuminate'.on_attach(client)
 
     if client.server_capabilities.documentSymbolProvider then
@@ -33,28 +31,7 @@ local on_attach = function(client, bufnr)
     print('Using ' .. client.name)
 end
 
-local servers = require('lsplangs').for_current_os()
-
-vim.g.Illuminate_ftwhitelist = utils.reduce(servers, function (acc, s)
-    for _, ft in ipairs(s.filetypes or {}) do
-        if not vim.tbl_contains(acc, ft) then table.insert(acc, ft) end
-    end
-    return acc
-end, {})
-
-local capabilities = cmp_nvim_lsp.default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp.name].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    capabilities = capabilities,
-    cmd = lsp.cmd,
-    settings = lsp.settings,
-    filetypes = lsp.filetypes
-  }
-end
+return {
+  on_attach = on_attach,
+}
 

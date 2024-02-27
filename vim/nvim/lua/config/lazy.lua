@@ -18,6 +18,3 @@ require("lazy").setup("plugins", {
   }
 })
 
--- Installs
-vim.api.nvim_create_user_command('InstallLsps', require 'installLsps', { force = true })
-

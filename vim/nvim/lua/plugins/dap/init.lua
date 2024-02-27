@@ -15,7 +15,7 @@ return {
     {
         {
             'mfussenegger/nvim-dap',
-            config = req 'config.dap',
+            config = req 'plugins.dap.config',
             dependencies = 'jbyuki/one-small-step-for-vimkind',
             module = 'dap',
             lazy = true,
