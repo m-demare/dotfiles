@@ -1,54 +1,54 @@
-local utils = require('utils')
+local utils = require "utils"
 local req = utils.req
 local cb = utils.call_bind
 local cmd = vim.api.nvim_create_user_command
 
-local dap = utils.bind(require, 'dap')
-local dapui = utils.bind(require, 'dapui')
-local osv = utils.bind(require, 'osv')
+local dap = utils.bind(require, "dap")
+local dapui = utils.bind(require, "dapui")
+local osv = utils.bind(require, "osv")
 
-cmd('DebugThis', cb(osv, 'launch'), { force=true })
-cmd('ClearBreakpoints', cb(dap, 'clear_breakpoints'), { force=true })
-cmd('ExceptionBreakpoints', cb(dap, 'set_exception_breakpoints'), { force=true })
+cmd("DebugThis", cb(osv, "launch"), { force = true })
+cmd("ClearBreakpoints", cb(dap, "clear_breakpoints"), { force = true })
+cmd("ExceptionBreakpoints", cb(dap, "set_exception_breakpoints"), { force = true })
 
 return {
     {
         {
-            'mfussenegger/nvim-dap',
-            config = req 'plugins.dap.config',
-            dependencies = 'jbyuki/one-small-step-for-vimkind',
-            module = 'dap',
+            "mfussenegger/nvim-dap",
+            config = req "plugins.dap.config",
+            dependencies = "jbyuki/one-small-step-for-vimkind",
+            module = "dap",
             lazy = true,
-            cmd = { 'DebugThis', 'ClearBreakpoints', 'ExceptionBreakpoints' },
+            cmd = { "DebugThis", "ClearBreakpoints", "ExceptionBreakpoints" },
             keys = {
-                { '<F5>',       cb(dap, 'close') },
-                { '<F9>',       cb(dap, 'continue') },
-                { '<F8>',       cb(dap, 'step_over') },
-                { '<F7>',       cb(dap, 'step_into') },
-                { '<F6>',       cb(dap, 'step_out') },
-                { '<leader>br', cb(dap, 'toggle_breakpoint') },
+                { "<F5>", cb(dap, "close") },
+                { "<F9>", cb(dap, "continue") },
+                { "<F8>", cb(dap, "step_over") },
+                { "<F7>", cb(dap, "step_into") },
+                { "<F6>", cb(dap, "step_out") },
+                { "<leader>br", cb(dap, "toggle_breakpoint") },
                 {
-                    '<leader>bc',
+                    "<leader>bc",
                     function()
-                        dap().set_breakpoint(vim.fn.input('Breakpoint condition: '))
-                    end
+                        dap().set_breakpoint(vim.fn.input "Breakpoint condition: ")
+                    end,
                 },
                 {
-                    '<leader>ev',
+                    "<leader>ev",
                     function()
-                        local expr = vim.fn.input 'Expression: '
+                        local expr = vim.fn.input "Expression: "
                         require("dapui").eval(expr)
-                    end
+                    end,
                 },
-            }
+            },
         },
         {
-            'rcarriga/nvim-dap-ui',
-            dependencies = 'nvim-dap',
-            module = 'dapui',
+            "rcarriga/nvim-dap-ui",
+            dependencies = "nvim-dap",
+            module = "dapui",
             lazy = true,
             keys = {
-                { '<M-d>', cb(dapui, 'toggle') },
+                { "<M-d>", cb(dapui, "toggle") },
             },
             opts = {
                 layouts = {
@@ -60,13 +60,14 @@ return {
                         },
                         size = 40,
                         position = "right",
-                    }, {
+                    },
+                    {
                         elements = { "repl", "console" },
                         size = 10,
                         position = "bottom",
                     },
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 }

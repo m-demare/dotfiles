@@ -1,41 +1,42 @@
-local utils = require('utils')
+local utils = require "utils"
 local map = vim.keymap.set
-local nmap = utils.bind(map, 'n')
+local nmap = utils.bind(map, "n")
 
-local group = vim.api.nvim_create_augroup('my_aucmds', { clear = true })
+local group = vim.api.nvim_create_augroup("my_aucmds", { clear = true })
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group    = group,
-    pattern  = '*',
-    callback = function() vim.highlight.on_yank { on_visual = true, timeout = 250 } end
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = group,
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank { on_visual = true, timeout = 250 }
+    end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd("FileType", {
     group = group,
-    pattern = 'netrw',
+    pattern = "netrw",
     callback = function()
         -- Go back in history
-        nmap('H', 'u', {buffer=true, remap=true})
+        nmap("H", "u", { buffer = true, remap = true })
         -- Go up a directory
-        nmap('h', '-^', {buffer=true, remap=true})
+        nmap("h", "-^", { buffer = true, remap = true })
         -- Go down a directory / open file
-        nmap('l', '<CR>', {buffer=true, remap=true})
-    end
+        nmap("l", "<CR>", { buffer = true, remap = true })
+    end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = group,
     pattern = { "*.txt", "*.md", "*.tex" },
-    command = "setlocal spell"
+    command = "setlocal spell",
 })
 
-local js_fts = {'javascript', 'typescript', 'typescriptreact', 'javascriptreact'}
-vim.api.nvim_create_autocmd('FileType', {
-    group=group,
-    callback = function (ev)
+local js_fts = { "javascript", "typescript", "typescriptreact", "javascriptreact" }
+vim.api.nvim_create_autocmd("FileType", {
+    group = group,
+    callback = function(ev)
         if utils.unix and vim.tbl_contains(js_fts, ev.match) then
-            require('maps').map_open_mdn(ev.buf)
+            require("maps").map_open_mdn(ev.buf)
         end
-    end
+    end,
 })
-

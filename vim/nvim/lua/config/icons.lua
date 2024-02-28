@@ -1,4 +1,4 @@
-local unix = require('utils').unix
+local unix = require("utils").unix
 
 local cmp_icons = {}
 local lualine_separators, navic_icons, nvim_tree_icons
@@ -32,41 +32,41 @@ if unix then
         TypeParameter = "  ",
     }
 else
-    lualine_separators = ''
+    lualine_separators = ""
     navic_icons = {
-        File          = '',
-        Module        = '',
-        Namespace     = '',
-        Package       = '',
-        Class         = '',
-        Method        = '',
-        Property      = '',
-        Field         = '',
-        Constructor   = '',
-        Enum          = '',
-        Interface     = '',
-        Function      = '',
-        Variable      = '',
-        Constant      = '',
-        String        = '',
-        Number        = '',
-        Boolean       = '',
-        Array         = '',
-        Object        = '',
-        Key           = '',
-        Null          = '',
-        EnumMember    = '',
-        Struct        = '',
-        Event         = '',
-        Operator      = '',
-        TypeParameter = '',
+        File = "",
+        Module = "",
+        Namespace = "",
+        Package = "",
+        Class = "",
+        Method = "",
+        Property = "",
+        Field = "",
+        Constructor = "",
+        Enum = "",
+        Interface = "",
+        Function = "",
+        Variable = "",
+        Constant = "",
+        String = "",
+        Number = "",
+        Boolean = "",
+        Array = "",
+        Object = "",
+        Key = "",
+        Null = "",
+        EnumMember = "",
+        Struct = "",
+        Event = "",
+        Operator = "",
+        TypeParameter = "",
     }
     nvim_tree_icons = {
         show = {
             file = false,
             folder = false,
             folder_arrow = true,
-            git = false
+            git = false,
         },
         glyphs = {
             folder = {
@@ -79,7 +79,7 @@ else
                 symlink = ">",
                 symlink_open = "v",
             },
-        }
+        },
     }
 end
 
@@ -89,4 +89,3 @@ return {
     lualine_separators = lualine_separators,
     nvim_tree_icons = nvim_tree_icons,
 }
-

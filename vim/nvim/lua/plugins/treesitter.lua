@@ -1,4 +1,4 @@
-local unix = require('utils').unix
+local unix = require("utils").unix
 
 local function total_size(bufnr)
     local lines, size = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), 0
@@ -10,9 +10,9 @@ end
 
 return {
     {
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
         opts = {
             ensure_installed = unix and {
                 "c",
@@ -69,7 +69,7 @@ return {
         end,
     },
     {
-        'nvim-treesitter/playground',
-        cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' }
-    }
+        "nvim-treesitter/playground",
+        cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+    },
 }

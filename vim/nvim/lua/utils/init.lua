@@ -1,22 +1,22 @@
 local M = {}
 
 function M.bind(fn, ...)
-    local args = {...}
+    local args = { ... }
     return function(...)
         return fn(unpack(args), ...)
     end
 end
 
 function M.strict_bind(fn, ...)
-    local args = {...}
+    local args = { ... }
     return function()
         return fn(unpack(args))
     end
 end
 
 function M.call_bind(fn, prop, ...)
-    local args = {...}
-    return function ()
+    local args = { ... }
+    return function()
         return fn()[prop](unpack(args))
     end
 end
@@ -30,11 +30,9 @@ function M.reduce(list, fn, init)
 end
 
 function M.tbl_join(tbl, join_str)
-    local retval = ''
+    local retval = ""
     for i, v in ipairs(tbl) do
-        if i>1 then
-            retval = retval .. join_str
-        end
+        if i > 1 then retval = retval .. join_str end
         retval = retval .. v
     end
     return retval
@@ -48,14 +46,13 @@ function M.req(file, fn)
 end
 
 function M.visual_selection()
-    local saved_reg = vim.fn.getreg 'v'
+    local saved_reg = vim.fn.getreg "v"
     vim.cmd [[noautocmd sil norm "vy]]
-    local sel = vim.fn.getreg 'v'
-    vim.fn.setreg('v', saved_reg)
+    local sel = vim.fn.getreg "v"
+    vim.fn.setreg("v", saved_reg)
     return sel
 end
 
-M.unix = vim.fn.has("unix") == 1
+M.unix = vim.fn.has "unix" == 1
 
 return M
-
