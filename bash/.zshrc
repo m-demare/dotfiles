@@ -9,8 +9,7 @@ setopt hist_find_no_dups
 fpath=(~/.config/zsh-z $fpath)
 autoload -U compinit && compinit
 # https://superuser.com/a/1092328
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 unsetopt flowcontrol
 setopt auto_menu
