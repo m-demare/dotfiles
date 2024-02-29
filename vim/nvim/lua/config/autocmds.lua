@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = group,
     callback = function(ev)
         if utils.unix and vim.tbl_contains(js_fts, ev.match) then
-            require("maps").map_open_mdn(ev.buf)
+            require("config.maps").map_open_mdn(ev.buf)
         end
     end,
 })
