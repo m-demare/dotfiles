@@ -36,7 +36,7 @@ return {
             telescope.load_extension "ui-select"
             telescope.load_extension "attempt"
 
-            if unix == 1 then
+            if unix then
                 telescope.load_extension "fzf"
                 telescope.load_extension "smart_history"
             end
@@ -78,6 +78,6 @@ return {
             { "<leader>?", ts_utils.grep_string, mode = { "n", "v" } },
             { "<leader>gb", ts_utils.picker "git_branches" },
             { "<leader>al", ts_utils.extension_picker("attempt", "attempt") },
-        }
+        },
     },
 }

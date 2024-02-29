@@ -1,5 +1,5 @@
-local utils  = require('utils')
-local telescope_builtin = utils.bind(require, 'telescope.builtin')
+local utils = require "utils"
+local telescope_builtin = utils.bind(require, "telescope.builtin")
 
 local M = {}
 
