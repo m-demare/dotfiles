@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p $HOME/localwork/
 platform=$(uname)
 
 if [[ $platform =~ "Linux" ]]; then
@@ -7,7 +8,7 @@ if [[ $platform =~ "Linux" ]]; then
     if command -v pacman &> /dev/null
     then
         INSTALL="sudo pacman --noconfirm -Syu"
-        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom fnm"
+        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom"
     else
         echo "Updating repos"
         sudo apt-get update >> /dev/null
@@ -20,20 +21,19 @@ if [[ $platform =~ "Linux" ]]; then
         $INSTALL $1
     }
 
-    install_packages "git curl zsh ripgrep tmux zathura gdb python neovim $EXTRA_PACKAGES"
+    install_packages "git curl zsh ripgrep tmux zathura gdb python neovim stow $EXTRA_PACKAGES"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
         echo "Changed default shell to zsh"
 
-    mkdir -p ~/localwork/
     # neovim
     echo "Cloning neovim"
-    git clone https://github.com/neovim/neovim ~/localwork/neovim
+    git clone https://github.com/neovim/neovim $HOME/localwork/neovim
 
     echo "Cloning zsh-z"
-    mkdir -p ~/.config
-    git clone https://github.com/agkozak/zsh-z ~/.config/zsh-z
+    mkdir -p $HOME/.config
+    git clone https://github.com/agkozak/zsh-z $HOME/.config/zsh-z
 
     # rust
     if command -v pacman &> /dev/null
@@ -46,15 +46,19 @@ if [[ $platform =~ "Linux" ]]; then
     fi
     cargo install fnm samply flamegraph cargo-valgrind wiki-tui
 
-    . ~/.nvm/nvm.sh
     fnm install v20.5.1
 
 elif [[ $platform =~ "MINGW" ]]; then
     # Windows
     echo "This should be run using git bash"
-    cmd <<< "mklink /D %HOMEPATH%\\AppData\\Local\\nvim %HOMEPATH%\\.config\\nvim\\"
+    cmd <<< "mklink /D %HOMEPATH%\\AppData\\Local\\nvim %HOMEPATH%\\.dotfiles\\vim\\.config\\nvim\\"
+    mkdir -p $HOME/.config/vim
+    cmd <<< "mklink %HOMEPATH%\\.config\\vim\\globals.vim %HOMEPATH%\\.dotfiles\\vim\\.config\\vim\\globals.vim"
+    cmd <<< "mklink %HOMEPATH%\\.vimrc %HOMEPATH%\\.dotfiles\\vim\\.vimrc"
     echo "Created symlink for nvim settings"
 fi
+
+git clone https://github.com/m-demare/dotfiles.git $HOME/.dotfiles
 
 exit 0
 
