@@ -49,15 +49,17 @@ function localProxy(){
 }
 
 if type nvim > /dev/null 2>&1; then
-    # node 'n vim (this changes the window title, so I didn't want it to be that long)
-    function nnvim(){
-        old_node_v="$(fnm current)"
-        fnm use $vim_node_version > /dev/null
-        \nvim "$@"
-        fnm use $old_node_v > /dev/null
-    }
-    alias nvim='nnvim'
-    alias v='nnvim'
+    if type fnm > /dev/null 2>&1; then
+        # node 'n vim (this changes the window title, so I didn't want it to be that long)
+        function nnvim(){
+            old_node_v="$(fnm current)"
+            fnm use $vim_node_version > /dev/null
+            \nvim "$@"
+            fnm use $old_node_v > /dev/null
+        }
+        alias nvim='nnvim'
+        alias v='nnvim'
+    fi
 fi
 
 # Git {{{
@@ -67,7 +69,7 @@ alias glo='git log --decorate --graph --oneline'
 
 alias gti='git '    # too often
 
-alias g='git '    # too often
+alias g='git '
 
 gMergesOf () {
     git log --merges --ancestry-path --oneline $1..origin | tail

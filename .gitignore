@@ -1,4 +1,4 @@
 .netrwhist
-vim/nvim/spell/*.spl
+vim/.config/nvim/spell/*.spl
 
 .luarc.json
