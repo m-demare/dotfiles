@@ -55,6 +55,9 @@ elif [[ $platform =~ "MINGW" ]]; then
     mkdir -p $HOME/.config/vim
     cmd <<< "mklink %HOMEPATH%\\.config\\vim\\globals.vim %HOMEPATH%\\.dotfiles\\vim\\.config\\vim\\globals.vim"
     cmd <<< "mklink %HOMEPATH%\\.vimrc %HOMEPATH%\\.dotfiles\\vim\\.vimrc"
+    cmd <<< "mklink %HOMEPATH%\\.bashrc %HOMEPATH%\\.dotfiles\\bash\\.bashrc"
+    cmd <<< "mklink %HOMEPATH%\\.bash_aliases %HOMEPATH%\\.dotfiles\\bash\\.bash_aliases"
+    cmd <<< "mklink %HOMEPATH%\\.gitconfig %HOMEPATH%\\.dotfiles\\git\\.gitconfig"
     echo "Created symlink for nvim settings"
 fi
 
