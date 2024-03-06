@@ -2,6 +2,12 @@ alias cl='clear; clear'
 
 alias ls='ls --color=auto'
 
+alias grep='grep --color=auto'
+
+alias fgrep='fgrep --color=auto'
+
+alias egrep='egrep --color=auto'
+
 alias l='ls -CF'
 
 alias ll='ls -alF'
@@ -16,7 +22,7 @@ alias less='less --ignore-case'
 
 alias op='xdg-open '
 
-alias path='tr ":" "\n"<<<$PATH | sort'
+alias path='tr ":" "\n"<<<$PATH'
 
 alias sudo='sudo '
 

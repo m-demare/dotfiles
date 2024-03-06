@@ -52,44 +52,31 @@ RPROMPT="%(?..%F{red}%? ↵%f)"
 
 export LANG=en_US.UTF-8
 
-if type nvim &> /dev/null; then
-  export EDITOR='nvim'
-else
-  export EDITOR='vim'
-fi
-
-# ssh agent
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-fi
-
-export PATH=/bin:/usr/bin:/usr/ucb:/usr/local/bin
+function appendPath(){
+    export PATH=$PATH:$1
+}
 
 # Play
-export PATH=$PATH:$HOME/play
-
-# Ruby
-export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
+appendPath $HOME/play
 
 # Android tools
 export ANDROID_HOME=$HOME/android
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
+appendPath $ANDROID_HOME/tools
+appendPath $ANDROID_HOME/platform-tools
 
 # Tizen
-TIZEN_STUDIO=$HOME/tizen-studio
-export PATH=$PATH:$TIZEN_STUDIO/tools/ide/bin/
+export TIZEN_STUDIO=$HOME/tizen-studio
+appendPath $TIZEN_STUDIO/tools/ide/bin/
 
-export PATH=$PATH:$HOME/.local/bin
+# Rust
+appendPath $HOME/.cargo/bin
 
-export PATH=$PATH:$HOME/.cargo/bin
+appendPath $HOME/.local/bin
 
 export vim_node_version=v20.5.1
-eval "$(fnm env --shell=zsh)"
+if type fnm > /dev/null 2>&1; then
+    eval "$(fnm env --shell=zsh)"
+fi
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
