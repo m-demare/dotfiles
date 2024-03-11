@@ -70,9 +70,9 @@ return {
         -- stylua: ignore
         keys = {
             { "<C-p>", ts_utils.project_files },
-            { "<leader>ff", ts_utils.picker("find_files", { file_ignore_patterns = { ".git" }, no_ignore=true, no_ignore_parent=true, hidden=true }) },
+            { "<leader>ff", ts_utils.picker("find_files", { file_ignore_patterns = { "^.git" }, no_ignore=true, no_ignore_parent=true, hidden=true }) },
             { "<leader><C-p>", ts_utils.picker "buffers" },
-            { "<leader>/", ts_utils.picker("live_grep", { file_ignore_patterns = { ".git" }, additional_args={ "--hidden" } }) },
+            { "<leader>/", ts_utils.picker("live_grep", { file_ignore_patterns = { "^.git" }, additional_args={ "--hidden" } }) },
             { "<leader>?", ts_utils.grep_string, mode = { "n", "v" } },
             { "<leader>gb", ts_utils.picker "git_branches" },
             { "<leader>al", ts_utils.extension_picker("attempt", "attempt") },
