@@ -1,10 +1,12 @@
 HIST_STAMPS="yyyy-mm-dd"
-HISTSIZE=5000
+HISTSIZE=50000
 HISTFILE=~/.zsh_history
-SAVEHIST=5000
+SAVEHIST=50000
 setopt appendhistory
 setopt sharehistory
 setopt hist_find_no_dups
+setopt hist_ignore_dups
+setopt extended_history
 
 fpath=(~/.config/zsh-z $fpath)
 autoload -U compinit && compinit
@@ -16,6 +18,7 @@ setopt auto_menu
 setopt complete_in_word
 setopt always_to_end
 setopt auto_pushd
+bindkey '^[[Z' reverse-menu-complete
 
 setopt autocd
 
@@ -113,19 +116,6 @@ __set_vi_mode_cursor() {
     esac
 }
 
-__get_vi_mode() {
-    local mode
-    case $KEYMAP in
-        vicmd)
-          mode=NORMAL
-          ;;
-        main|viins)
-          mode=INSERT
-          ;;
-    esac
-    print -n -- $mode
-}
-
 zle-keymap-select() {
     __set_vi_mode_cursor
     zle reset-prompt
@@ -153,4 +143,25 @@ bindkey -M vicmd "^P" up-line-or-beginning-search
 bindkey -M viins "^P" up-line-or-beginning-search
 bindkey -M vicmd "^N" down-line-or-beginning-search
 bindkey -M viins "^N" down-line-or-beginning-search
+
+# History fuzzy search
+fzf_history() {
+    RES="$(fc -ln 1 -1 | fzf --tac --height=40%)"
+    local ret=$?
+    BUFFER=$(printf "${RES[@]//\\\\n/\\\\\\n}")
+    zle vi-fetch-history -n $BUFFER
+    zle end-of-line
+    zle reset-prompt
+    return $ret
+}
+
+autoload fzf_history
+zle -N fzf_history
+bindkey '^R' fzf_history
+
+# Fix deletion
+bindkey '^?' backward-delete-char
+bindkey '^w' backward-delete-word
+bindkey '^[[3~' delete-char
+WORDCHARS='_-'
 

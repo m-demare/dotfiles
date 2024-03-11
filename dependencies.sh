@@ -21,7 +21,7 @@ if [[ $platform =~ "Linux" ]]; then
         $INSTALL $1
     }
 
-    install_packages "git curl zsh ripgrep tmux zathura gdb python neovim stow $EXTRA_PACKAGES"
+    install_packages "git curl zsh ripgrep tmux zathura gdb python neovim fzf stow $EXTRA_PACKAGES"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&

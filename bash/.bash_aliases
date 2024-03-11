@@ -14,6 +14,8 @@ alias ll='ls -alF'
 
 alias la='ls -A'
 
+alias history='history 1'
+
 alias work='cd ~/localwork'
 
 alias cp='cp -i'
