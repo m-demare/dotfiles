@@ -1,6 +1,3 @@
-local utils = require "utils"
-local req = utils.req
-
 return {
     { "tpope/vim-commentary" },
     { "tpope/vim-surround" },
@@ -35,7 +32,15 @@ return {
     },
     {
         "ggandor/leap.nvim",
-        config = req("leap", "add_default_mappings"),
+        config = function ()
+            vim.keymap.set({"n"}, "s", "<Plug>(leap-forward)")
+            vim.keymap.set({"x"}, "x", "<Plug>(leap-forward)")
+            vim.keymap.set({"o"}, "gs", "<Plug>(leap-forward)")
+
+            vim.keymap.set({"n"}, "S", "<Plug>(leap-backward)")
+            vim.keymap.set({"x"}, "X", "<Plug>(leap-backward)")
+            vim.keymap.set({"o"}, "gS", "<Plug>(leap-backward)")
+        end,
     },
     {
         "windwp/nvim-autopairs",
