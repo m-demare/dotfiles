@@ -8,12 +8,12 @@ if [[ $platform =~ "Linux" ]]; then
     if command -v pacman &> /dev/null
     then
         INSTALL="sudo pacman --noconfirm -Syu"
-        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom"
+        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom fd unarchiver"
     else
         echo "Updating repos"
         sudo apt-get update >> /dev/null
         INSTALL="sudo apt-get -y install"
-        EXTRA_PACKAGES="cargo"
+        EXTRA_PACKAGES="cargo fd-find unar"
     fi
 
     install_packages(){
@@ -44,7 +44,7 @@ if [[ $platform =~ "Linux" ]]; then
     else
         cargo install alacritty bottom
     fi
-    cargo install fnm samply flamegraph cargo-valgrind wiki-tui
+    cargo install fnm samply flamegraph cargo-valgrind wiki-tui yazi
 
     fnm install v20.5.1
 
