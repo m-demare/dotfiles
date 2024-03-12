@@ -3,6 +3,9 @@ local sumneko_root_path = HOME .. "\\.config\\sumneko"
 local sumneko_binary = HOME .. "\\.config\\sumneko\\bin\\lua-language-server"
 local unix = require("utils").unix
 
+local lualib = vim.api.nvim_get_runtime_file("", true)
+table.insert(lualib, "/usr/share/awesome/lib")
+
 local lss = {
     {
         name = "pyright",
@@ -80,10 +83,15 @@ local lss = {
                         "EffectVariant",
                         "FamiliarVariant",
                         "LevelStage",
+
+                        "awesome",
+                        "client",
+                        "root",
+                        "screen",
                     },
                 },
                 workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
+                    library = lualib,
                     checkThirdParty = false,
                 },
                 telemetry = {
