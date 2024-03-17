@@ -46,7 +46,7 @@ hide_when_typing = true
 [window]
 decorations = "full"
 dynamic_padding = false
-opacity = 0.75
+opacity = 0.50
 startup_mode = "Windowed"
 
 [window.dimensions]
