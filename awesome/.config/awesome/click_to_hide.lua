@@ -1,3 +1,4 @@
+-- Will work in awesome 4.4+ :(
 local awful = require "awful"
 local wibox = require "wibox"
 

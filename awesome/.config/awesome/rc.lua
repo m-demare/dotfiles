@@ -79,16 +79,16 @@ awful.layout.layouts = {
 -- }}}
 
 -- {{{ Menu
-local mymainmenu = awful.menu({
+local power_menu = awful.menu({
     items = {
-        { "power off", spawn 'shutdown now' },
-        { "restart", spawn 'shutdown -r now' },
+        { "power off", spawn "shutdown now" },
+        { "restart", spawn "shutdown -r now" },
         { "logout", function() awesome.quit() end },
     },
 })
 
 local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+                                     menu = power_menu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -214,7 +214,7 @@ local globalkeys = gears.table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
+    awful.key({ modkey,           }, "b", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
     awful.key({ modkey,           }, "j",
@@ -285,7 +285,7 @@ local globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    awful.key({ modkey }, "x",
+    awful.key({ modkey, "Shift" }, "x",
               function ()
                   awful.prompt.run {
                     prompt       = "Run Lua code: ",
@@ -317,6 +317,10 @@ local globalkeys = gears.table.join(
               {description = "firefox private window", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "s", spawn.with_shell "~/.config/awesome/bin/screenshot.sh",
               {description = "screenshot", group = "launcher"}),
+    awful.key({ modkey            }, "x", function () power_menu:show() end,
+              {description = "power menu", group = "launcher"}),
+    awful.key({ modkey,           }, "Escape", spawn("xkill"),
+              {description = "go back", group = "tag"}),
 
 
     -- Screen brightness
