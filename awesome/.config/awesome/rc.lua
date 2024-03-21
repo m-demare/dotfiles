@@ -206,6 +206,30 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
+local function swap_screen_clients(self, other)
+    for _, own_tag in ipairs(self.tags) do
+        local other_tag = awful.tag.find_by_name(other, own_tag.name)
+        local self_clients = own_tag:clients()
+        local other_clients
+
+        if other_tag then
+            other_clients = other_tag:clients()
+        else
+            log.info("Didn't find tag with name %s on screen of geometry %s, will put clients to first tag", own_tag.name, other.geometry)
+            other_tag = other.tags[1]
+            other_clients = {}
+        end
+
+        for _, c in ipairs(self_clients) do
+            c:move_to_tag(other_tag)
+        end
+
+        for _, c in ipairs(other_clients) do
+            c:move_to_tag(own_tag)
+        end
+    end
+end
+
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -299,6 +323,15 @@ local globalkeys = gears.table.join(
     -- Screens
     awful.key({ modkey,           }, "o",      function () awful.screen.focus_relative(1)   end,
               {description = "switch screen focus", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "client"}),
+    awful.key({ modkey, "Mod1"     }, "o",
+        function ()
+            if screen.count() > 1 then
+                swap_screen_clients(screen[1], screen[2])
+            end
+        end,
+        {description = "swap screens", group = "client"}),
 
     -- Launching
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -359,8 +392,6 @@ local clientkeys = gears.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
