@@ -4,22 +4,36 @@ end
 
 local stringify
 
-local function stringify_table(table, depth)
-    local s = "{"
-    for k, v in pairs(table) do
-        s = s .. '\n' .. spaces(depth * 4) .. stringify(k, depth + 1) .. ' = ' .. stringify(v, depth + 1) .. ','
+local function shallow_copy(t)
+  local t2 = {}
+  for k,v in pairs(t) do
+    t2[k] = v
+  end
+  return t2
+end
+
+local function stringify_table(t, depth, visited)
+    visited = shallow_copy(visited)
+    visited[t] = true
+
+    local s = tostring(t) .. " {"
+    for k, v in pairs(t) do
+        s = s .. '\n' .. spaces(depth * 4) .. stringify(k, depth + 1, visited) .. ' = ' .. stringify(v, depth + 1, visited) .. ','
     end
     if #s>1 then s = s .. "\n" .. spaces((depth - 1) * 4) end
     s = s .. "}"
     return s
 end
 
-stringify = function (val, depth)
-    local t = type(val)
+stringify = function (val, depth, visited)
     depth = depth or 1
+    visited = visited or {}
+    if visited[val] then return "<Circular " .. tostring(val) .. ">" end
+
+    local t = type(val)
     if t == "string" then return '"' .. val .. '"' end
     if t == "nil" then return "nil" end
-    if t == "table" then return stringify_table(val, depth) end
+    if t == "table" then return stringify_table(val, depth, visited) end
     return tostring(val)
 end
 
