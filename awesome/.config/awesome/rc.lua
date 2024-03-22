@@ -622,5 +622,11 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = "#84717f" end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+client.connect_signal("property::urgent", function(c)
+    log.debug("urgent called for %s %s", c.class, c.name)
+    c.minimized = false
+    c:jump_to()
+end)
 -- }}}
 

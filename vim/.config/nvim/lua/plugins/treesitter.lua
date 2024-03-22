@@ -23,6 +23,8 @@ return {
                 "markdown",
                 "markdown_inline",
                 "python",
+                "query",
+                "regex",
                 "rust",
                 "svelte",
                 "tsx",
@@ -30,7 +32,6 @@ return {
                 "vim",
                 "vimdoc",
                 "vue",
-                "query",
             } or {},
             highlight = {
                 enable = true,
