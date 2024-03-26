@@ -338,7 +338,7 @@ local globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey,           }, "Return", spawn(terminal),
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "d", spawn.editor_at "~/.dotfiles",
               {description = "edit dotfiles", group = "launcher"}),
@@ -625,6 +625,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 client.connect_signal("property::urgent", function(c)
     log.debug("urgent called for %s %s", c.class, c.name)
+    if c.class ==  "Alacritty" then return end
     c.minimized = false
     c:jump_to()
 end)

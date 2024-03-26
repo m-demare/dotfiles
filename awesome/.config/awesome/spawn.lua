@@ -13,7 +13,7 @@ function M.term_at(dir, ...)
     log.debug('creating term cb for %s at %s', cmd, dir)
     return function()
         dir = string.gsub(dir, '~', home)
-        awful.spawn(terminal .. " --working-directory " .. dir .. " -e ".. cmd)
+        awful.spawn(terminal .. " --working-directory " .. dir .. " -e ".. cmd, false)
     end
 end
 

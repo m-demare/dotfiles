@@ -39,9 +39,9 @@ end
 
 local function stringify_all(...)
     local unpack = unpack or table.unpack
-    local args = {...}
-    for k, v in ipairs(args) do
-        args[k] = stringify(v)
+    local args = table.pack(...)
+    for k=1, args.n do
+        args[k] = stringify(args[k])
     end
     return unpack(args)
 end
