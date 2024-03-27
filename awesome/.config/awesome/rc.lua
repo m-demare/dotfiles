@@ -323,8 +323,6 @@ local globalkeys = gears.table.join(
     -- Screens
     awful.key({ modkey,           }, "o",      function () awful.screen.focus_relative(1)   end,
               {description = "switch screen focus", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
     awful.key({ modkey, "Mod1"     }, "o",
         function ()
             if screen.count() > 1 then
@@ -418,7 +416,9 @@ local clientkeys = gears.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize horizontally", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "client"})
 )
 
 for i = 1, 9 do
