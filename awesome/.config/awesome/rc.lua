@@ -323,7 +323,7 @@ local globalkeys = gears.table.join(
     -- Screens
     awful.key({ modkey,           }, "o",      function () awful.screen.focus_relative(1)   end,
               {description = "switch screen focus", group = "client"}),
-    awful.key({ modkey, "Mod1"     }, "o",
+    awful.key({ modkey, "Control" }, "o",
         function ()
             if screen.count() > 1 then
                 swap_screen_clients(screen[1], screen[2])
