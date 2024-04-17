@@ -76,6 +76,7 @@ return {
     {
         "rest-nvim/rest.nvim",
         dependencies = "nvim-lua/plenary.nvim",
+        commit = "1ddcc92a6af701f83c13a22212449e451432d2dc",
         keys = {
             { "<leader>sr", "<Plug>RestNvim" },
         },
