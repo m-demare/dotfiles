@@ -215,3 +215,7 @@ snoremap <BS> <BS>i
 
 nnoremap <leader>jq <CMD>%!jq<CR>
 
+cnoremap %% <C-R>=expand('%')<cr>
+
+cnoremap %/ <C-R>=expand('%:h').'/'<cr>
+
