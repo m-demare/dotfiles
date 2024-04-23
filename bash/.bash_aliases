@@ -16,8 +16,6 @@ alias la='ls -A'
 
 alias history='history 1'
 
-alias work='cd ~/localwork'
-
 alias cp='cp -i'
 
 alias less='less --ignore-case'
@@ -54,6 +52,12 @@ alias wiki='wiki-tui'
 
 function localProxy(){
     (ncat -lkv localhost $1 -c 'tee /dev/stderr | ncat -v localhost $2 | tee /dev/stderr') 2>&1 | tee -a $3
+}
+
+function mvtmp(){
+    DIR=`mktemp -d -t "mvtmp.XXXX"` && \
+    mv "$@" $DIR && \
+    cd $DIR
 }
 
 if type nvim > /dev/null 2>&1; then
