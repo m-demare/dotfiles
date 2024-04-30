@@ -612,7 +612,8 @@ client.connect_signal("property::floating", function(c)
         not c.requests_no_titlebar and
         not c.fullscreen and
         not c.maximized and
-        not c.maximized_vertical
+        not c.maximized_vertical and
+        not c.maximized_horizontal
     then
         awful.titlebar.show(c)
     else
