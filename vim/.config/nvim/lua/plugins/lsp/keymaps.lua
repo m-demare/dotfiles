@@ -27,8 +27,6 @@ local on_attach = function(client, bufnr)
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = "single",
     })
-
-    print("Using " .. client.name)
 end
 
 return {
