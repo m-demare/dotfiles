@@ -40,3 +40,12 @@ vim.api.nvim_create_autocmd("FileType", {
         end
     end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = group,
+    callback = function(ev)
+        if "query" == ev.match then
+            nmap('o', 'EditQuery')
+        end
+    end,
+})

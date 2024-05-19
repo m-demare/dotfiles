@@ -7,7 +7,13 @@ local on_attach = function(client, bufnr)
         require("nvim-navic").attach(client, bufnr)
     end
 
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    local function toggle_hints()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end
+
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", {
+        buf=bufnr,
+    })
 
     map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
     map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
@@ -23,6 +29,7 @@ local on_attach = function(client, bufnr)
     map("n", "[g", vim.diagnostic.goto_prev, { buffer = bufnr })
     map("n", "]g", vim.diagnostic.goto_next, { buffer = bufnr })
     map({ "n", "v" }, "<leader>fo", vim.lsp.buf.format, { buffer = bufnr })
+    map("n", "<leader>th", toggle_hints, { buffer = bufnr })
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = "single",
