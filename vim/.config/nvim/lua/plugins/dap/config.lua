@@ -1,9 +1,18 @@
 local dap = require "dap"
 local utils = require "utils"
+local osv = require "osv"
 local unix = utils.unix
 
+local cmd = vim.api.nvim_create_user_command
+local b = utils.strict_bind
+local LUA_DB_PORT = 9996
+cmd("OsvStart", b(osv.launch, { port = LUA_DB_PORT }), { force = true })
+cmd("OsvStop", b(osv.stop), { force = true })
+cmd("ClearBreakpoints", b(dap.clear_breakpoints), { force = true })
+cmd("ExceptionBreakpoints", b(dap.set_exception_breakpoints), { force = true })
+
 local function request_port()
-    local val = tonumber(vim.fn.input "Port: ")
+    local val = tonumber(vim.fn.input("Port: ", tostring(LUA_DB_PORT)))
     assert(val, "Please provide a port number")
     return val
 end
@@ -34,11 +43,9 @@ dap.adapters.firefox = {
 }
 
 local ff_base_config = {
-    name = "Debug with Firefox",
     type = "firefox",
     request = "launch",
     reAttach = true,
-    url = "http://localhost:3000",
     webRoot = "${workspaceFolder}",
     firefoxExecutable = "/usr/bin/firefox",
 }
@@ -122,15 +129,21 @@ if unix then
 end
 
 -- dapui
-dap.listeners.before.event_terminated["dapui_config"] = function()
+dap.listeners.before.attach.dapui_config = function()
+    require("dapui").open()
+end
+dap.listeners.before.launch.dapui_config = function()
+    require("dapui").open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
     require("dapui").close()
 end
-dap.listeners.before.event_exited["dapui_config"] = function()
+dap.listeners.before.event_exited.dapui_config = function()
     require("dapui").close()
 end
 
 local keymap_restore = {}
-dap.listeners.after.event_initialized["inspect_k"] = function()
+dap.listeners.after.event_initialized.inspect_k = function()
     for _, buf in pairs(vim.api.nvim_list_bufs()) do
         local keymaps = vim.api.nvim_buf_get_keymap(buf, "n")
         for _, keymap in pairs(keymaps) do
@@ -143,7 +156,7 @@ dap.listeners.after.event_initialized["inspect_k"] = function()
     vim.keymap.set("n", "K", require("dap.ui.widgets").hover)
 end
 
-dap.listeners.after.event_terminated["inspect_k"] = function()
+dap.listeners.after.event_terminated.inspect_k = function()
     for _, keymap in pairs(keymap_restore) do
         vim.api.nvim_buf_set_keymap(
             keymap.buffer,
