@@ -1,4 +1,5 @@
 return {
+    { "folke/ts-comments.nvim", config = true, event = "VeryLazy", },
     { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
     { "chentoast/marks.nvim", config = true },
