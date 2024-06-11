@@ -26,7 +26,7 @@ alias path='tr ":" "\n"<<<$PATH'
 
 alias sudo='sudo '
 
-alias py='python3.11 '
+alias py='python3 '
 
 alias al='$EDITOR ~/.bash_aliases '
 
