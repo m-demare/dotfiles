@@ -33,6 +33,7 @@ return {
     },
     {
         "m-demare/hlargs.nvim",
+        event = "VeryLazy",
         dev = true,
         opts = {
             hl_priority = 150,
@@ -45,6 +46,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
+        event = "VeryLazy",
         dependencies = "SmiteshP/nvim-navic",
         config = function(_, opts)
             vim.o.showmode = false
@@ -73,6 +75,7 @@ return {
     {
         "SmiteshP/nvim-navic",
         dependencies = "neovim/nvim-lspconfig",
+        lazy = true,
         opts = {
             icons = icons.navic_icons,
             depth_limit = 2,

@@ -5,6 +5,7 @@ local unix = utils.unix
 return {
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         dependencies = "hrsh7th/cmp-nvim-lsp",
         config = function()
             local nvim_lsp = require "lspconfig"
@@ -32,7 +33,7 @@ return {
     },
     {
         "rafamadriz/friendly-snippets",
-        dependencies = { "L3MON4D3/LuaSnip", "nvimdev/lspsaga.nvim" },
+        dependencies = { "L3MON4D3/LuaSnip" },
         event = "InsertEnter *",
     },
     {
@@ -67,6 +68,7 @@ return {
     },
     {
         "nvimdev/lspsaga.nvim",
+        cmd = "Lspsaga",
         opts = {
             ui = {
                 devicon = false,
