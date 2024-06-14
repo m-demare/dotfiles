@@ -107,7 +107,7 @@ alias p='cd ~/localwork/debPlayerWeb'
 
 alias q='cd ~/localwork/debQ'
 
-alias levQ='q; play debug run'
+alias levQ='q; fnm use 9; play debug run'
 
 alias mo='cd ~/localwork/debQMobile/debQMobile; fnm use 9; ~/play/play "run 9001"'
 
