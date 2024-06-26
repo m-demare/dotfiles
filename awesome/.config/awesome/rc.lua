@@ -194,8 +194,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             memory_widget,
-            s.mylayoutbox,
             mytextclock,
+            s.mylayoutbox,
         },
     }
 end)
@@ -342,7 +342,7 @@ local globalkeys = gears.table.join(
               {description = "edit dotfiles", group = "launcher"}),
     awful.key({ modkey,           }, "y", spawn.term "yazi",
               {description = "yazi", group = "launcher"}),
-    awful.key({ modkey,           }, "w", spawn.at_tag("firefox", 2),
+    awful.key({ modkey,           }, "w", spawn.at_tag("firefox", 2, nil, "firefox"),
               {description = "firefox", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "w", spawn.at_tag("firefox --private-window", 3),
               {description = "firefox private window", group = "launcher"}),

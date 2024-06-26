@@ -25,16 +25,26 @@ function M.editor_at(dir)
     return M.term_at(dir, editor)
 end
 
-function M.at_tag(cmd, tagnr, screennr)
+function M.at_tag(cmd, tagnr, screennr, except_exists_name)
     log.debug('creating cb for %s at tag %s', cmd, tagnr)
     return function ()
         screennr = screennr or M.main_screen()
-        awful.spawn(cmd, { tag = tostring(tagnr), screen=screennr})
         local screen = screen[screennr]
         local tag = screen.tags[tagnr]
-        if tag then
-            tag:view_only()
+        if not tag then return end
+
+        -- Focus on tag
+        tag:view_only()
+
+        if except_exists_name then
+            for _, client in ipairs(tag:clients()) do
+                if client.class == except_exists_name then
+                    log.debug('%s already exists, not opening again', except_exists_name)
+                    return
+                end
+            end
         end
+        awful.spawn(cmd, { tag = tostring(tagnr), screen=screennr})
     end
 end
 
