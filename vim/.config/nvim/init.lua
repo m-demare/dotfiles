@@ -1,7 +1,7 @@
 vim.loader.enable()
 
 if vim.fn.has "unix" == 1 then
-    vim.g.python3_host_prog = "/usr/bin/python3.11"
+    vim.g.python3_host_prog = "/usr/bin/python3"
 else
     vim.g.python3_host_prog = "C:\\Windows\\py"
     vim.g.node_host_prog = "C:\\Program Files\\nodejs\\"
