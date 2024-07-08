@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 mkdir -p $HOME/localwork/
 platform=$(uname)
@@ -8,12 +9,12 @@ if [[ $platform =~ "Linux" ]]; then
     if command -v pacman &> /dev/null
     then
         INSTALL="sudo pacman --noconfirm -Syu"
-        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom fd unarchiver"
+        EXTRA_PACKAGES="gdb-dashboard rustup rust-analyzer alacritty bottom fd unarchiver sqlite"
     else
         echo "Updating repos"
         sudo apt-get update >> /dev/null
         INSTALL="sudo apt-get -y install"
-        EXTRA_PACKAGES="cargo fd-find unar"
+        EXTRA_PACKAGES="cargo fd-find unar pkg-config cmake g++ libssl-dev libfontconfig1-dev sqlite3"
     fi
 
     install_packages(){
@@ -21,7 +22,7 @@ if [[ $platform =~ "Linux" ]]; then
         $INSTALL $1
     }
 
-    install_packages "git curl zsh ripgrep tmux zathura gdb python neovim fzf stow $EXTRA_PACKAGES"
+    install_packages "git curl zsh ripgrep tmux zathura gdb neovim fzf stow $EXTRA_PACKAGES"
 
     # use zsh
     sudo chsh $USER -s $(which zsh) &&
@@ -30,6 +31,9 @@ if [[ $platform =~ "Linux" ]]; then
     # neovim
     echo "Cloning neovim"
     git clone https://github.com/neovim/neovim $HOME/localwork/neovim
+
+    # prevent some errors
+    mkdir -p ~/.local/share/nvim/databases/
 
     echo "Cloning zsh-z"
     mkdir -p $HOME/.config
@@ -44,9 +48,11 @@ if [[ $platform =~ "Linux" ]]; then
     else
         cargo install alacritty bottom
     fi
-    cargo install fnm samply flamegraph cargo-valgrind wiki-tui yazi
+    cargo install fnm samply flamegraph cargo-valgrind wiki-tui
 
-    fnm install v20.5.1
+    $HOME/.cargo/bin/fnm install v20.5.1
+
+    cargo install yazi-fm yazi-cli
 
 elif [[ $platform =~ "MINGW" ]]; then
     # Windows
