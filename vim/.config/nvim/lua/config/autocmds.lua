@@ -6,7 +6,6 @@ local group = vim.api.nvim_create_augroup("my_aucmds", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = group,
-    pattern = "*",
     callback = function()
         vim.highlight.on_yank { on_visual = true, timeout = 250 }
     end,
@@ -25,10 +24,15 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+vim.api.nvim_create_autocmd("FileType", {
     group = group,
-    pattern = { "*.txt", "*.md", "*.tex" },
-    command = "setlocal spell",
+    callback = function (ev)
+        if vim.tbl_contains({"markdown", "tex", "text"}, ev.match) then
+            vim.cmd "setlocal spell"
+        else
+            vim.cmd "setlocal nospell"
+        end
+    end
 })
 
 if utils.unix then
@@ -45,7 +49,9 @@ vim.api.nvim_create_autocmd("FileType", {
     group = group,
     pattern = "query",
     callback = function(ev)
-        nmap('o', '<cmd>EditQuery<cr>', { buffer = ev.buf })
+        if not vim.api.nvim_get_option_value ("modifiable", {buf=ev.buf}) then
+            nmap('o', '<cmd>EditQuery<cr>', { buffer = ev.buf })
+        end
     end,
 })
 
