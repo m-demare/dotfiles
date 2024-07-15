@@ -26,6 +26,7 @@ end
 require "config.lazy"
 
 require "config.autocmds"
+require "config.filetype"
 vim.defer_fn(function()
     require "config.maps"
 end, 20)
