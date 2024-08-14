@@ -2,11 +2,13 @@ HIST_STAMPS="yyyy-mm-dd"
 HISTSIZE=50000
 HISTFILE=~/.zsh_history
 SAVEHIST=50000
-setopt appendhistory
-setopt sharehistory
-setopt hist_find_no_dups
-setopt hist_ignore_dups
-setopt extended_history
+setopt append_history       # Append lines in the order in which sessions are closed
+setopt share_history        # Share between sessions
+setopt hist_find_no_dups    # Don't display duplicates in search
+setopt hist_ignore_all_dups # Don't save duplicates 
+setopt extended_history     # Add timestamps to entries
+setopt hist_ignore_space    # Don't add to hist if it starts with spc
+setopt hist_reduce_blanks   # Remove extra spcs before adding to hist
 
 fpath=(~/.config/zsh-z $fpath)
 autoload -U compinit && compinit
@@ -158,6 +160,17 @@ fzf_history() {
 autoload fzf_history
 zle -N fzf_history
 bindkey '^R' fzf_history
+
+# Prevent saving some things to history
+function zshaddhistory() {
+  emulate -L zsh
+  if ! [[ "$1" =~ "(^ |^z |^ts $)" ]] ; then
+      print -sr -- "${1%%$'\n'}"
+      fc -p
+  else
+      return 1
+  fi
+}
 
 # Fix deletion
 bindkey '^?' backward-delete-char
