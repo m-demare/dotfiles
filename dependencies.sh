@@ -50,7 +50,7 @@ if [[ $platform =~ "Linux" ]]; then
     fi
     cargo install fnm samply flamegraph cargo-valgrind wiki-tui
 
-    $HOME/.cargo/bin/fnm install v20.5.1
+    $HOME/.cargo/bin/fnm install v20.16.0
 
     cargo install yazi-fm yazi-cli
 

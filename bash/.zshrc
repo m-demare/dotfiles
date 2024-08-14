@@ -76,7 +76,7 @@ appendPath $HOME/.cargo/bin
 
 appendPath $HOME/.local/bin
 
-export vim_node_version=v20.5.1
+export vim_node_version=v20.16.0
 if type fnm > /dev/null 2>&1; then
     eval "$(fnm env --shell=zsh)"
 fi

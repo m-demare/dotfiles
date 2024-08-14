@@ -59,4 +59,4 @@ if type fnm > /dev/null 2>&1; then
     eval "$(fnm env --shell=bash)"
 fi
 
-export vim_node_version=v20.5.1
+export vim_node_version=v20.16.0
