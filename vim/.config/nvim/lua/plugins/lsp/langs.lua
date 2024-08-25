@@ -13,6 +13,17 @@ local lss = {
         install_method = "npm",
         val = "pyright",
         os = { "win32", "unix" },
+        settings = {
+            python = {
+                analysis = {
+                    autoSearchPaths = true,
+                    extraPaths= {
+                        "~/localwork/simics/packages/simics-6.0.185/linux64/lib/python-py3/",
+                        "~/localwork/simics/packages/simics-6.0.185/linux64/bin/py3",
+                    },
+                },
+            },
+        }
     },
     {
         name = "tsserver",
