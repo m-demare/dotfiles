@@ -7,7 +7,7 @@ luasnip.config.setup {}
 
 local icons = require("config.icons").cmp_icons
 local function format(_, vim_item)
-    vim_item.kind = (icons[vim_item.kind] or "") .. vim_item.kind
+    vim_item.kind = (icons[vim_item.kind] or "") .. (vim_item.kind or "")
     return vim_item
 end
 
