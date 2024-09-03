@@ -5,7 +5,7 @@ local unix = utils.unix
 return {
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        event = { "VeryLazy", "BufReadPre" },
         dependencies = "hrsh7th/cmp-nvim-lsp",
         config = function()
             local nvim_lsp = require "lspconfig"
