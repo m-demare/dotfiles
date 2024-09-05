@@ -36,7 +36,7 @@ return {
         event = "VeryLazy",
         dev = true,
         opts = {
-            hl_priority = 150,
+            hl_priority = 126,
             highlight = {
                 fg = "#ef9062",
                 italic = true,

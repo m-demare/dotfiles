@@ -26,7 +26,7 @@ local lss = {
         }
     },
     {
-        name = "tsserver",
+        name = "ts_ls",
         filetypes = {
             "javascript",
             "javascriptreact",
