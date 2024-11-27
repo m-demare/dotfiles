@@ -125,5 +125,5 @@ alias gFeature='xclip -sel clip -o | sed -Ee "/^\s*(.)* (#[0-9]+)\s*$/!d;s/(^\s*
 
 alias wifiEnable='sudo systemctl restart iwd.service && sudo dhcpcd wlan0 --nohook mtu && sudo dhcpcd wlan0 --nohook mtu'
 
-alias fixDbeaver='echo "-vm\n/usr/lib/jvm/java-22-openjdk/bin" | cat - /usr/share/dbeaver/dbeaver.ini | sudo tee /usr/share/dbeaver/dbeaver.ini'
+alias fixDbeaver='echo "-vm\n/usr/lib/jvm/java-23-openjdk/bin" | cat - /usr/share/dbeaver/dbeaver.ini | sudo tee /usr/share/dbeaver/dbeaver.ini'
 # }}}
