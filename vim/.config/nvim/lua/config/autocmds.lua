@@ -26,13 +26,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     group = group,
-    callback = function (ev)
-        if vim.tbl_contains({"markdown", "tex", "text"}, ev.match) then
+    callback = function(ev)
+        if vim.tbl_contains({ "markdown", "tex", "text" }, ev.match) then
             vim.cmd "setlocal spell"
         else
             vim.cmd "setlocal nospell"
         end
-    end
+    end,
 })
 
 if utils.unix then
@@ -49,8 +49,8 @@ vim.api.nvim_create_autocmd("FileType", {
     group = group,
     pattern = "query",
     callback = function(ev)
-        if not vim.api.nvim_get_option_value ("modifiable", {buf=ev.buf}) then
-            nmap('o', '<cmd>EditQuery<cr>', { buffer = ev.buf })
+        if not vim.api.nvim_get_option_value("modifiable", { buf = ev.buf }) then
+            nmap("o", "<cmd>EditQuery<cr>", { buffer = ev.buf })
         end
     end,
 })
@@ -65,4 +65,3 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "q", "<c-w>q", { buffer = ev.buf })
     end,
 })
-

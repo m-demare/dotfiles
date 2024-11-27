@@ -48,16 +48,14 @@ return {
                 icons = icons.nvim_tree_icons,
             },
         },
-
     },
     {
-        'stevearc/oil.nvim',
+        "stevearc/oil.nvim",
         opts = {},
         dependencies = unix and "nvim-tree/nvim-web-devicons" or nil,
         keys = {
             { "<leader>oi", "<cmd>Oil .<CR>" },
             { "<leader><leader>oi", "<cmd>Oil %:h<CR>" },
-
-        }
-    }
+        },
+    },
 }

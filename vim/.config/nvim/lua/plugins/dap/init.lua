@@ -40,7 +40,7 @@ return {
             lazy = true,
             keys = {
                 { "<M-d>", cb(dapui, "toggle") },
-                { "<leader>.", cb(dapui, "eval", nil), mode = { 'n', 'v' } },
+                { "<leader>.", cb(dapui, "eval", nil), mode = { "n", "v" } },
                 {
                     "<leader>ev",
                     function()
@@ -75,8 +75,8 @@ return {
                 enabled = false,
             },
             keys = {
-                { "<leader>vtt", "<cmd>DapVirtualTextToggle<CR>" }
-            }
+                { "<leader>vtt", "<cmd>DapVirtualTextToggle<CR>" },
+            },
         },
     },
 }

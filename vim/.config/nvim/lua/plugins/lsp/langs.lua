@@ -17,13 +17,13 @@ local lss = {
             python = {
                 analysis = {
                     autoSearchPaths = true,
-                    extraPaths= {
+                    extraPaths = {
                         "~/localwork/simics/packages/simics-6.0.185/linux64/lib/python-py3/",
                         "~/localwork/simics/packages/simics-6.0.185/linux64/bin/py3",
                     },
                 },
             },
-        }
+        },
     },
     {
         name = "ts_ls",

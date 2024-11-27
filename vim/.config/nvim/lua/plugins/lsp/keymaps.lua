@@ -12,7 +12,7 @@ local on_attach = function(client, bufnr)
     end
 
     vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", {
-        buf=bufnr,
+        buf = bufnr,
     })
 
     map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })

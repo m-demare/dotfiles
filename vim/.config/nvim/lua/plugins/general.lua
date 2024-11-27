@@ -1,5 +1,5 @@
 return {
-    { "folke/ts-comments.nvim", config = true, event = "VeryLazy", },
+    { "folke/ts-comments.nvim", config = true, event = "VeryLazy" },
     { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
     { "chentoast/marks.nvim", config = true },
@@ -32,14 +32,14 @@ return {
     },
     {
         "ggandor/leap.nvim",
-        config = function ()
-            vim.keymap.set({"n"}, "s", "<Plug>(leap-forward)")
-            vim.keymap.set({"x"}, "x", "<Plug>(leap-forward)")
-            vim.keymap.set({"o"}, "gs", "<Plug>(leap-forward)")
+        config = function()
+            vim.keymap.set({ "n" }, "s", "<Plug>(leap-forward)")
+            vim.keymap.set({ "x" }, "x", "<Plug>(leap-forward)")
+            vim.keymap.set({ "o" }, "gs", "<Plug>(leap-forward)")
 
-            vim.keymap.set({"n"}, "S", "<Plug>(leap-backward)")
-            vim.keymap.set({"x"}, "X", "<Plug>(leap-backward)")
-            vim.keymap.set({"o"}, "gS", "<Plug>(leap-backward)")
+            vim.keymap.set({ "n" }, "S", "<Plug>(leap-backward)")
+            vim.keymap.set({ "x" }, "X", "<Plug>(leap-backward)")
+            vim.keymap.set({ "o" }, "gS", "<Plug>(leap-backward)")
         end,
     },
     {

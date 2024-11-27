@@ -34,7 +34,7 @@ return {
     {
         "m-demare/hlargs.nvim",
         event = "VeryLazy",
-        dependencies = {"nvim-treesitter/nvim-treesitter"},
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
         dev = true,
         opts = {
             hl_priority = 126,
