@@ -342,6 +342,8 @@ local globalkeys = gears.table.join(
               {description = "edit dotfiles", group = "launcher"}),
     awful.key({ modkey,           }, "y", spawn.term "yazi",
               {description = "yazi", group = "launcher"}),
+    awful.key({ modkey,           }, "e", spawn "pcmanfm",
+              {description = "pcmanfm", group = "launcher"}),
     awful.key({ modkey,           }, "w", spawn.at_tag("firefox", 2, nil, "firefox"),
               {description = "firefox", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "w", spawn.at_tag("firefox --private-window", 3),
@@ -351,7 +353,7 @@ local globalkeys = gears.table.join(
     awful.key({ modkey            }, "x", function () power_menu:show() end,
               {description = "power menu", group = "launcher"}),
     awful.key({ modkey,           }, "Escape", spawn("xkill"),
-              {description = "go back", group = "tag"}),
+              {description = "xkill", group = "tag"}),
 
 
     -- Screen brightness
