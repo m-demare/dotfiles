@@ -38,6 +38,13 @@ function M.tbl_join(tbl, join_str)
     return retval
 end
 
+function M.tbl_find(tbl, pred)
+    for i, v in ipairs(tbl) do
+        if pred(v, i) then return v end
+    end
+    return nil
+end
+
 function M.req(file, fn)
     return function()
         local mod = require(file)
