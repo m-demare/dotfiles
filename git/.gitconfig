@@ -12,3 +12,5 @@
 	autoSetupRemote = true
 [log]
 	decorate = full
+[init]
+	defaultBranch = main
