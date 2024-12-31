@@ -4,7 +4,7 @@ local function get_npm_path()
     if unix then
         return "npm"
     else
-        return vim.fn.expand "~/AppData/Roaming/nvm/v16.17.0/npm"
+        return vim.fn.expand "~/AppData/Roaming/nvm/v20.11.0/npm"
     end
 end
 
