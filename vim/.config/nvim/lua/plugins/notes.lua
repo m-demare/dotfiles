@@ -1,4 +1,4 @@
-vim.g.OpenLink = function (url)
+vim.g.OpenLink = function(url)
     vim.cmd("silent ! firefox --private-window " .. url)
 end
 

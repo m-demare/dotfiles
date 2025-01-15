@@ -66,19 +66,4 @@ return {
             end, {})
         end,
     },
-    {
-        "nvimdev/lspsaga.nvim",
-        cmd = "Lspsaga",
-        opts = {
-            ui = {
-                devicon = false,
-                code_action = "»",
-                normal_bg = "NONE",
-                title_bg = "NONE",
-            },
-            symbol_in_winbar = {
-                enable = false,
-            },
-        },
-    },
 }
