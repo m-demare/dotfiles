@@ -21,10 +21,10 @@ return {
                         local transparent_groups =
                             { "CursorLine", "TabLine", "FloatBorder", "NormalFloat" }
                         for _, group in ipairs(transparent_groups) do
-                            vim.cmd("highlight " .. group .. " ctermbg=none guibg=none")
+                            vim.api.nvim_set_hl(0, group, { bg = "none" })
                         end
                     end
-                    vim.cmd "highlight! Visual guibg=#666666"
+                    vim.api.nvim_set_hl(0, "Visual", { bg = "#666666" })
                 end,
                 group = augroup,
             })
@@ -42,6 +42,9 @@ return {
                 fg = "#ef9062",
                 italic = true,
                 cterm = { italic = true },
+            },
+            extras = {
+                unused_args = { link = "DiagnosticUnnecessary" },
             },
         },
     },
