@@ -36,7 +36,8 @@ local on_attach = function(client, bufnr)
     map("n", "<leader>th", toggle_hints, { buffer = bufnr })
 
     local rounded = { border = "rounded" }
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, rounded)
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+        vim.lsp.with(vim.lsp.handlers.signature_help, rounded)
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, rounded)
     vim.diagnostic.config { float = rounded }
 end

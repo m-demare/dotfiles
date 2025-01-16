@@ -1,9 +1,6 @@
 local cmp = require "cmp"
-local luasnip = require "luasnip"
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-require("luasnip.loaders.from_vscode").lazy_load()
-luasnip.filetype_extend("typescript", { "javascript" })
-luasnip.config.setup {}
+require "config.snippets"
 
 local icons = require("config.icons").cmp_icons
 local function format(_, vim_item)
@@ -29,7 +26,7 @@ cmp.setup {
     preselect = cmp.PreselectMode.Item,
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(args.body)
+            require "luasnip".lsp_expand(args.body)
         end,
     },
     window = {
@@ -44,8 +41,8 @@ cmp.setup {
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.confirm { select = true }
-            elseif luasnip.locally_jumpable(1) then
-                luasnip.jump(1)
+            elseif require "luasnip".locally_jumpable(1) then
+                require "luasnip".jump(1)
             elseif has_words_before() then
                 cmp.complete()
             else
@@ -53,23 +50,29 @@ cmp.setup {
             end
         end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            if require "luasnip".jumpable(-1) then
+                require "luasnip".jump(-1)
             else
                 fallback()
             end
         end, { "i", "s" }),
+        ["<C-j>"] = cmp.mapping(function(fallback)
+            if require "luasnip".choice_active() then
+                require "luasnip".change_choice(1)
+            else
+                fallback()
+            end
+        end),
     },
     sources = cmp.config.sources({
         {
             name = "luasnip",
             entry_filter = function()
                 local ctx = require "cmp.config.context"
-                return not luasnip.jumpable(1)
-                    and not ctx.in_treesitter_capture "string"
-                    and not ctx.in_syntax_group "String"
-                    and not ctx.in_treesitter_capture "comment"
-                    and not ctx.in_syntax_group "Comment"
+                return not ctx.in_treesitter_capture "string"
+                        and not ctx.in_syntax_group "String"
+                        and not ctx.in_treesitter_capture "comment"
+                        and not ctx.in_syntax_group "Comment"
             end,
         },
         { name = "nvim_lsp" },
@@ -113,7 +116,7 @@ local cmp_autocmds = vim.api.nvim_create_augroup("my_cmp_autocmds", { clear = tr
 vim.api.nvim_create_autocmd("ModeChanged", {
     callback = function()
         -- Prevent snippet from expanding any further if I leave the region
-        if luasnip.jumpable(1) and not luasnip.locally_jumpable(1) then luasnip.unlink_current() end
+        if require "luasnip".jumpable(1) and not require "luasnip".locally_jumpable(1) then require "luasnip".unlink_current() end
     end,
     group = cmp_autocmds,
 })
