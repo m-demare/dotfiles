@@ -27,9 +27,9 @@ local stmt_query = [[
 ]]
 
 -- stylua: ignore
-return function (ls, ft)
+return function (ls, ft, query_lang)
     ft = ft or "javascript"
-    local query_lang = vim.treesitter.language.get_lang(ft)
+    query_lang = query_lang or vim.treesitter.language.get_lang(ft)
 
     require("luasnip.session.snippet_collection").clear_snippets(ft)
 
