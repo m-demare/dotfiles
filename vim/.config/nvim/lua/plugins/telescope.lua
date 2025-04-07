@@ -21,6 +21,7 @@ return {
             {
                 "nvim-telescope/telescope-smart-history.nvim",
                 dependencies = "tami5/sqlite.lua",
+                build = "mkdir -p .local/share/nvim/databases"
             },
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
