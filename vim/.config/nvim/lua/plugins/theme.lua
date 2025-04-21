@@ -1,5 +1,5 @@
 local utils = require "utils"
-local unix = utils.unix
+local unix = utils.unix and not utils.mac
 local icons = require "config.icons"
 
 return {

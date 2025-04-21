@@ -39,6 +39,7 @@ return {
             },
             follow_url_func = vim.g.OpenLink,
         },
+        enabled = vim.fn.isdirectory ( vim.fn.expand '~/wiki' )
     },
     {
         "iamcco/markdown-preview.nvim",

@@ -143,7 +143,20 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java,*.c,*.h,*.cpp :call CleanExtraSpaces()
+autocmd BufWritePre *.txt,*.json,*.xml,*.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.sh,*.java,*.c,*.h,*.cpp,*.md :call CleanExtraSpaces()
+
+" Fix weird unicode chars, and lines terminated in -
+fun! FixCopyPasteFromPdf()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/“\|”/"/eg
+    silent! %s/’/'/eg
+    silent! %s/\(\w\)-$\n\(\w\)/\1\2/e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+autocmd BufWritePre *.md :call FixCopyPasteFromPdf()
 
 " Sppelling
 set spelllang=es,en

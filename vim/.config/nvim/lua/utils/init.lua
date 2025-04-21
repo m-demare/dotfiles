@@ -61,5 +61,6 @@ function M.visual_selection()
 end
 
 M.unix = vim.fn.has "unix" == 1
+M.mac = vim.fn.has "mac" == 1
 
 return M
