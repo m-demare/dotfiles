@@ -162,7 +162,17 @@ autocmd BufWritePre *.md :call FixCopyPasteFromPdf()
 set spelllang=es,en
 
 " Toggle spell checking
-map <leader>ss :setlocal spell!<cr>
+map <leader>ss <cmd>setlocal spell!<cr>
+
+for d in globpath(&runtimepath, "spell/*.add", 0, 1)
+    execute "set spellfile+=" . fnameescape(d)
+endfor
+
+fun! CompileDicts()
+    for d in globpath(&runtimepath, "spell/*.add", 0, 1)
+        execute "mkspell! " . fnameescape(d)
+    endfor
+endfun
 
 " Spelling shortcuts
 " [s and ]s to move between errors
