@@ -46,7 +46,7 @@ return {
                 nmap("<leader>tb", gs.toggle_current_line_blame, { buffer = bufnr })
                 nmap("<leader>hd", gs.diffthis, { buffer = bufnr })
                 nmap("<leader>hD", bind(gs.diffthis, "~"), { buffer = bufnr })
-                nmap("<leader>td", gs.toggle_deleted, { buffer = bufnr })
+                nmap("<leader>td", gs.preview_hunk_inline, { buffer = bufnr })
 
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { buffer = bufnr })
                 map({ "o", "x" }, "ah", ":<C-U>Gitsigns select_hunk<CR>", { buffer = bufnr })

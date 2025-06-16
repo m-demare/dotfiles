@@ -14,6 +14,7 @@ return {
         event = "VeryLazy",
         build = ":TSUpdate",
         dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
+        tag = "v0.10.0",
         opts = {
             ensure_installed = unix and {
                 "c",
